@@ -4,7 +4,7 @@
 引用了部分第三方库，具体有：
 
 * CStack，[仓库链接](github.com/Climber-Rong/cstack)
-* Ctrie，[仓库链接](github.com/Climber-Rong/cstrie)
+* Ctrie，[仓库链接](github.com/Climber-Rong/ctrie)
 
 同时稍微更新了一下list库，并且确立了架构
 
