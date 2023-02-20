@@ -27,7 +27,8 @@ typedef const char* Exception;
 /*库依赖*/
 #include"list.cpp"
 /*以下引用到开源库，由github.com/Climber-Rong编写，采用Apache2.0开源协议*/
-
+#include"stack.h"		// github.com/Climber-Rong/cstack
+#include"strie.h"		// github.com/Climber-Rong/ctrie
 
 #endif
 
