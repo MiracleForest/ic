@@ -20,8 +20,14 @@
 #ifndef LIB_HPP
 #define LIB_HPP
 
+/*异常宏*/
 typedef const char* Exception;
+#define MM_OUT "Memory Out"
+
+/*库依赖*/
 #include"list.cpp"
+/*以下引用到开源库，由github.com/Climber-Rong编写，采用Apache2.0开源协议*/
+
 
 #endif
 

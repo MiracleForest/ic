@@ -28,7 +28,9 @@ class List {
 	public:
 		List();
 		List* add(void* ptr);		//添加到末尾，返回this
+		List* remove(int index);	//删除第index个元素，返回this
 		void* get(int index);		//获取元素
+		int size();					//元素数量 
 		void destroy();				//销毁
 		// Public Declarations
 	protected:
@@ -39,24 +41,58 @@ List::List() {
 	length = 0;
 	free_len = 10;
 	data = (void**)calloc(10, sizeof(void**));
+	if(data==NULL) {
+		throw MM_OUT;
+	}
 	*data = NULL;
 }
 
 List* List::add(void* ptr) {
-	data[length] = ptr;
-	length++;
-	free_len--;
 	if(free_len==0) {
 		//空余不足
 		realloc(data, (length+10) * sizeof(void*));
+		
 		free_len = 10;
 	}
+	
+	if(data==NULL) {
+			throw MM_OUT;
+	}
+	
+	data[length] = ptr;
+	length++;
+	free_len--;
+	
+	return this;
+}
+
+List* List::remove(int index) {
+	for(int i=index+1;i<length;i++){
+		data[i-1] = data[i];		//往前移动 
+	} 
+	length--;
+	free_len++;
+	if(free_len>10){
+		//删除元素过多导致空闲内存空间过多
+		realloc(data, length*sizeof(void**));
+		free_len = 0;		//不设置多余空间 
+	}
+	
+	if(data==NULL){
+		throw MM_OUT;
+	}
+	
 	return this;
 }
 
 void* List::get(int index) {
 	return data[index];
 }
+
+int List::size()
+{
+	return length;
+ } 
 
 void List::destroy() {
 	//并不销毁元素
