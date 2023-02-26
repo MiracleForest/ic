@@ -17,8 +17,6 @@ int main() {
 
 	string tmp = "";
 	while(getline(cin,tmp)) {
-		//这里的顺序不能调换
-		//一旦调换，"!"也被加入input_string
 		input_string += (tmp+"\n");
 	}
 
