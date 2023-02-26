@@ -1,0 +1,20 @@
+private class Test1
+{
+	public i32 v;
+
+	public i32 func()
+	{
+		v = 10; // OK
+		return v; // OK
+	}
+}
+
+private class Test1_1
+{
+	i32 func()
+	{
+		Test1 test1 = new Test1; //Error!
+		test1.v = 10; // Error!
+		return test1.v; // Error!
+	}
+}
