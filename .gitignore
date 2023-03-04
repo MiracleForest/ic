@@ -1,6 +1,19 @@
-﻿################################################################################
-# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
-################################################################################
-
+﻿# Visual Studio related
 /.vs
-/out/build/x64-Debug
+/CMakeSettings.json
+/out
+
+# Visual Studio Code related
+/.vscode
+/build
+
+# Idea related
+/.idea
+/cmake-build-*
+
+# Build related
+
+# Misc
+
+# Clangd cache
+/.cache

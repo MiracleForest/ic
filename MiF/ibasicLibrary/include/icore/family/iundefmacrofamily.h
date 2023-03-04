@@ -1,0 +1,161 @@
+﻿/****
+ *
+ * Copyright(C) 2022 MiracleForest Studio. All Rights Reserved.
+ *
+ * @文件名：iundefmacrofamily.h
+ * @创建时间：2022.12.19.12:01
+ * @创建者：Lovelylavender4
+ * -----------------------------------------------------------------------------
+ * 此文件取消定义了imacrofamily的宏
+ * -----------------------------------------------------------------------------
+ * 如果你发现了bug，你可以去Github或邮箱(MiracleForest@Outlook.com)反馈给我们！
+ * 我们一定会努力做得更好的！
+ *
+ ****/
+#pragma once
+#undef __ICC__
+#undef __CLANG__
+#undef __GCC__
+#undef __GCCV__
+#undef __HP__
+#undef __ILECPP__
+#undef __MSVC__
+#undef __PGCPP__
+#undef __SUNPRO__
+#undef __UNKNOWN__
+#undef __CPP_23__
+#undef __CPP_20__ 
+#undef __CPP_17__ 
+#undef __CPP_14__ 
+#undef __CPP_11__ 
+#undef __WIN64__ 
+#undef __WIN32__ 
+#undef __WINDOWS__ 
+#undef __POSIX_BASED__ 
+#undef __IOS_EMBEDDED__ 
+#undef __IOS_STIMULATOR_IPHONE__ 
+#undef __MACOS__ 
+#undef __LINUX__ 
+#undef __ANDROID__
+#undef __ANDROID__ 
+#undef __APPLE__ 
+#undef __APPLE__ 
+#undef __UNIX__ 
+#undef __SOLARIS__ 
+#undef __HP_UX__ 
+#undef __DRAGONFLY_BSD__ 
+#undef __FREEBSD__ 
+#undef __NETBSD__ 
+#undef __OPENBSD__ 
+#undef __BSD__ 
+#undef __UNK__ 
+#undef IS_FLOAT_DIFFERENT(a, b)
+#undef IS_FLOAT_EQUAL(a, b)
+#undef IS_DOUBLE_DIFFERENT(a, b)
+#undef IS_DOUBLE_EQUAL(a, b)
+#undef MATH_E
+#undef MATH_LOG2E
+#undef MATH_LOG10E
+#undef MATH_LN2
+#undef MATH_LN10
+#undef MATH_PI
+#undef MATH_PI_2
+#undef MATH_PI_4
+#undef MATH_1_PI
+#undef MATH_2_PI
+#undef MATH_2_SQRTPI
+#undef MATH_SQRT2
+#undef MATH_SQRT1_2
+#undef IAPI
+#undef IAPI_EXPORT
+#undef IAPI_IMPORT
+#undef _CGETVF(rt,cname,lname)
+#undef _CSETVF(rt,pt,cname,lname)
+#undef CATCH(x)
+#undef TCATCH(_try,x)
+#undef IERROR
+#undef SPACE(namespaceName)
+#undef SPACE_ 
+#undef ECLASS(className)
+#undef ECLASS_
+#undef _iError
+#undef _iErrorCode
+#undef iMain(pname)
+#undef _ITYPE
+#undef _IBASIC
+#undef _ISTD
+#undef TMYEAR2CALENDAR(Y)
+#undef CALENDARYR2TM(Y)
+#undef TMYEAR2Y2K(Y)
+#undef Y2KYEAR2TM(Y)
+#undef SECS_PER_MIN
+#undef SECS_PER_HOUR
+#undef SECS_PER_DAY
+#undef DAYS_PER_WEEK 
+#undef SECS_PER_WEEK
+#undef SECS_YR_2000
+#undef NUMBEROfSECONDS(_time_)
+#undef NUMBEROfMINUTES(_time_)
+#undef NUMBEROfHOURS(_time_) 
+#undef DAYOFWEEK(_time_) 
+#undef ELAPSEDDAYS(_time_) 
+#undef ELAPSEDSECS2DAY(_time_) 
+#undef LODWORD(x)
+#undef HIDWORD(x)  
+#undef BYTEn(x, n)  
+#undef WORDn(x, n) 
+#undef BYTE1(x) 
+#undef BYTE2(x)  
+#undef BYTE3(x) 
+#undef BYTE4(x)  
+#undef BYTE5(x)
+#undef BYTE6(x)  
+#undef BYTE7(x)
+#undef BYTE8(x)  
+#undef BYTE9(x)   
+#undef BYTE10(x) 
+#undef BYTE11(x))
+#undef BYTE12(x)  
+#undef BYTE13(x) 
+#undef BYTE14(x)  
+#undef BYTE15(x)  
+#undef WORD1(x)   
+#undef WORD2(x)   
+#undef WORD3(x)  
+#undef WORD4(x) 
+#undef WORD5(x) 
+#undef WORD6(x)   
+#undef WORD7(x)  
+#undef SLOBYTE(x) 
+#undef SLOWORD(x)   
+#undef SLODWORD(x) 
+#undef SHIBYTE(x)
+#undef SHIWORD(x) 
+#undef SHIDWORD(x)  
+#undef SBYTEn(x, n)   
+#undef SWORDn(x, n)   
+#undef SBYTE1(x)   
+#undef SBYTE2(x)   
+#undef SBYTE3(x)  
+#undef SBYTE4(x)   
+#undef SBYTE5(x)  
+#undef SBYTE6(x)   
+#undef SBYTE7(x)   
+#undef SBYTE8(x)   
+#undef SBYTE9(x) 
+#undef SBYTE10(x)
+#undef SBYTE11(x)
+#undef SBYTE12(x)
+#undef SBYTE13(x)
+#undef SBYTE14(x) 
+#undef SBYTE15(x)
+#undef SWORD1(x)   
+#undef SWORD2(x) 
+#undef SWORD3(x)
+#undef SWORD4(x)
+#undef SWORD5(x)
+#undef SWORD6(x)
+#undef SWORD7(x)
+#undef _UNKNOWN
+#undef EXPRESSIONSWITHCOMMAS(...)
+#undef _OWORD
