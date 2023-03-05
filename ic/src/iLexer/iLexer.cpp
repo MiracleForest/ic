@@ -299,3 +299,8 @@ bool iLexer::isKeyword(istring id)const
 	return false;
 }
 
+_ISTD Ref<iLexer> iLexer::operator=(_ISTD CRef<iLexer> l)
+{
+	this->_targetCode = l._targetCode;
+	return *this;
+}

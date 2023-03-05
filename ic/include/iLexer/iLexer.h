@@ -72,6 +72,10 @@ SPACE(i)
 			//判断该标识符是否为关键字
 			bool isKeyword(istring id)const;
 
+		public:
+
+			_ISTD Ref<iLexer> operator=(_ISTD CRef<iLexer>);
+
 		private:
 			istring _targetCode;
 			const std::vector<istring> _keywords = { "char", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64",
