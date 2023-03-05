@@ -1,20 +1,20 @@
-private class Test1
-{
-	public i32 v;
+import i.IO;
 
-	public i32 func()
+public class iMain
+{
+	iMain()
 	{
-		v = 10; // OK
-		return v; // OK
+		//控制台输出
+		iConsole.output("//Hello world!/*控制台输出*/");
+		/*****
+		  控
+		  制
+		  台
+		  输
+		  出
+		*****/
+		f32 f = 1.23f;
+		i32 v = 12°3'4''5'''6''''i32;
 	}
 }
 
-private class Test1_1
-{
-	i32 func()
-	{
-		Test1 test1 = new Test1; //Error!
-		test1.v = 10; // Error!
-		return test1.v; // Error!
-	}
-}

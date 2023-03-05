@@ -18,26 +18,26 @@
 
 SPACE(i)
 {
-    SPACE(icSystem)
-    {
-    
+	SPACE(icSystem)
+	{
+
 		class iLexer
 		{
-			using uchar = i::core::uchar;
-			using uint = i::core::uint;
+			using uchar = _ISTD uchar;
+			using uint = _ISTD uint;
 			using istring = _ISTDTEXT istring;
 
 		public:
-			
+
 			iLexer(istring text);
 
 		public:
 
 			//向下读取一个Token
-			iToken read();	
+			iToken read();
 
 			//返回整个token数组
-			std::vector<iToken> parse();		
+			std::vector<iToken> parse();
 
 		protected:
 
@@ -70,10 +70,10 @@ SPACE(i)
 			int readIdentifier();
 
 			//判断该标识符是否为关键字
-			bool isKeyword(istring id)const;	
+			bool isKeyword(istring id)const;
 
 		private:
-			istring _text;
+			istring _targetCode;
 			const std::vector<istring> _keywords = { "char", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64",
 												 "string", "enum", "label", "keyword", "struct", "symbol", "self", "type", "source", "target",
 												 "opt", "pretreatment", "defspace", "class", "break", "continue", "interface", "for", "foreach",
@@ -81,8 +81,8 @@ SPACE(i)
 												 "throw", "return", "assert", "operator", "delete", "goto", "particulor", "virtual", "export",
 												 "static", "const", "ref", "ptr", "final", "mutable", "explicit", "true", "false", "new", "void",
 												 "default", "null", "nullptr", "or", "not", "and", "is", "nand", "nor", "xor", "xnor", "in", "as",
-												 "add", "sub", "mul", "div", "equal"
+												 "add", "sub", "mul", "div", "equal","get","set"
 			};
 		};//iLexer
-    }
+	}
 }

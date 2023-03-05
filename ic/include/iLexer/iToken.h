@@ -40,12 +40,14 @@ SPACE(i)
 
 		class iToken
 		{
-			using uchar = i::core::uchar;
-			using uint = i::core::uint;
+			using uchar = _ISTD uchar;
+			using uint = _ISTD uint;
 			using istring = _ISTDTEXT istring;
 		public:
 
-			iToken(uchar token_id, istring text);
+			iToken();
+
+			iToken(iTokenID token_id, istring text);
 
 		public:
 
@@ -53,16 +55,20 @@ SPACE(i)
 			istring getText()const;
 
 			//获取编号
-			uchar getID()const;
+			iTokenID getID()const;
 
 		public:
 
 			istring getID2String()const;
 
+		public:
+
+			_ISTD Ref<iToken> operator=(_ISTD CRef<iToken>);
+
 		private:
 
 			istring _text;
-			uint _ID;
+			iTokenID _ID;
 
 		};//iToken
 

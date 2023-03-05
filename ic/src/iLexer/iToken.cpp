@@ -4,6 +4,13 @@ using uchar = i::core::uchar;
 using uint = i::core::uint;
 using istring = _ISTDTEXT istring;
 
+iToken::iToken(iTokenID token_id, istring text)
+	:_ID(token_id), _text(text)
+{ }
+
+iToken::iToken()
+	:_ID(iTokenID::Unk), _text("")
+{ }
 
 istring iToken::getID2String()const
 {
@@ -42,16 +49,19 @@ istring iToken::getID2String()const
 	}
 }
 
-iToken::iToken(uchar token_id, istring text)
-	:_ID(token_id),_text(text)
-{ }
-
-istring iToken::getText()
+istring iToken::getText()const
 {
-	return this->text;
+	return this->_text;
 }
 
-uchar iToken::getID()
+iTokenID iToken::getID()const
 {
-	return this->ID;
+	return this->_ID;
+}
+
+_ISTD Ref<iToken> iToken::operator=(_ISTD CRef<iToken> t)
+{
+	this->_ID = t.getID();
+	this->_text = t.getText();
+	return *this;
 }
