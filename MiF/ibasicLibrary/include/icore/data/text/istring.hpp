@@ -103,10 +103,10 @@ SPACE(i)
                         {
                             _data = s;
                         }
-                        //else
-                        //{
-                        //    _data = toStdString(s);
-                        //}
+                        else
+                        {
+                            _data = toStdString(s);
+                        }
                     }
 
                     istring(iChar ichar)

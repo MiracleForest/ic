@@ -11,13 +11,18 @@ iMain(_p_start)
 {
 	_p_start.pause = true;
 	using istring = _ISTDTEXT istring;
-
+	
 	_ISTD io::iLogger logger("ic");
 
-	std::fstream targetFile("script.is");
+	//std::fstream targetFile("script.is");
+	istring filePath = R"(..\..\..\..\script.is)";
+
+	std::fstream targetFile(filePath.data());
 	if (!targetFile.good())
 	{
 		logger.error("打开目标文件失败！");
+		//输出当前目录
+		std::cout << i::core::data::text::iEncoding::wideChar2ANSI(std::filesystem::current_path().native()) + R"(\)" + filePath.data() << std::endl;
 		return _ISTD iexception::error::make(-1);
 	}
 	std::string codeString = "";
