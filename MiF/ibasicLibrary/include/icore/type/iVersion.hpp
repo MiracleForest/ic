@@ -37,7 +37,7 @@ SPACE(i)
 			int macro = 0;//宏版本
 			int major = 0;//主版本
 			int minor = 0;//次版本
-			int revision = 0;//修订版本
+			int patch = 0;//修补版本
 			data::text::istring branch = "master";//分支
 			uint64 numberOfBuilds = 0;//构建次数
 			Status status = Status::Unk;//状况 
@@ -77,7 +77,7 @@ SPACE(nlohmann)
 		json.push_back(value.macro);
 		json.push_back(value.major);
 		json.push_back(value.minor);
-		json.push_back(value.revision);
+		json.push_back(value.patch);
 		json.push_back(value.branch.data());
 		json.push_back(value.numberOfBuilds);
 		json.push_back(strbuff);
@@ -89,7 +89,7 @@ SPACE(nlohmann)
 		value.macro = j[0].get<int>();
 		value.major = j[1].get<int>();
 		value.minor = j[2].get<int>();
-		value.revision = j[3].get<int>();
+		value.patch = j[3].get<int>();
 		value.branch = j[4].get<std::string>();
 		value.numberOfBuilds = j[5].get<_ISTD uint64>();
 		std::string s = j[6].get<std::string>();

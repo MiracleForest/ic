@@ -27,6 +27,7 @@
 #include <iomanip>
 #include <string_view>
 #include <format>
+#include <codecvt>
 
 #ifdef __WINDOWS__
 #include <stringapiset.h>
@@ -103,10 +104,10 @@ SPACE(i)
                         {
                             _data = s;
                         }
-                        //else
-                        //{
-                        //    _data = toStdString(s);
-                        //}
+                        else
+                        {
+                            _data = toStdString(s);
+                        }
                     }
 
                     istring(iChar ichar)
@@ -861,6 +862,11 @@ SPACE(i)
                         return value;
                     }
 
+                    static std::string toStdString(CPtr<char16_t> value)
+                    {
+                        return std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t>{}.to_bytes(value);
+                    }
+
                     static std::string toStdString(const wchar_t value)
                     {
                         return iEncoding::wideChar2UTF8(std::wstring(1, value));
@@ -876,6 +882,11 @@ SPACE(i)
                         return value.data();
                     }
 
+                    static std::string toStdString(__unk_type__ value)
+                    {
+                        return std::string(static_cast<CPtr<char>>(value));
+                    }
+
 #ifdef __cpp_lib_char8_t
                     static std::string toStdString(CRef<std::u8string> value)
                     {
@@ -889,6 +900,10 @@ SPACE(i)
                         if (std::convertible_to<value.data(), std::string>)
                         {
                             return toStdString(value.data());
+                        }
+                        else
+                        {
+                            return {};
                         }
                     }
 
@@ -1777,7 +1792,7 @@ SPACE(i)
                     {
                         try
                         {
-                            auto n = std::stod(this->_data);
+                            (void)std::stod(this->_data);
                             return true;
                         }
                         catch (...)

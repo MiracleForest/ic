@@ -331,7 +331,7 @@ SPACE(i)
                             std::swap(c[i], c[resort[i]]);
                     for (int i = 1; i < lim; i <<= 1)
                     {
-                        iComplex W1n(cos(_ISTDMATH MATH_PI / i), state * sin(_ISTDMATH MATH_PI / i)); //-
+                        iComplex W1n(cos(_ISTDMATH MATH_PI / i), state * sin(_ISTDMATH MATH_PI / i));
                         for (int size = i << 1, j = 0; j < lim; j += size)
                         {
                             iComplex W(1.00, 0.00);
@@ -378,4 +378,20 @@ SPACE(i)
 inline _ISTDMATH iBigInteger operator""_bi(_ISTD CPtr<char> str)
 {
     return _ISTDMATH iBigInteger(_ISTDTEXT istring(str));
+}
+
+SPACE(i)
+{
+    SPACE(core)
+    {
+        SPACE(math)
+        {
+            class iNewBigInteger : public basic::iBasicDataType<iBigInteger, data::text::istring>
+            {
+                using istring = data::text::istring;
+                iObject(iNewBigInteger)
+                
+            };
+        }
+    }
 }

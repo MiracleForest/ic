@@ -57,6 +57,10 @@ file(
         ${PROJECT_SOURCE_DIR}/src/iLexer/*.h
 )
 
+# third-party source files
+file(GLOB_RECURSE THIRD_PARTY_SRC_FILES ${CMAKE_SOURCE_DIR}/third-party/rawpdb/*)
+
+
 add_executable(ic ${SRC_FILES} ${THIRD_PARTY_SRC_FILES})
 
 target_compile_options(
@@ -68,7 +72,4 @@ target_compile_definitions(
         ic
         PRIVATE _CONSOLE _UNICODE UNICODE
 )
-
-# third-party source files
-file(GLOB_RECURSE THIRD_PARTY_SRC_FILES ${CMAKE_SOURCE_DIR}/third-party/rawpdb/*)
 

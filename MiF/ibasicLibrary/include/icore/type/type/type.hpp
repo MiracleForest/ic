@@ -89,6 +89,7 @@ SPACE(i)
 			iCuboid,
 			iCube,
 			iBigInteger,
+			iNewBigInteger,
 			iBigDecimal,
 			iProcess,
 			iPosition,
@@ -109,6 +110,7 @@ SPACE(i)
 			iWBStreamImpl,
 			iBinVariant,
 			iLogger,
+			iPlural,
 			iCriticalSectionLock,
 			iCriticalSectionLockHolder
 		};//ECLASS(TypeList)

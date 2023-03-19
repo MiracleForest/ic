@@ -32,8 +32,8 @@ SPACE(i)
         struct _p_start
         {
             int argc = 0;
-            DPtr<char> argv = nullptr;
-            DPtr<char> envp = nullptr;
+            PPtr<char> argv = nullptr;
+            PPtr<char> envp = nullptr;
             bool pause = false;
         }; //struct _p_start 
 
@@ -95,8 +95,8 @@ SPACE(i)
  ****/
 int main(
     int argc,
-    _ISTD DPtr<char> argv,
-    _ISTD DPtr<char> envp
+    _ISTD PPtr<char> argv,
+    _ISTD PPtr<char> envp
 )
 {
     try

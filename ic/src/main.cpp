@@ -14,7 +14,7 @@ iMain(_p_start)
 
 	_ISTD io::iLogger logger("ic");
 
-	std::fstream targetFile("script.is");
+	std::fstream targetFile("../../../../script.is");
 	if (!targetFile.good())
 	{
 		logger.error("打开目标文件失败！");

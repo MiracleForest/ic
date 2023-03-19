@@ -4,17 +4,25 @@ public class iMain
 {
 	iMain()
 	{
-		//控制台输出
-		iConsole.output("//Hello world!/*控制台输出*/");
+		//Hello world
+		iConsole.output("//Hello world!/*Hello world*/");
 		/*****
-		  控
-		  制
-		  台
-		  输
-		  出
+		  H
+		  e
+		  l
+		  l
+		  o
+		   
+		  w
+		  o
+		  r
+		  l
+		  d
 		*****/
+
+		string str="sdsd'645645";
 		f32 f = 1.23f;
-		i32 v = 12°3'4''5'''6''''i32;
+		i32 v = 123'4''5'''6''''i32;
 	}
 }
 

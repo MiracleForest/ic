@@ -217,16 +217,16 @@ private:
 #define NUMBEROfSECONDS(_time_) ((_time_) % SECS_PER_MIN)  
 #define NUMBEROfMINUTES(_time_) (((_time_) / SECS_PER_MIN) % SECS_PER_MIN) 
 #define NUMBEROfHOURS(_time_) (((_time_) % SECS_PER_DAY) / SECS_PER_HOUR)
-#define DAYOFWEEK(_time_) ((((_time_) / SECS_PER_DAY + 4)  % DAYS_PER_WEEK)+1) // 1 = Sunday
-#define ELAPSEDDAYS(_time_) ((_time_) / SECS_PER_DAY)  // this is number of days since Jan 1 1970
-#define ELAPSEDSECS2DAY(_time_) ((_time_) % SECS_PER_DAY)   // the number of seconds since last midnight 
+#define DAYOFWEEK(_time_) ((((_time_) / SECS_PER_DAY + 4)  % DAYS_PER_WEEK)+1) // 1 = 星期日
+#define ELAPSEDDAYS(_time_) ((_time_) / SECS_PER_DAY)  // 这是自1970年1月1日以来的天数
+#define ELAPSEDSECS2DAY(_time_) ((_time_) % SECS_PER_DAY)   // 从去年午夜开始的秒数 
 
 /*------------------------其他------------------------*/
-#define LODWORD(x)  (*((_DWORD*)&(x)))  // low dword
+#define LODWORD(x)  (*((_DWORD*)&(x)))
 #define HIDWORD(x)  (*((_DWORD*)&(x)+1))
 #define BYTEn(x, n)   (*((_BYTE*)&(x)+n))
 #define WORDn(x, n)   (*((_WORD*)&(x)+n))
-#define BYTE1(x)   BYTEn(x,  1)         // byte 1 (counting from 0)
+#define BYTE1(x)   BYTEn(x,  1)
 #define BYTE2(x)   BYTEn(x,  2)
 #define BYTE3(x)   BYTEn(x,  3)
 #define BYTE4(x)   BYTEn(x,  4)
@@ -242,14 +242,13 @@ private:
 #define BYTE14(x)  BYTEn(x, 14)
 #define BYTE15(x)  BYTEn(x, 15)
 #define WORD1(x)   WORDn(x,  1)
-#define WORD2(x)   WORDn(x,  2)         // third word of the object, unsigned
+#define WORD2(x)   WORDn(x,  2)
 #define WORD3(x)   WORDn(x,  3)
 #define WORD4(x)   WORDn(x,  4)
 #define WORD5(x)   WORDn(x,  5)
 #define WORD6(x)   WORDn(x,  6)
 #define WORD7(x)   WORDn(x,  7)
 
-// now signed macros (the same but with sign extension)
 #define SLOBYTE(x)   (*((int8*)&(x)))
 #define SLOWORD(x)   (*((int16*)&(x)))
 #define SLODWORD(x)  (*((int32*)&(x)))
@@ -345,13 +344,13 @@ SPACE(i)
         using Ptr = Type*;
 
         template <typename Type>
-        using DPtr = Type**;
+        using PPtr = Type**;
 
         template <typename Type>
         using CPtr = const Type*;
 
         template <typename Type>
-        using CDPtr = const Type**;
+        using CPPtr = const Type**;
 
         template <typename Type>
         using CRef = const Type&;
