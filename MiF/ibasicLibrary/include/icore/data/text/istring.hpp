@@ -864,7 +864,7 @@ SPACE(i)
 
                     static std::string toStdString(CPtr<char16_t> value)
                     {
-                        return std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t>{}.to_bytes(value);
+                        return u16str2str(value);
                     }
 
                     static std::string toStdString(const wchar_t value)
@@ -1037,6 +1037,18 @@ SPACE(i)
                         auto len = WideCharToMultiByte(codePage, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr);
                         Ptr<char> buffer = new char[len + 1];
                         WideCharToMultiByte(codePage, 0, wstr.c_str(), -1, buffer, len + 1, nullptr, nullptr);
+                        buffer[len] = '\0';
+
+                        std::string result = std::string(buffer);
+                        delete[] buffer;
+                        return result;
+                    }
+
+                    static std::string u16str2str(CRef<std::u16string> u16str)
+                    {
+                        auto len = WideCharToMultiByte(CP_ACP, 0, reinterpret_cast<const wchar_t*>(u16str.c_str()), -1, nullptr, 0, nullptr, nullptr);
+                        Ptr<char> buffer = new char[len + 1];
+                        WideCharToMultiByte(CP_ACP, 0, reinterpret_cast<const wchar_t*>(u16str.c_str()), -1, buffer, len + 1, nullptr, nullptr);
                         buffer[len] = '\0';
 
                         std::string result = std::string(buffer);
