@@ -46,31 +46,31 @@ SPACE(i)
 
 			/*模拟正则，每个分组判断过去，符合则返回配对长度，不符合返回0*/
 			//读取空白字符
-			int readSpace();
+			int readSpace(int pos);
 
 			//读取一个字符串
-			int readString();
+			int readString(int pos);
 
 			//读取一个数
-			int readNumber();
+			int readNumber(int pos);
 
 			//十进制
-			int readDecNumber();
+			int readDecNumber(int pos);
 
 			//十六进制
-			int readHexNumber();
+			int readHexNumber(int pos);
 
 			//八进制
-			int readOctNumber();
+			int readOctNumber(int pos);
 
 			//单行注释
-			int readLineComment();
+			int readLineComment(int pos);
 
 			//多行注释
-			int readBigComment();
+			int readBigComment(int pos);
 
 			//读取一个标识符
-			int readIdentifier();
+			int readIdentifier(int pos);
 
 			//判断该标识符是否为关键字
 			bool isKeyword(istring id)const;
@@ -90,6 +90,9 @@ SPACE(i)
 												 "default", "null", "nullptr", "or", "not", "and", "is", "nand", "nor", "xor", "xnor", "in", "as",
 												 "add", "sub", "mul", "div", "equal","get","set"
 			};
+
+			int pos = 0;
+			int len = _inputCode.length();
 		};//iLexer
 	}
 }
