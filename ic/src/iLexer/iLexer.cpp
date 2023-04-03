@@ -3,42 +3,44 @@ using namespace i::icSystem;
 using uchar = _ISTD uchar;
 using uint = _ISTD uint;
 using istring = _ISTDTEXT istring;
+using iLogger = _ISTD io::iLogger;
 
 iLexer::iLexer(istring targetCode)
-	:_targetCode(targetCode)
+	:_inputCode(targetCode)
 { }
 
 iToken iLexer::read()
 {
 	int result = 0;
 	//找到有用token就返回
-	while (_targetCode != "")
+	while (_inputCode != "")
 	{
-		int len = _targetCode.length();
+		int len = _inputCode.length();
 
-		if (_targetCode[0] == '\n')
+		if (_inputCode[0] == '\n')
 		{
-			_targetCode = _targetCode.substr(1, _targetCode.length());
+			_inputCode = _inputCode.substr(1, _inputCode.length());
 			return iToken(iTokenID::EOL, "");
 		}
 
 		if (result = readString())
 		{
-			//text = text[result:]
-			_targetCode = _targetCode.substr(result, len);
-			return iToken(iTokenID::String, _targetCode.substr(0, result));
+			auto rtstr = _inputCode.substr(0, result);
+			_inputCode = _inputCode.substr(result, len);
+			return iToken(iTokenID::String, rtstr);
 		}
 
 		if (result = readNumber())
 		{
-			_targetCode = _targetCode.substr(result, len);
-			return iToken(iTokenID::Number, _targetCode.substr(0, result));
+			auto rtstr = _inputCode.substr(0, result);
+			_inputCode = _inputCode.substr(result, len);
+			return iToken(iTokenID::Number, rtstr);
 		}
 
 		if (result = readIdentifier())
 		{
-			istring token_str = _targetCode.substr(0, result);
-			_targetCode = _targetCode.substr(result, len);
+			istring token_str = _inputCode.substr(0, result);
+			_inputCode = _inputCode.substr(result, len);
 			if (isKeyword(token_str) == true)
 			{
 				return iToken(iTokenID::Keyword, token_str);
@@ -48,21 +50,21 @@ iToken iLexer::read()
 
 		if (result = readSpace())
 		{
-			_targetCode = _targetCode.substr(result, len);
+			_inputCode = _inputCode.substr(result, len);
 		}
 		else if (result = readLineComment())
 		{
-			_targetCode = _targetCode.substr(result, len);
+			_inputCode = _inputCode.substr(result, len);
 		}
 		else if (result = readBigComment())
 		{
-			_targetCode = _targetCode.substr(result, len);
+			_inputCode = _inputCode.substr(result, len);
 		}
 		else
 		{
 			//到这里为止什么都没有，肯定是运算符
-			istring op = _targetCode.substr(0, 1);
-			_targetCode = _targetCode.substr(1, len);
+			istring op = _inputCode.substr(0, 1);
+			_inputCode = _inputCode.substr(1, len);
 			return iToken(iTokenID::Operator, op);
 		}
 	}
@@ -86,7 +88,7 @@ std::vector<iToken> iLexer::parse()
 int iLexer::readSpace()
 {
 	int result = 0;
-	while (result < _targetCode.length() && (_targetCode[result] == ' ' || _targetCode[result] == '\t'))
+	while (result < _inputCode.length() && (_inputCode[result] == ' ' || _inputCode[result] == '\t'))
 	{
 		result++;
 	}
@@ -95,18 +97,19 @@ int iLexer::readSpace()
 
 int iLexer::readString()
 {
+
 	int result = 0;
-	if (_targetCode[0] != '\"')
+	if (_inputCode[0] != '\"')
 	{
 		return 0;
 	}
 	//左引号
 	result++;
 
-	while (result < (_targetCode.length() - 1) && _targetCode[result] != '\"')
+	while (result < (_inputCode.length() - 1) && _inputCode[result] != '\"')
 	{
 		//只要没到底，没读完，那就继续读
-		if (_targetCode[result] == '\\')
+		if (_inputCode[result] == '\\')
 		{
 			//转义字符不转，直接保留
 			result++;
@@ -114,7 +117,7 @@ int iLexer::readString()
 		result++;
 	}
 
-	if (_targetCode[result] != '\"')
+	if (_inputCode[result] != '\"')
 	{
 		//没有右边的引号
 		return 0;
@@ -153,7 +156,7 @@ int iLexer::readDecNumber()
 {
 	int result = 0;
 
-	while (result < _targetCode.length() && ('0' <= _targetCode[result] && _targetCode[result] <= '9'))
+	while (result < _inputCode.length() && ('0' <= _inputCode[result] && _inputCode[result] <= '9'))
 	{
 		result++;
 	}
@@ -165,13 +168,13 @@ int iLexer::readHexNumber()
 {
 	int result = 0;
 
-	if (_targetCode.length() <= 2)
+	if (_inputCode.length() <= 2)
 	{
 		//长度过小
 		return 0;
 	}
 
-	if (_targetCode[0] == '0' && _targetCode[1] == 'x')
+	if (_inputCode[0] == '0' && _inputCode[1] == 'x')
 	{
 		result += 2;
 	}
@@ -180,7 +183,7 @@ int iLexer::readHexNumber()
 		return 0;
 	}
 
-	while (result < _targetCode.length() && ('0' <= _targetCode[result] && _targetCode[result] <= 'F'))
+	while (result < _inputCode.length() && ('0' <= _inputCode[result] && _inputCode[result] <= 'F'))
 	{
 		result++;
 	}
@@ -191,13 +194,13 @@ int iLexer::readOctNumber()
 {
 	int result = 0;
 
-	if (_targetCode.length() <= 1)
+	if (_inputCode.length() <= 1)
 	{
 		//长度过小
 		return 0;
 	}
 
-	if (_targetCode[0] == '0')
+	if (_inputCode[0] == '0')
 	{
 		result += 1;
 	}
@@ -208,7 +211,7 @@ int iLexer::readOctNumber()
 	//至少是个位数
 	result++;
 
-	while (result < _targetCode.length() && ('0' <= _targetCode[result] && _targetCode[result] <= '8'))
+	while (result < _inputCode.length() && ('0' <= _inputCode[result] && _inputCode[result] <= '8'))
 	{
 		result++;
 	}
@@ -218,13 +221,13 @@ int iLexer::readOctNumber()
 int iLexer::readLineComment()
 {
 	int result = 0;
-	if (_targetCode.length() <= 1)
+	if (_inputCode.length() <= 1)
 	{
 		//长度过小
 		return 0;
 	}
 
-	if (_targetCode[0] == '/' && _targetCode[1] == '/')
+	if (_inputCode[0] == '/' && _inputCode[1] == '/')
 	{
 		//加上两个斜杠
 		result += 2;
@@ -234,7 +237,7 @@ int iLexer::readLineComment()
 		return 0;
 	}
 
-	while (result < _targetCode.length() && _targetCode[result] != '\n')
+	while (result < _inputCode.length() && _inputCode[result] != '\n')
 	{
 		result++;
 	}
@@ -246,12 +249,12 @@ int iLexer::readBigComment()
 {
 	int result = 0;
 
-	if (_targetCode.length() <= 3)
+	if (_inputCode.length() <= 3)
 	{
 		return 0;
 	}
 
-	if (_targetCode[0] == '/' && _targetCode[1] == '*')
+	if (_inputCode[0] == '/' && _inputCode[1] == '*')
 	{
 		//加上/*
 		result += 2;
@@ -261,7 +264,7 @@ int iLexer::readBigComment()
 		return 0;
 	}
 
-	while (result < (_targetCode.length() - 2) && (_targetCode[result] != '*' || _targetCode[result + 1] != '/'))
+	while (result < (_inputCode.length() - 2) && (_inputCode[result] != '*' || _inputCode[result + 1] != '/'))
 	{
 		result++;
 	}
@@ -275,11 +278,11 @@ int iLexer::readBigComment()
 int iLexer::readIdentifier()
 {
 	int result = 0;
-	if (('A' <= _targetCode[0] && _targetCode[0] <= 'Z') || ('a' <= _targetCode[0] && _targetCode[0] <= 'z') || _targetCode[0] == '_')
+	if (('A' <= _inputCode[0] && _inputCode[0] <= 'Z') || ('a' <= _inputCode[0] && _inputCode[0] <= 'z') || _inputCode[0] == '_')
 	{
 		result++;
 	}
-	while (result < _targetCode.length() && (('A' <= _targetCode[result] && _targetCode[result] <= 'Z') || ('a' <= _targetCode[result] && _targetCode[result] <= 'z') || ('0' <= _targetCode[result] && _targetCode[result] <= '9') || _targetCode[result] == '_'))
+	while (result < _inputCode.length() && (('A' <= _inputCode[result] && _inputCode[result] <= 'Z') || ('a' <= _inputCode[result] && _inputCode[result] <= 'z') || ('0' <= _inputCode[result] && _inputCode[result] <= '9') || _inputCode[result] == '_'))
 	{
 		result++;
 	}
@@ -301,6 +304,6 @@ bool iLexer::isKeyword(istring id)const
 
 _ISTD Ref<iLexer> iLexer::operator=(_ISTD CRef<iLexer> l)
 {
-	this->_targetCode = l._targetCode;
+	this->_inputCode = l._inputCode;
 	return *this;
 }

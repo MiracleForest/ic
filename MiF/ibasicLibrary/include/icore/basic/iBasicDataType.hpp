@@ -30,6 +30,7 @@ SPACE(i)
 			template<typename Type, typename dtrType>
 			class iBasicDataType : public iBasic<Type>
 			{
+
 				virtual dtrType data()const = 0;
 
 			};//class iBasicDataType

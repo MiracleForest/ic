@@ -14,6 +14,7 @@
 ****/
 #pragma once
 #include <icore/family/imacrofamily.h>
+#include <icore/exception/error.hpp>
 #include <icore/type/type/type.hpp>
 #include <icore/data/text/istring.hpp>
 #include <icore/math/iVec2.hpp>

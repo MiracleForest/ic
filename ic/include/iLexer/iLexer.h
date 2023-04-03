@@ -14,6 +14,9 @@
  */
 
 #include <icore/family/imacrofamily.h>
+#include <icore/exception/error.hpp>
+#include <icore/console/iconsole.hpp>
+#include <icore/console/iLogger.hpp>
 #include "iToken.h"
 
 SPACE(i)
@@ -77,7 +80,7 @@ SPACE(i)
 			_ISTD Ref<iLexer> operator=(_ISTD CRef<iLexer>);
 
 		private:
-			istring _targetCode;
+			istring _inputCode;
 			const std::vector<istring> _keywords = { "char", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64",
 												 "string", "enum", "label", "keyword", "struct", "symbol", "self", "type", "source", "target",
 												 "opt", "pretreatment", "defspace", "class", "break", "continue", "interface", "for", "foreach",

@@ -73,7 +73,7 @@ SPACE(i)
 				___uptr,
 				___unaligned
 			};//enum class Retouchs :int
-
+			
 			enum class CppFunctionCallRules
 				:int
 			{
