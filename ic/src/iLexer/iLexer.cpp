@@ -5,6 +5,7 @@ using uint = _ISTD uint;
 using istring = _ISTDTEXT istring;
 using iLogger = _ISTD io::iLogger;
 
+
 iLexer::iLexer(istring targetCode)
 	:_inputCode(targetCode)
 { }
@@ -31,14 +32,14 @@ iToken iLexer::read()
 		if (result = readNumber(pos))
 		{
 			auto rtstr = _inputCode.substr(pos, result);
-			pos+=result;
+			pos += result;
 			return iToken(iTokenID::Number, rtstr);
 		}
 
 		if (result = readIdentifier(pos))
 		{
 			istring token_str = _inputCode.substr(pos, result);
-			pos+=result;
+			pos += result;
 			if (isKeyword(token_str) == true)
 			{
 				return iToken(iTokenID::Keyword, token_str);
@@ -48,15 +49,15 @@ iToken iLexer::read()
 
 		if (result = readSpace(pos))
 		{
-			pos+=result;
+			pos += result;
 		}
 		else if (result = readLineComment(pos))
 		{
-			pos+=result;
+			pos += result;
 		}
 		else if (result = readBigComment(pos))
 		{
-			pos+=result;
+			pos += result;
 		}
 		else
 		{
@@ -86,7 +87,7 @@ std::vector<iToken> iLexer::parse()
 int iLexer::readSpace(int pos)
 {
 	int result = 0;
-	while (pos+result < _inputCode.length() && (_inputCode[pos+result] == ' ' || _inputCode[pos+result] == '\t'))
+	while (pos + result < _inputCode.length() && (_inputCode[pos + result] == ' ' || _inputCode[pos + result] == '\t'))
 	{
 		result++;
 	}
@@ -104,10 +105,10 @@ int iLexer::readString(int pos)
 	//左引号
 	result++;
 
-	while (pos+result < (_inputCode.length() - 1) && _inputCode[pos+result] != '\"')
+	while (pos + result < (_inputCode.length() - 1) && _inputCode[pos + result] != '\"')
 	{
 		//只要没到底，没读完，那就继续读
-		if (_inputCode[pos+result] == '\\')
+		if (_inputCode[pos + result] == '\\')
 		{
 			//转义字符不转，直接保留
 			result++;
@@ -115,7 +116,7 @@ int iLexer::readString(int pos)
 		result++;
 	}
 
-	if (_inputCode[pos+result] != '\"')
+	if (_inputCode[pos + result] != '\"')
 	{
 		//没有右边的引号
 		return 0;
@@ -154,7 +155,7 @@ int iLexer::readDecNumber(int pos)
 {
 	int result = 0;
 
-	while (pos+result < _inputCode.length() && ('0' <= _inputCode[pos+result] && _inputCode[pos+result] <= '9'))
+	while (pos + result < _inputCode.length() && ('0' <= _inputCode[pos + result] && _inputCode[pos + result] <= '9'))
 	{
 		result++;
 	}
@@ -166,13 +167,13 @@ int iLexer::readHexNumber(int pos)
 {
 	int result = 0;
 
-	if (_inputCode.length() <= pos+2)
+	if (_inputCode.length() <= pos + 2)
 	{
 		//长度过小
 		return 0;
 	}
 
-	if (_inputCode[pos] == '0' && _inputCode[pos+1] == 'x')
+	if (_inputCode[pos] == '0' && _inputCode[pos + 1] == 'x')
 	{
 		result += 2;
 	}
@@ -181,7 +182,7 @@ int iLexer::readHexNumber(int pos)
 		return 0;
 	}
 
-	while (pos+result < _inputCode.length() && ('0' <= _inputCode[pos+result] && _inputCode[pos+result] <= 'F'))
+	while (pos + result < _inputCode.length() && ('0' <= _inputCode[pos + result] && _inputCode[pos + result] <= 'F'))
 	{
 		result++;
 	}
@@ -192,7 +193,7 @@ int iLexer::readOctNumber(int pos)
 {
 	int result = 0;
 
-	if (_inputCode.length() <=pos+ 1)
+	if (_inputCode.length() <= pos + 1)
 	{
 		//长度过小
 		return 0;
@@ -209,7 +210,7 @@ int iLexer::readOctNumber(int pos)
 	//至少是个位数
 	result++;
 
-	while (pos+result < _inputCode.length() && ('0' <= _inputCode[pos+result] && _inputCode[pos+result] <= '8'))
+	while (pos + result < _inputCode.length() && ('0' <= _inputCode[pos + result] && _inputCode[pos + result] <= '8'))
 	{
 		result++;
 	}
@@ -219,13 +220,13 @@ int iLexer::readOctNumber(int pos)
 int iLexer::readLineComment(int pos)
 {
 	int result = 0;
-	if (_inputCode.length() <= pos+1)
+	if (_inputCode.length() <= pos + 1)
 	{
 		//长度过小
 		return 0;
 	}
 
-	if (_inputCode[pos] == '/' && _inputCode[pos+1] == '/')
+	if (_inputCode[pos] == '/' && _inputCode[pos + 1] == '/')
 	{
 		//加上两个斜杠
 		result += 2;
@@ -235,7 +236,7 @@ int iLexer::readLineComment(int pos)
 		return 0;
 	}
 
-	while (pos+result < _inputCode.length() && _inputCode[pos+result] != '\n')
+	while (pos + result < _inputCode.length() && _inputCode[pos + result] != '\n')
 	{
 		result++;
 	}
@@ -247,12 +248,12 @@ int iLexer::readBigComment(int pos)
 {
 	int result = 0;
 
-	if (_inputCode.length() <= pos+3)
+	if (_inputCode.length() <= pos + 3)
 	{
 		return 0;
 	}
 
-	if (_inputCode[pos] == '/' && _inputCode[pos+1] == '*')
+	if (_inputCode[pos] == '/' && _inputCode[pos + 1] == '*')
 	{
 		//加上/*
 		result += 2;
@@ -262,7 +263,7 @@ int iLexer::readBigComment(int pos)
 		return 0;
 	}
 
-	while (pos+result < (_inputCode.length() - 2) && (_inputCode[pos+result] != '*' || _inputCode[pos+result + 1] != '/'))
+	while (pos + result < (_inputCode.length() - 2) && (_inputCode[pos + result] != '*' || _inputCode[pos + result + 1] != '/'))
 	{
 		result++;
 	}
@@ -280,7 +281,7 @@ int iLexer::readIdentifier(int pos)
 	{
 		result++;
 	}
-	while (pos+result < _inputCode.length() && (('A' <= _inputCode[pos+result] && _inputCode[pos+result] <= 'Z') || ('a' <= _inputCode[pos+result] && _inputCode[pos+result] <= 'z') || ('0' <= _inputCode[pos+result] && _inputCode[pos+result] <= '9') || _inputCode[pos+result] == '_'))
+	while (pos + result < _inputCode.length() && (('A' <= _inputCode[pos + result] && _inputCode[pos + result] <= 'Z') || ('a' <= _inputCode[pos + result] && _inputCode[pos + result] <= 'z') || ('0' <= _inputCode[pos + result] && _inputCode[pos + result] <= '9') || _inputCode[pos + result] == '_'))
 	{
 		result++;
 	}

@@ -100,7 +100,8 @@ SPACE(i)
                     template<typename T>
                     istring(T s)
                     {
-                        if constexpr (std::is_same<std::string, T>::value)
+                        if constexpr (std::is_same<std::string, T>::value ||
+                            std::is_same<std::string_view, T>::value)
                         {
                             _data = s;
                         }
@@ -698,10 +699,13 @@ SPACE(i)
                     }
 
 
-                    istring substr(size_type pos = 0, size_type count = istring::npos) const
+                    istring substr(size_type start = 0, size_type length = istring::npos)
                     {
-                        istring str(this->_data.substr(pos, count).data());
-                        return str;
+                        if (start + length > this->_data.size())
+                        {
+                            length = this->_data.size() - start;
+                        }
+                        return std::string_view(this->_data.data() + start, length);
                     }
 
                     /****

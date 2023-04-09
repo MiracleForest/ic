@@ -44,15 +44,20 @@ iMain(_p_start)
 
 	auto t2 = Clock::now();//计时结束
 
-
+	typedef std::chrono::high_resolution_clock Clock;
+	auto t3 = Clock::now();//计时开始
 	for (int i = 0; i < tokens.size(); i++)
 	{
 		logger.info("<{}> \t{}", tokens[i].getID2String(), iEncoding::UTF82ANSI(tokens[i].getText().data()));
 	}
+	auto t4 = Clock::now();//计时结束
 
 	logger.note("解析用时：{}纳秒", std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
 	logger.note("等于：{}毫秒", std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1e+6);
 	logger.note("等于：{}秒", std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1e+9);
+	logger.note("打印用时：{}纳秒", std::chrono::duration_cast<std::chrono::nanoseconds>(t4 - t3).count());
+	logger.note("等于：{}毫秒", std::chrono::duration_cast<std::chrono::nanoseconds>(t4 - t3).count() / 1e+6);
+	logger.note("等于：{}秒", std::chrono::duration_cast<std::chrono::nanoseconds>(t4 - t3).count() / 1e+9);
 
 	return _ISTD iexception::error::noError();
 }
