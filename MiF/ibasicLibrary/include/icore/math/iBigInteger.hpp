@@ -17,8 +17,8 @@
 #pragma once
 
 #include <icore/family/imacrofamily.h>
-#include <icore/basic/iBasicDataType.hpp>
-#include <icore/data/text/istring.hpp>
+#include <icore/basic/iBasicDataType.h>
+#include <icore/data/text/istring.h>
 
 #include <deque>
 #include <algorithm>
@@ -31,7 +31,7 @@ SPACE(i)
     {
         SPACE(math)
         {
-            class iBigInteger
+            class IAPI iBigInteger
                 : public basic::iBasicDataType<iBigInteger, data::text::istring>
             {
                 using istring = data::text::istring;

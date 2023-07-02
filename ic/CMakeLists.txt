@@ -40,7 +40,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS YES)
 
 include_directories(${CMAKE_SOURCE_DIR}/MiF/ibasicLibrary/include)
-include_directories(${CMAKE_SOURCE_DIR}/third-party/)
+include_directories(${CMAKE_SOURCE_DIR}/third-party)
+
+link_directories(${CMAKE_SOURCE_DIR}/MiF/ibasicLibrary/lib)
 
 file(
         GLOB_RECURSE SRC_FILES
@@ -48,20 +50,37 @@ file(
         ${PROJECT_SOURCE_DIR}/include/*.hpp
         ${PROJECT_SOURCE_DIR}/include/iLexer/*.h
         ${PROJECT_SOURCE_DIR}/include/iLexer/*.hpp
+        ${PROJECT_SOURCE_DIR}/include/iLexer/*.inl
+        ${PROJECT_SOURCE_DIR}/include/iParse/*.h
+        ${PROJECT_SOURCE_DIR}/include/iParse/*.hpp
+        ${PROJECT_SOURCE_DIR}/include/iParse/*.inl
+        ${PROJECT_SOURCE_DIR}/include/iAST/*.h
+        ${PROJECT_SOURCE_DIR}/include/iAST/*.hpp
+        ${PROJECT_SOURCE_DIR}/include/iAST/*.inl
         ${PROJECT_SOURCE_DIR}/src/*.cpp
-        ${PROJECT_SOURCE_DIR}/src/*.hpp
-        ${PROJECT_SOURCE_DIR}/src/*.h
         ${PROJECT_SOURCE_DIR}/src/*.rc
         ${PROJECT_SOURCE_DIR}/src/iLexer/*.cpp
         ${PROJECT_SOURCE_DIR}/src/iLexer/*.hpp
         ${PROJECT_SOURCE_DIR}/src/iLexer/*.h
+        ${PROJECT_SOURCE_DIR}/src/iParse/*.cpp
+        ${PROJECT_SOURCE_DIR}/src/iParse/*.hpp
+        ${PROJECT_SOURCE_DIR}/src/iParse/*.h
+        ${PROJECT_SOURCE_DIR}/src/iAST/*.cpp
+        ${PROJECT_SOURCE_DIR}/src/iAST/*.hpp
+        ${PROJECT_SOURCE_DIR}/src/iAST/*.h
 )
 
 # third-party source files
 file(GLOB_RECURSE THIRD_PARTY_SRC_FILES ${CMAKE_SOURCE_DIR}/third-party/rawpdb/*)
 
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
+set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
+set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
+
 
 add_executable(ic ${SRC_FILES} ${THIRD_PARTY_SRC_FILES})
+
+target_link_libraries(ic I:/root/ai/Feilulu/WorkArea/Programming/MiracleForest/ic/MiF/lib/iBasicLibrary_debug.lib)
 
 target_compile_options(
         ic

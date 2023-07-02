@@ -17,9 +17,9 @@
 #pragma once
 
 #include <icore/family/imacrofamily.h>
-#include <icore/basic/iBasicDataType.hpp>
-#include <icore/exception/exception.hpp>
-#include <icore/data/text/istring.hpp>
+#include <icore/basic/iBasicDataType.h>
+#include <icore/exception/exception.h>
+#include <icore/data/text/istring.h>
 #include <icore/math/iFraction.hpp>
 #include <icore/math/iMath.hpp>
 
@@ -29,7 +29,7 @@ SPACE(i)
 	{
 		SPACE(math)
 		{
-			class iMatrix
+			class IAPI iMatrix
 				: public basic::iBasicDataType<iMatrix, Ptr<double>>
 			{
 				iObject(iMatrix);
@@ -38,7 +38,7 @@ SPACE(i)
 					: _data(nullptr), _cols(0), _rows(0), is_square(false)
 				{ }
 
-				iMatrix(Ref<iMatrix> mat)
+				iMatrix(CRef<iMatrix> mat)
 				{
 					_data = new double[mat._cols * mat._rows];
 					memcpy_s(

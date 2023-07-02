@@ -17,10 +17,9 @@
 #pragma warning(disable:4305)
 
 #include <icore/family/imacrofamily.h>
-#include <icore/data/text/istring.hpp>
+#include <icore/data/text/istring.h>
 #include <thread>
 #include <icore/math/iMath.hpp>
-#include <Windows.h>
 
 SPACE(i)
 {
@@ -39,32 +38,32 @@ SPACE(i)
 				iObject(iVec2);
 
 			public:
-				iVec2<T>()
+				iVec2()
 				{
 					x = (T)0;
 					y = (T)0;
 				}
 
 				template <typename U>
-				iVec2<T>(CRef<iVec2<U>> a)
+				iVec2(CRef<iVec2<U>> a)
 				{
 					x = (T)a.x;
 					y = (T)a.y;
 				}
 
-				iVec2<T>(CRef<T> a)
+				iVec2(CRef<T> a)
 				{
 					x = a;
 					y = a;
 				}
 
-				iVec2<T>(CRef<T> a, CRef<T> b)
+				iVec2(CRef<T> a, CRef<T> b)
 				{
 					x = a;
 					y = b;
 				}
 
-				iVec2<T>(CRef<istring> Vec, CRef<char> c = ';', Ptr<iVec2<T>> def = nullptr)
+				iVec2(CRef<istring> Vec, CRef<char> c = ';', Ptr<iVec2<T>> def = nullptr)
 				{
 					if (def)
 					{

@@ -158,17 +158,19 @@
 #define IAPI_IMPORT _declspec(dllimport)
 
 #elif defined(__GCC__)
-#define IAPI __attribute__​((visibility(​ "​default​"​)))
+#define IAPI __attribute__((visibility("default")))
 #else
 #define IAPI
 #endif
 
 /*------------------------类------------------------*/
-#define _CGETVF(rt,cname,lname) rt get ## cname()const{return _ ## lname;}
-#define _CSETVF(rt,pt,cname,lname) rt& set ## cname(_ISTD CRef<pt> lname){_ ## lname =lname;return *this;}
+#define _CGETVF(rt,cname,lname) rt get ## cname()const{return this-> _ ## lname;}
+#define _CSETVF(rt,pt,cname,lname) rt& set ## cname(_ISTD CRef<pt> lname){this-> _ ## lname =lname;return *this;}
+#define _CGETVF2(rt,cname,lname) rt get ## cname()const{return this-> lname;}
+#define _CSETVF2(rt,pt,cname,lname) rt* set ## cname(_ISTD CRef<pt> lname){ this-> lname =lname;return this;}
 #define iObject(className) public:\
-virtual itype getType()const{return iType::className;}\
-virtual void destructor()const{className::~className();}\
+virtual itype getType() const{return iType::className;}\
+virtual void destructor() const{className::~className();}\
 private:
 
 /*------------------------快捷------------------------*/
@@ -184,12 +186,14 @@ private:
     printf(x);                                                                 \
   }
 #define IERROR ::i::core::iexception::error
+#define IERRORPTR ::i::core::iexception::error
 #define SPACE(namespaceName) namespace namespaceName
 #define SPACE_ namespace
 #define ECLASS(className) enum class className
 #define ECLASS_ enum class
 
 #define _iError  i::core::iexception::error
+#define _iErrorPtr  i::core::iexception::error*
 #define _iErrorCode  i::core::iexception::ErrorCode
 #define iMain(pname) iError i::core::Main::start(N_ISTD Ref<_p_start> pname)
 
@@ -283,7 +287,9 @@ private:
 
 #define EXPRESSIONSWITHCOMMAS(...) __VA_ARGS__
 
-#include <stdint.h>
+#define _NODISCARD [[nodiscard]]
+
+#include <cstdint>
 
 SPACE(i)
 {
@@ -302,21 +308,23 @@ SPACE(i)
         using uchar = unsigned char;
         using schar = signed char;
 
-        using __unk_type__ = void*;
-        using unkType = void*;
+        using __unk_type_v__ = void*;
+        using unkTypev = void*;
+        using unkPtr = void*;
+        using anyPtr = void*;
         using handle = void*;
         using wchar = wchar_t;
 
 #ifdef _USE_WINDOWS_H__
-        using hmodule = HMODULE;
-        using hrsrc = HRSRC;
-        using hglobal = handle;
-        using hwnd = HWND;
-        using lresult = LRESULT;
-        using wparam = WPARAM;
-        using lparam = LPARAM;
-        using lpcwstr = LPCWSTR;
-#endif//_WINDOWS_
+        using  hmodule = HMODULE;
+        using  hrsrc = HRSRC;
+        using  hglobal = handle;
+        using  hwnd = HWND;
+        using  lresult = LRESULT;
+        using  wparam = WPARAM;
+        using  lparam = LPARAM;
+        using  lpcwstr = LPCWSTR;
+#endif//__WINDOWS__
 
 #ifdef __WINDOWS__
 
@@ -356,10 +364,62 @@ SPACE(i)
         using CRef = const Type&;
 
         template <typename Type>
+        using CRRef = const Type&&;
+
+        template <typename Type>
         using Ref = Type&;
 
         template <typename Type>
         using RRef = Type&&;
+
+        template <typename _Type>
+        struct stdcall_cast_s;
+
+        template <typename _Type>
+        struct cdecl_cast_s;
+
+        template <typename _Type>
+        struct fastcall_cast_s;
+
+        template <typename _Type>
+        struct thiscall_cast_s;
+
+        template <typename _RetTy, typename... _ArgTy>
+        struct stdcall_cast_s<_RetTy(_ArgTy...)>
+        {
+            using type = _RetTy(__stdcall*)(_ArgTy...);
+        };
+
+        template <typename _RetTy, typename... _ArgTy>
+        struct cdecl_cast_s<_RetTy(_ArgTy...)>
+        {
+            using type = _RetTy(__cdecl*)(_ArgTy...);
+        };
+
+        template <typename _RetTy, typename... _ArgTy>
+        struct fastcall_cast_s<_RetTy(_ArgTy...)>
+        {
+            using type = _RetTy(__fastcall*)(_ArgTy...);
+        };
+
+        template <typename _RetTy, typename... _ArgTy>
+        struct thiscall_cast_s<_RetTy(_ArgTy...)>
+        {
+            using type = _RetTy(__thiscall*)(_ArgTy...);
+        };
+
+        template <typename _Func>
+        using stdcall_cast = typename stdcall_cast_s<_Func>::type;
+
+        template <class _Func>
+        using cdecl_cast = typename cdecl_cast_s<_Func>::type;
+
+        template <class _Func>
+        using fastcall_cast = typename fastcall_cast_s<_Func>::type;
+
+        template <class _Func>
+        using thiscall_cast = typename thiscall_cast_s<_Func>::type;
+
 
     } // SPACE(core)
 } // SPACE(i)

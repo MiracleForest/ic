@@ -16,7 +16,7 @@
 #pragma once
 
 #include <icore/family/imacrofamily.h>
-#include <icore/basic/iBasicDataType.hpp>
+#include <icore/basic/iBasicDataType.h>
 #include "iFraction.hpp"
 
 
@@ -26,7 +26,7 @@ SPACE(i)
 	{
 		SPACE(math)
 		{
-			class iQuadraticRadical
+			class IAPI iQuadraticRadical
 				:public basic::iBasicDataType<iQuadraticRadical, std::list<std::pair<iFraction, int>>>
 			{
 				iObject(iQuadraticRadical);

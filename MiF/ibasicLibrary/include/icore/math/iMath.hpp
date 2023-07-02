@@ -16,8 +16,9 @@
 #pragma warning(disable:4244)
 
 #include <icore/family/imacrofamily.h>
-#include <icore/data/text/istring.hpp>
-#include <math.h>
+#include <icore/data/text/istring.h>
+#include <cmath>
+#include <cfloat>
 #include <numeric>
 #include <numbers>
 

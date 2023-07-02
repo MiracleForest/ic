@@ -17,14 +17,15 @@
 #pragma once
 
 #include <icore/family/imacrofamily.h>
-#include <icore/basic/iBasic.hpp>
+#include <icore/basic/iBasic.h>
+#include <cmath>
 
 SPACE(i)
 {
 	SPACE(core)
 	{
 
-		class iEaseCurve
+		class IAPI iEaseCurve
 			: public basic::iBasic<iEaseCurve>
 		{
 			iObject(iEaseCurve);
@@ -82,10 +83,10 @@ SPACE(i)
 		public:
 
 			//根据Type选择曲线，并计算t点(0,1)时曲线的值，若越界返回0或1
-			float Evaluate(float t)
+			double Evaluate(double t)
 			{
-				float from = 0;
-				float to = 1;
+				double from = 0;
+				double to = 1;
 				if (t > 1)
 				{
 					return 1;
@@ -163,10 +164,10 @@ SPACE(i)
 				return 0;
 			}
 
-			static float Evaluate(Type easeCurveType, float t)
+			static double Evaluate(Type easeCurveType, double t)
 			{
-				float from = 0;
-				float to = 1;
+				double from = 0;
+				double to = 1;
 				if (t > 1)
 				{
 					return 1;
@@ -246,180 +247,180 @@ SPACE(i)
 
 		public:
 
-			static float linear(float from, float to, float t)
+			static double linear(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				return c * t / 1.0f + from;
 			}
 
-			static float inQuad(float from, float to, float t)
+			static double inQuad(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				return c * t * t + from;
 			}
 
-			static float outQuad(float from, float to, float t)
+			static double outQuad(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				return -c * t * (t - 2.0f) + from;
 			}
 
-			static float inOutQuad(float from, float to, float t)
+			static double inOutQuad(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 0.5f;
 				if (t < 1) return c / 2.0f * t * t + from;
 				t--;
 				return -c / 2.0f * (t * (t - 2) - 1) + from;
 			}
 
-			static float inCubic(float from, float to, float t)
+			static double inCubic(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				return c * t * t * t + from;
 			}
 
-			static float outCubic(float from, float to, float t)
+			static double outCubic(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				t--;
 				return c * (t * t * t + 1) + from;
 			}
 
-			static float inOutCubic(float from, float to, float t)
+			static double inOutCubic(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 0.5f;
 				if (t < 1) return c / 2.0f * t * t * t + from;
 				t -= 2;
 				return c / 2.0f * (t * t * t + 2) + from;
 			}
 
-			static float inQuart(float from, float to, float t)
+			static double inQuart(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				return c * t * t * t * t + from;
 			}
 
-			static float outQuart(float from, float to, float t)
+			static double outQuart(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				t--;
 				return -c * (t * t * t * t - 1) + from;
 			}
 
-			static float inOutQuart(float from, float to, float t)
+			static double inOutQuart(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 0.5f;
 				if (t < 1) return c / 2.0f * t * t * t * t + from;
 				t -= 2;
 				return -c / 2.0f * (t * t * t * t - 2) + from;
 			}
 
-			static float inQuint(float from, float to, float t)
+			static double inQuint(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				return c * t * t * t * t * t + from;
 			}
 
-			static float outQuint(float from, float to, float t)
+			static double outQuint(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				t--;
 				return c * (t * t * t * t * t + 1) + from;
 			}
 
-			static float inOutQuint(float from, float to, float t)
+			static double inOutQuint(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 0.5f;
 				if (t < 1) return c / 2.0f * t * t * t * t * t + from;
 				t -= 2;
 				return c / 2.0f * (t * t * t * t * t + 2) + from;
 			}
 
-			static float inSine(float from, float to, float t)
+			static double inSine(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				return -c * cos(t / 1.0f * (3.1415926535897931 / 2.0f)) + c + from;
 			}
 
-			static float outSine(float from, float to, float t)
+			static double outSine(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				return c * sin(t / 1.0f * (3.1415926535897931 / 2.0f)) + from;
 			}
 
-			static float inOutSine(float from, float to, float t)
+			static double inOutSine(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				return -c / 2.0f * (cos(3.1415926535897931 * t / 1.0f) - 1) + from;
 			}
 
-			static float inExpo(float from, float to, float t)
+			static double inExpo(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				return c * pow(2, 10 * (t / 1.0f - 1)) + from;
 			}
 
-			static float outExpo(float from, float to, float t)
+			static double outExpo(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				return c * (-pow(2, -10 * t / 1.0f) + 1) + from;
 			}
 
-			static float inOutExpo(float from, float to, float t)
+			static double inOutExpo(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 0.5f;
 				if (t < 1.0f) return c / 2.0f * pow(2, 10 * (t - 1)) + from;
 				t--;
 				return c / 2.0f * (-pow(2, -10 * t) + 2) + from;
 			}
 
-			static float inCirc(float from, float to, float t)
+			static double inCirc(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				return -c * (sqrt(1 - t * t) - 1) + from;
 			}
 
-			static float outCirc(float from, float to, float t)
+			static double outCirc(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 1.0f;
 				t--;
 				return c * sqrt(1 - t * t) + from;
 			}
 
-			static float inOutCirc(float from, float to, float t)
+			static double inOutCirc(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				t /= 0.5f;
 				if (t < 1) return -c / 2.0f * (sqrt(1 - t * t) - 1) + from;
 				t -= 2;
 				return c / 2.0f * (sqrt(1 - t * t) + 1) + from;
 			}
 
-			static float inBounce(float from, float to, float t)
+			static double inBounce(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				return c - outBounce(0.0f, c, 1.0f - t) + from; //does this work?
 			}
 
-			static float outBounce(float from, float to, float t)
+			static double outBounce(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 
 				if ((t /= 1.0f) < (1 / 2.75f))
 				{
@@ -439,65 +440,65 @@ SPACE(i)
 				}
 			}
 
-			static float inOutBounce(float from, float to, float t)
+			static double inOutBounce(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				if (t < 0.5f) return inBounce(0, c, t * 2.0f) * 0.5f + from;
 				return outBounce(0, c, t * 2 - 1) * 0.5f + c * 0.5f + from;
 
 			}
 
-			static float inElastic(float from, float to, float t)
+			static double inElastic(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				if (t == 0) return from;
 				if ((t /= 1.0f) == 1) return from + c;
-				float p = 0.3f;
-				float s = p / 4.0f;
+				double p = 0.3f;
+				double s = p / 4.0f;
 				return -(c * pow(2, 10 * (t -= 1)) * sin((t - s) * (2 * 3.1415926535897931) / p)) + from;
 			}
 
-			static float outElastic(float from, float to, float t)
+			static double outElastic(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				if (t == 0) return from;
 				if ((t /= 1.0f) == 1) return from + c;
-				float p = 0.3f;
-				float s = p / 4.0f;
+				double p = 0.3f;
+				double s = p / 4.0f;
 				return (c * pow(2, -10 * t) * sin((t - s) * (2 * 3.1415926535897931) / p) + c + from);
 			}
 
-			static float inOutElastic(float from, float to, float t)
+			static double inOutElastic(double from, double to, double t)
 			{
-				float c = to - from;
+				double c = to - from;
 				if (t == 0) return from;
 				if ((t /= 0.5f) == 2) return from + c;
-				float p = 0.3f * 1.5f;
-				float s = p / 4.0f;
+				double p = 0.3f * 1.5f;
+				double s = p / 4.0f;
 				if (t < 1) return -0.5f * (c * pow(2, 10 * (t -= 1.0f)) * sin((t - 2) * (2 * 3.1415926535897931) / p)) + from;
 				return c * pow(2, -10 * (t -= 1)) * sin((t - s) * (2.0f * 3.1415926535897931) / p) * 0.5f + c + from;
 			}
 
-			static float inBack(float from, float to, float t)
+			static double inBack(double from, double to, double t)
 			{
-				float c = to - from;
-				float s = 1.70158f;
+				double c = to - from;
+				double s = 1.70158f;
 				t /= 0.5f;
 				return c * t * t * ((s + 1) * t - s) + from;
 			}
 
-			static float outBack(float from, float to, float t)
+			static double outBack(double from, double to, double t)
 			{
-				float c = to - from;
-				float s = 1.70158f;
+				double c = to - from;
+				double s = 1.70158f;
 				t = t / 1.0f - 1.0f;
 				return c * (t * t * ((s + 1) * t + s) + 1) + from;
 			}
 
-			static float inOutBack(float from, float to, float t)
+			static double inOutBack(double from, double to, double t)
 			{
-				float c = to - from;
-				float s = 1.70158f;
+				double c = to - from;
+				double s = 1.70158f;
 				t /= 0.5f;
 				if (t < 1) return c / 2.0f * (t * t * (((s *= (1.525f)) + 1) * t - s)) + from;
 				t -= 2;

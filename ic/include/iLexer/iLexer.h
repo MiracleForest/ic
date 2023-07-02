@@ -14,9 +14,9 @@
  */
 
 #include <icore/family/imacrofamily.h>
-#include <icore/exception/error.hpp>
-#include <icore/console/iconsole.hpp>
-#include <icore/console/iLogger.hpp>
+#include <icore/exception/error.h>
+#include <icore/console/iconsole.h>
+#include <icore/console/iLogger.h>
 #include "iToken.h"
 
 SPACE(i)

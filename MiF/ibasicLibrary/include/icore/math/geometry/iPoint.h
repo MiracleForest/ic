@@ -2,22 +2,21 @@
 *
 * Copyright(C) 2022 MiracleForest Studio. All Rights Reserved.
 *
-* @ÎÄ¼şÃû£ºiPoint.hpp
-* @´´½¨Ê±¼ä£º2023.1.17.19:50
-* @´´½¨Õß£ºMinsecrus
+* @æ–‡ä»¶åï¼šiPoint.hpp
+* @åˆ›å»ºæ—¶é—´ï¼š2023.1.17.19:50
+* @åˆ›å»ºè€…ï¼šMinsecrus
 * -----------------------------------------------------------------------------
-* iBasicLibrary µã
+* iBasicLibrary ç‚¹
 * -----------------------------------------------------------------------------
-* Èç¹ûÄã·¢ÏÖÁËbug£¬Äã¿ÉÒÔÈ¥Github»òÓÊÏä(MiracleForest@Outlook.com)·´À¡¸øÎÒÃÇ£¡
-* ÎÒÃÇÒ»¶¨»áÅ¬Á¦×öµÃ¸üºÃµÄ£¡
+* å¦‚æœä½ å‘ç°äº†bugï¼Œä½ å¯ä»¥å»Githubæˆ–é‚®ç®±(MiracleForest@Outlook.com)åé¦ˆç»™æˆ‘ä»¬ï¼
+* æˆ‘ä»¬ä¸€å®šä¼šåŠªåŠ›åšå¾—æ›´å¥½çš„ï¼
 *
 ****/
 
 #pragma once
 
 #include "../../family/imacrofamily.h"
-#include "../../basic/iBasicDatatype.hpp"
-#include "../../basic/iBasic.hpp"
+#include "../../basic/iBasicDataType.h"
 #include "../iMath.hpp"
 
 SPACE(i)
@@ -37,13 +36,18 @@ SPACE(i)
 	{
 		SPACE(math)
 		{
-			class iPoint :
+			class IAPI iPoint :
 				public basic::iBasicDataType<iPoint, std::pair<int, int>>
 			{
 				iObject(iPoint);
 			public:
+
 				// virtual double distanceFromOrigin() const;
-				virtual std::pair<int, int> data() const;
+				virtual std::pair<int, int> data() const
+				{
+					return { _x,_y };
+				}
+
 			public:
 				bool isOnLine(iLine l);
 

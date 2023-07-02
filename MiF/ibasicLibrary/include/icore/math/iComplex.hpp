@@ -17,7 +17,7 @@
 #pragma warning(disable:4305)
 
 #include <icore/family/imacrofamily.h>
-#include <icore/basic/iBasicDataType.hpp>
+#include <icore/basic/iBasicDataType.h>
 #include <icore/math/iMath.hpp>
 
 SPACE(i)
@@ -26,7 +26,7 @@ SPACE(i)
     {
         SPACE(math)
         {
-            class iComplex
+            class IAPI iComplex
                 : public basic::iBasicDataType<iComplex, std::pair<double, double>>
             {
                 iObject(iComplex)

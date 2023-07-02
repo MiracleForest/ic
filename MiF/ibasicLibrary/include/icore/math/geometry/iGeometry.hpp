@@ -14,13 +14,17 @@
 ****/
 
 // ReSharper disable All
-#pragma once
 
 #include <icore/family/imacrofamily.h>
-#include <icore/basic/iBasicDataType.hpp>
+#include <icore/basic/iBasicDataType.h>
+#include <icore/console/iLogger.h>
 
 #include <icore/math/iFraction.hpp>
+#include <icore/math/iMath.hpp>
 
+#include "icore/console/iConsole.h"
+
+#pragma once
 // 类的预先声明
 SPACE(i)
 {
@@ -32,6 +36,7 @@ SPACE(i)
             {
                 using istring = data::text::istring;
                 class iLine;
+                class iLineI;
                 class iLineF;
 
                 class iPoint;
@@ -69,7 +74,7 @@ SPACE(i)
                     Intercept
                 };
 
-                class iLine :
+                class IAPI iLine :
                     public basic::iBasicDataType<iLine, std::tuple<double, double, double>>
                 {
                     iObject(iLine)
@@ -80,7 +85,7 @@ SPACE(i)
                         _A(_a),
                         _B(_b),
                         _C(_c)
-                    { }
+                    {}
 
                 public:
                     // Ax+By+C=0
@@ -92,6 +97,7 @@ SPACE(i)
                     // y=kx+b
                     iLine static fromObliqueCutoff(double k, double b);
                     iLine static fromTwoPoint(double x1, double y1, double x2, double y2);
+                    iLine static fromTwoPoint(iPoint a, iPoint b);
                     iLine static fromIntercept(double a, double b);
 
                 public:
@@ -106,10 +112,63 @@ SPACE(i)
                     int passQuadrants() const;
                     bool canPassQuadrant(int quadrant) const;
 
+                    double A() const;
+                    double B() const;
+                    double C() const;
+
+
                 private:
                     double _A;
                     double _B;
                     double _C;
+                };
+
+                // iLineI
+                class IAPI iLineI :
+                    public basic::iBasicDataType<iLineI, std::tuple<int, int, int>>
+                {
+                    iObject(iLineI)
+                public:
+                    iLineI(int _a, int _b, int _c)
+                        :
+                        _A(_a),
+                        _B(_b),
+                        _C(_c)
+                    {}
+
+                public:
+                    // Ax+By+C=0
+                    iLineI static fromGeneral(CRef<iFraction> _a, CRef<iFraction> _b, CRef<iFraction> _c);
+
+                    // y-y0=k(x-x0)
+                    iLineI static fromDotOblique(CRef<iFraction> x0, CRef<iFraction> y0, CRef<iFraction> k);
+
+                    // y=kx+b
+                    iLineI static fromObliqueCutoff(CRef<iFraction> k, CRef<iFraction> b);
+
+                    iLineI static fromTwoPoint(CRef<iFraction> x1, CRef<iFraction> y1, CRef<iFraction> x2, CRef<iFraction> y2);
+                    iLineI static fromIntercept(CRef<iFraction> a, CRef<iFraction> b);
+
+                public:
+                    virtual std::tuple<int, int, int> data() const;
+
+                public:
+                    [[nodiscard]] iFraction slope() const;
+                    [[nodiscard]] iFraction xIntercept() const;
+                    [[nodiscard]] iFraction yIntercept() const;
+
+                    bool canPass(iPoint p);
+                    int passQuadrants();
+                    bool canPassQuadrant(int quadrant);
+
+                    istring toAnalyticExpression(iLineEquationMode m, CRef<istring>, CRef<istring>);
+                    istring toLatexAnalyticExpression(iLineEquationMode m);
+
+                private:
+
+                    int _A;
+                    int _B;
+                    int _C;
                 };
 
                 // iLineF
@@ -123,7 +182,7 @@ SPACE(i)
                         _A(_a),
                         _B(_b),
                         _C(_c)
-                    { }
+                    {}
 
                 public:
                     // Ax+By+C=0
@@ -154,6 +213,7 @@ SPACE(i)
                     istring toLatexAnalyticExpression(iLineEquationMode m);
 
                 private:
+
                     iFraction _A;
                     iFraction _B;
                     iFraction _C;
@@ -169,13 +229,13 @@ SPACE(i)
                         :
                         _x(0),
                         _y(0)
-                    { }
+                    {}
 
                     iPoint(double a, double b)
                         :
                         _x(a),
                         _y(b)
-                    { }
+                    {}
 
                 public:
                     virtual std::pair<double, double> data() const;
@@ -185,11 +245,14 @@ SPACE(i)
 
                     friend std::ostream& operator<<(std::ostream& stream, CRef<iPoint> p);
 
+                    double x() const;
+                    double y() const;
                 private:
                     double _x;
                     double _y;
                 };
 
+                //iPointF
                 class iPointF :
                     public basic::iBasicDataType<iPointF, std::pair<iFraction, iFraction>>
                 {
@@ -217,7 +280,7 @@ SPACE(i)
                         _a(a),
                         _b(b),
                         _c(c)
-                    { }
+                    {}
 
                 public:
                 private:
@@ -244,7 +307,7 @@ SPACE(i)
                         _h(h),
                         _x(x),
                         _y(y)
-                    { }
+                    {}
 
                 private:
                     double _w;
@@ -272,7 +335,7 @@ SPACE(i)
                         _h(h),
                         _x(x),
                         _y(y)
-                    { }
+                    {}
 
                 public:
                     static iRectangleF fromTwoPoints(iPointF a, iPointF b);
@@ -324,6 +387,9 @@ SPACE(i)
                 {
                     iObject(iCube)
                 };
+
+                iPoint intersection(iLine l1, iLine l2);
+
             }
         }
     }
@@ -346,27 +412,32 @@ SPACE(i)
 
                 inline iLine iLine::fromGeneral(double _a, double _b, double _c)
                 {
-                    return iLine(_a, _b, _c);
+                    return { _a, _b, _c };
                 }
 
                 inline iLine iLine::fromDotOblique(double x0, double y0, double k)
                 {
-                    return iLine(k, -1, y0 - k * x0);
+                    return { k, -1, y0 - k * x0 };
                 }
 
                 inline iLine iLine::fromObliqueCutoff(double k, double b)
                 {
-                    return iLine(k, -1, b);
+                    return { k, -1, b };
                 }
 
                 inline iLine iLine::fromTwoPoint(double x1, double y1, double x2, double y2)
                 {
-                    return iLine(y2 - y1, x1 - x2, x2 * y1 - x1 * y2);
+                    return { y2 - y1, x1 - x2, x2 * y1 - x1 * y2 };
+                }
+
+                inline iLine iLine::fromTwoPoint(iPoint a, iPoint b)
+                {
+                    return iLine::fromTwoPoint(a.x(), a.y(), b.x(), b.y());
                 }
 
                 inline iLine iLine::fromIntercept(double a, double b)
                 {
-                    return iLine(b, a, -a * b);
+                    return { b, a, -a * b };
                 }
 
                 inline double iLine::slope() const
@@ -415,6 +486,23 @@ SPACE(i)
                 {
                     return passQuadrants() & (1 << quadrant);
                 }
+                inline double iLine::A() const
+                {
+                    return this->_A;
+                }
+                inline double iLine::B() const
+                {
+                    return this->_B;
+                }
+                inline double iLine::C() const
+                {
+                    return this->_C;
+                }
+
+                inline std::tuple<int, int, int> iLineI::data() const
+                {
+                    return { _A,_B,_C };
+                }
             }
 
             // iLineF
@@ -442,39 +530,99 @@ SPACE(i)
 
                 inline iLineF iLineF::fromGeneral(CRef<iFraction> _a, CRef<iFraction> _b, CRef<iFraction> _c)
                 {
-                    return iLineF({ _a, _b, _c });
+                    return { _a, _b, _c };
                 }
 
                 inline iLineF iLineF::fromDotOblique(CRef<iFraction> x0, CRef<iFraction> y0, CRef<iFraction> k)
                 {
-                    return iLineF({ k, -1, y0 - k * x0 });
+                    return { k, -1, y0 - k * x0 };
                 }
 
                 inline iLineF iLineF::fromObliqueCutoff(CRef<iFraction> k, CRef<iFraction> b)
                 {
-                    return iLineF({ k, -1, b });
+                    return { k, -1, b };
                 }
 
                 inline iLineF iLineF::fromTwoPoint(CRef<iFraction> x1, CRef<iFraction> y1, CRef<iFraction> x2, CRef<iFraction> y2)
                 {
-                    return iLineF({ y2 - y1, x1 - x2, x2 * y1 - x1 * y2 });
+                    return { y2 - y1, x1 - x2, x2 * y1 - x1 * y2 };
                 }
 
                 inline iLineF iLineF::fromIntercept(CRef<iFraction> a, CRef<iFraction> b)
                 {
-                    return iLineF({ b, a, -a * b });
+                    return { b, a, -a * b };
                 }
 
+                inline istring remove1(istring s, bool withOperator = false)
+                {
+                    if (withOperator)
+                    {
+                        if (s == istring("+1"))
+                        {
+                            return "+";
+                        } else if (s == istring("-1"))
+                        {
+                            return "-";
+                        } else
+                        {
+                            return s;
+                        }
+                    } else
+                    {
+                        if (s == istring("1"))
+                        {
+                            return "";
+                        } else if (s == istring("-1"))
+                        {
+                            return "-";
+                        } else
+                        {
+                            return s;
+                        }
+                    }
+                }
+                inline istring remove0(istring s)
+                {
+                    if (s == istring("+0") || s == istring("-0") || s == istring("0"))
+                    {
+                        return "";
+                    } else return s;
+                }
                 inline istring iLineF::toAnalyticExpression(iLineEquationMode m = iLineEquationMode::General,
                     CRef<istring> dependentVariable = "y",
                     CRef<istring> independentVariable = "x")
                 {
+                    io::iLogger logger("iLine");
+
                     if (m == iLineEquationMode::General)
                     {
-                        return istring("") + _A.toStdString() + independentVariable + _B.toStdStringWithOperator() +
-                            dependentVariable + _C.toStdStringWithOperator() + "=0";
-                    }
-                    else
+                        int denominatorA = this->_A.getDenominator();
+                        int denominatorB = this->_B.getDenominator();
+                        int denominatorC = this->_C.getDenominator();
+                        int denominatorAB = denominatorA * denominatorB / gcd(denominatorA, denominatorB);
+                        int denominatorMax= denominatorAB * denominatorC / gcd(denominatorAB, denominatorC);
+
+                        istring str("");
+
+                        // a
+                        istring a = (_A*denominatorMax).toStdString();
+                        logger.info("a: {}", a);
+
+                        str += remove1(a);
+                        str += independentVariable;
+
+                        // b
+                        istring b = (_B * denominatorMax).toStdStringWithOperator();
+                        logger.info("b: {}", b);
+                        str += remove1(b, true);
+                        str += dependentVariable;
+
+                        // c
+                        istring c = (_C * denominatorMax).toStdStringWithOperator();
+                        logger.info("c: {}", c);
+                        str += remove0(c);
+                        return str + "=0";
+                    } else
                         return "";
                 }
 
@@ -496,6 +644,18 @@ SPACE(i)
                 {
                     stream << "(" << p._x << "," << p._y << ")" << std::flush;
                     return stream;
+                }
+                inline bool iPoint::isOnLine(iLine l)
+                {
+                    return this->_x * l.A() + this->_y * l.B() + l.C() == 0;
+                }
+                inline double iPoint::x() const
+                {
+                    return _x;
+                }
+                inline double iPoint::y() const
+                {
+                    return _y;
                 }
             }
 
@@ -541,6 +701,12 @@ SPACE(i)
                     return iLineF::fromGeneral(0, -(_x + _w), 0);
                 }
 
+                inline iPoint intersection(iLine l1, iLine l2)
+                {
+                    return { (l2.C() * l1.B() - l1.C() * l2.B()) / (l1.A() * l2.B() - l2.A() * l1.B()) ,(l2.C() * l1.B() - l1.C() * l2.B()) / (l1.A() * l2.B() - l2.A() * l1.B()) };
+                }
+
+
                 inline iRectangleF iRectangleF::fromTwoPoints(iPointF a, iPointF b)
                 {
                     iFraction x1 = a.x();
@@ -557,3 +723,4 @@ SPACE(i)
         }
     }
 }
+

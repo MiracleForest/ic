@@ -12,11 +12,12 @@
 * 我们一定会努力做得更好的！
 *
 ****/
+/*
 #pragma once
 
 #include <icore/family/imacrofamily.h>
-#include <icore/basic/iBasic.hpp>
-#include <icore/math/iVec4.hpp>
+#include <icore/basic/iBasic.h>
+#include <icore/math/iVec2.hpp>
 
 SPACE(i)
 {
@@ -25,9 +26,9 @@ SPACE(i)
 		SPACE(math)
 		{
 
-			template <typename T>
-			class iRect
-				:public basic::iBasic<iRect>
+			template <class T>
+			class IAPI iRect
+				:public basic::iBasic<iRect<T>>
 			{
 				iObject(iRect);
 			public:
@@ -36,10 +37,12 @@ SPACE(i)
 				{
 					setRect((T)0, (T)0, (T)0, (T)0);
 				}
+
 				iRect(T vX, T vY, T vW, T vH)
 				{
 					setRect(vX, vY, vW, vH);
 				}
+
 				iRect(Vec2<T> xy, Vec2<T> zw)
 				{
 					setRect(xy.x, xy.y, zw.x, zw.y);
@@ -274,3 +277,4 @@ SPACE(i)
 	}//SPACE(core)
 }//SPACE(i)
 
+*/

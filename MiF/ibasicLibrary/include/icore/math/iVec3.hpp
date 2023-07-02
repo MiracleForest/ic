@@ -17,7 +17,7 @@
 #pragma warning(disable:4305)
 
 #include <icore/family/imacrofamily.h>
-#include <icore/data/text/istring.hpp>
+#include <icore/data/text/istring.h>
 #include <icore/math/iVec2.hpp>
 
 #include <cmath>

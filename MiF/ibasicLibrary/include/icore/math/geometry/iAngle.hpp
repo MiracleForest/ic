@@ -16,7 +16,7 @@
 #pragma once
 
 #include <icore/family/imacrofamily.h>
-#include <icore/basic/iBasicDataType.hpp>
+#include <icore/basic/iBasicDataType.h>
 #include <icore/math/iMath.hpp>
 
 
@@ -26,7 +26,7 @@ SPACE(i)
 	{
 		SPACE(math)
 		{
-			class iAngle
+			class IAPI iAngle
 				:public basic::iBasicDataType<iAngle, double>
 			{
 				iObject(iAngle);
