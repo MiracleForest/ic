@@ -11,10 +11,13 @@
  * 如果你发现了bug，你可以去Github或邮箱(MiracleForest@Outlook.com)反馈给我们！
  * 我们一定会努力做得更好的！
  */
+#pragma once
+
 
 #include <icore/family/imacrofamily.h>
 #include <icore/exception/error.h>
 #include <icore/data/text/istring.h>
+#include "../family/iicfamily.h"
 #include "iASTNodeBasic.h"
 
 SPACE(i)
@@ -26,13 +29,15 @@ SPACE(i)
 			enum class iASTNodeType
 				:int
 			{
-				properties = -1,
 				iASTNode,
-				iASTGlobalAreaNode
+				iASTGlobalAreaNode,
+				iASTStringLiteralNode,
+				iATSFloatingLiteralNode,
+				iATSIntegerLiteralNode
 			};
 
 
-			class iASTNode
+			class ICAPI iASTNode
 				:public iASTNodeBasic
 			{
 				using istring = _ISTDTEXT istring;
@@ -44,19 +49,14 @@ SPACE(i)
 
 				istring name;
 
+				int line;
+
 				bool additionalNode;
 
 				std::vector<istring> tags;
 
 			private:
-
-				istring _valueIfProperties = "";
-
 			public:
-
-				_CSETVF(iASTNode, istring, Value, valueIfProperties);
-
-				_CGETVF(istring, Value, valueIfProperties);
 
 				virtual _CSETVF2(iASTNode, _ISTD Ptr<iASTNode>, Parent, parent);
 
@@ -70,11 +70,6 @@ SPACE(i)
 
 			public:
 
-				void destructor()const
-				{
-					iASTNode::~iASTNode();
-				}
-
 			public:
 				virtual _ISTD Ptr<iASTNode> addTag(_ISTD CRef<istring> tag);
 
@@ -87,28 +82,19 @@ SPACE(i)
 				virtual std::vector<istring> getAllTag()const;
 
 			public:
-				
-				iASTNode();
 
-				template<class _Ty>
-				iASTNode(_Ty v)
-					: parent(nullptr)
-					, type(iASTNodeType::properties)
-					, name("properties")
-					, additionalNode(false)
-					, tags({})
-					, _valueIfProperties(istring::toStdString(v))
-				{ }
+				iASTNode();
 
 				iASTNode(
 					_ISTD Ptr<iASTNode> parent,
 					iASTNodeType type,
 					_ISTD CRef<istring>name,
+					int line,
 					bool additionalNode,
 					std::vector<istring> tags
 				);
 
-				~iASTNode();
+				virtual ~iASTNode();
 
 			};
 

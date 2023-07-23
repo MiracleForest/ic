@@ -2,11 +2,11 @@
  *
  * Copyright(C) 2022 MiracleForest Studio. All Rights Reserved.
  *
- * @文件名:iParser.h
- * @创建时间:2022.7.1.22:26
+ * @文件名:iATSFloatingLiteralNode.h
+ * @创建时间:2022.7.21.17:42
  * @创建者:Lovelylavender4
  * -----------------------------------------------------------------------------
- * iASTNodeBasic
+ * iATSFloatingLiteralNode
  * -----------------------------------------------------------------------------
  * 如果你发现了bug，你可以去Github或邮箱(MiracleForest@Outlook.com)反馈给我们！
  * 我们一定会努力做得更好的！
@@ -18,6 +18,7 @@
 #include <icore/data/text/istring.h>
 #include <icore/console/iconsole.h>
 #include <icore/console/iLogger.h>
+#include "iASTNodeBasic.h"
 #include "../family/iicfamily.h"
 
 SPACE(i)
@@ -26,8 +27,11 @@ SPACE(i)
 	{
 		SPACE(AST)
 		{
-			class ICAPI iASTNodeBasic
+			class ICAPI iATSFloatingLiteralNode
+				:public iASTNodeBasic
 			{
+				using istring = _ISTDTEXT istring;
+			public:
 
 			};
 

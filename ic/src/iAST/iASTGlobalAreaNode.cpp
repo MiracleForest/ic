@@ -5,20 +5,20 @@ using namespace i::core;
 iASTGlobalAreaNode::iASTGlobalAreaNode()
 	: childElementsList({})
 	, _childElementsListIndex(0)
-	, iASTNode(nullptr, iASTNodeType::iASTGlobalAreaNode, "iASTGlobalAreaNode", false, {})
+	, iASTNode(nullptr, iASTNodeType::iASTGlobalAreaNode, "iASTGlobalAreaNode", 0, false, {})
 { }
 
 iASTGlobalAreaNode::iASTGlobalAreaNode(Ptr<iASTNode> childElements)
 	:childElementsList({ childElements })
 	, _childElementsListIndex(0)
-	, iASTNode(nullptr, iASTNodeType::iASTGlobalAreaNode, "iASTGlobalAreaNode", false, {})
+	, iASTNode(nullptr, iASTNodeType::iASTGlobalAreaNode, "iASTGlobalAreaNode", 0, false, {})
 
 { }
 
 iASTGlobalAreaNode::iASTGlobalAreaNode(std::vector<Ptr<iASTNode>> childElementsList)
 	:childElementsList(childElementsList)
 	, _childElementsListIndex(0)
-	, iASTNode(nullptr, iASTNodeType::iASTGlobalAreaNode, "iASTGlobalAreaNode", false, {})
+	, iASTNode(nullptr, iASTNodeType::iASTGlobalAreaNode, "iASTGlobalAreaNode", 0, false, {})
 { }
 
 iASTGlobalAreaNode::~iASTGlobalAreaNode()
@@ -78,6 +78,7 @@ Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::setNext(Ptr<iASTNode> node)
 Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::set(Ptr<iASTNode> node)
 {
 	this->childElementsList[this->_childElementsListIndex] = node;
+	node->setParent(this);
 	return this;
 }
 
@@ -91,9 +92,9 @@ _ISTD Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::add(_ISTD Ptr<iASTNode> node)
 _ISTD Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::remove()
 {
 	std::cout << "-\n";
-	this->get()->destructor();
-	std::cout << "--\n";
+	_ISTD basic::iBasic<iASTNode>::destroy(this->get());
 	this->childElementsList.erase(this->childElementsList.begin() + this->_childElementsListIndex);
 	_childElementsListIndex--;
+	std::cout << "--\n";
 	return this;
 }

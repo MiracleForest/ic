@@ -34,10 +34,16 @@ project(ic
   VERSION ${IC_VERSION_MACRO}.${IC_VERSION_MAJOR}.${IC_VERSION_MINOR}.${IC_VERSION_PATCH}
   LANGUAGES C CXX ASM)
 
+project(libic
+  VERSION ${IC_VERSION_MACRO}.${IC_VERSION_MAJOR}.${IC_VERSION_MINOR}.${IC_VERSION_PATCH}
+  LANGUAGES C CXX ASM)
+
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS YES)
+
+link_directories(${CMAKE_SOURCE_DIR}/MiF/ibasicLibrary/lib)
 
 include_directories(${CMAKE_SOURCE_DIR}/MiF/ibasicLibrary/include)
 include_directories(${CMAKE_SOURCE_DIR}/third-party)
@@ -48,6 +54,7 @@ file(
         GLOB_RECURSE SRC_FILES
         ${PROJECT_SOURCE_DIR}/include/*.h
         ${PROJECT_SOURCE_DIR}/include/*.hpp
+        ${PROJECT_SOURCE_DIR}/include/family/*.h
         ${PROJECT_SOURCE_DIR}/include/iLexer/*.h
         ${PROJECT_SOURCE_DIR}/include/iLexer/*.hpp
         ${PROJECT_SOURCE_DIR}/include/iLexer/*.inl
@@ -57,8 +64,6 @@ file(
         ${PROJECT_SOURCE_DIR}/include/iAST/*.h
         ${PROJECT_SOURCE_DIR}/include/iAST/*.hpp
         ${PROJECT_SOURCE_DIR}/include/iAST/*.inl
-        ${PROJECT_SOURCE_DIR}/src/*.cpp
-        ${PROJECT_SOURCE_DIR}/src/*.rc
         ${PROJECT_SOURCE_DIR}/src/iLexer/*.cpp
         ${PROJECT_SOURCE_DIR}/src/iLexer/*.hpp
         ${PROJECT_SOURCE_DIR}/src/iLexer/*.h
@@ -70,6 +75,11 @@ file(
         ${PROJECT_SOURCE_DIR}/src/iAST/*.h
 )
 
+file(
+        GLOB_RECURSE SRC_FILES_EXE
+        ${PROJECT_SOURCE_DIR}/src/*.cpp
+        ${PROJECT_SOURCE_DIR}/src/*.rc
+)
 # third-party source files
 file(GLOB_RECURSE THIRD_PARTY_SRC_FILES ${CMAKE_SOURCE_DIR}/third-party/rawpdb/*)
 
@@ -78,9 +88,13 @@ set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OP
 set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
 
 
-add_executable(ic ${SRC_FILES} ${THIRD_PARTY_SRC_FILES})
+add_executable(ic ${SRC_FILES} ${THIRD_PARTY_SRC_FILES} ${SRC_FILES_EXE})
+add_library(libic SHARED ${SRC_FILES} ${THIRD_PARTY_SRC_FILES})
 
+# STATIC
+# SHARED
 target_link_libraries(ic I:/root/ai/Feilulu/WorkArea/Programming/MiracleForest/ic/MiF/lib/iBasicLibrary_debug.lib)
+target_link_libraries(libic I:/root/ai/Feilulu/WorkArea/Programming/MiracleForest/ic/MiF/lib/iBasicLibrary_debug.lib)
 
 target_compile_options(
         ic
@@ -89,6 +103,15 @@ target_compile_options(
 
 target_compile_definitions(
         ic
-        PRIVATE _CONSOLE _UNICODE UNICODE
+        PRIVATE _CONSOLE _UNICODE UNICODE ___STATICLIB___
 )
 
+target_compile_options(
+        libic
+        PRIVATE /experimental:module /diagnostics:column /source-charset:utf-8 /execution-charset:GBK 
+)
+
+target_compile_definitions(
+        libic
+        PRIVATE _CONSOLE _UNICODE UNICODE ___ICEXPORT___  
+) 

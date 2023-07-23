@@ -2,6 +2,8 @@
 #include <icore/console/iconsole.h>
 #include <icore/console/iLogger.h>
 #include <icore/type/iVector.h>
+#include <vector>
+#include <iostream>
 using namespace i::icSystem::AST;
 using namespace i::core;
 
@@ -11,12 +13,14 @@ iASTNode::iASTNode()
 	, name("iASTNode")
 	, additionalNode(false)
 	, tags({})
+	, line(0)
 { }
 
 iASTNode::iASTNode(
 	_ISTD Ptr<iASTNode> parent,
 	iASTNodeType type,
 	_ISTD CRef<istring>name,
+	int line,
 	bool additionalNode,
 	std::vector<istring> tags
 )
@@ -25,13 +29,18 @@ iASTNode::iASTNode(
 	, name(name)
 	, additionalNode(additionalNode)
 	, tags(tags)
+	, line(line)
 { }
 
 
 iASTNode::~iASTNode()
 {
 	std::cout << "~iASTNode\n";
-	_ISTD basic::iBasic<iASTNode>::destroy(parent);
+	//if (parent != nullptr)
+	//{
+	//	delete parent;
+	//	parent = nullptr;
+	//}
 }
 
 Ptr<iASTNode> iASTNode::addTag(_ISTD CRef<istring> tag)
@@ -51,7 +60,7 @@ int iASTNode::getTagIndex(_ISTD CRef<istring> tag)const
 	{
 		return -2;
 	}
-	for (int i = 0; auto& v : tags)
+	for (int i = 0; auto & v : tags)
 	{
 		if (v == tag)
 		{
