@@ -108,6 +108,11 @@ iMain(_p_start)
 		_ISTD basic::iBasic<icSystem::AST::iASTStringLiteralNode>::destroy(test_3);
 		_ISTD basic::iBasic<icSystem::AST::iASTStringLiteralNode>::destroy(test_4);
 		_ISTD basic::iBasic<icSystem::AST::iASTGlobalAreaNode>::destroy(astnode);
+		delete test_1;
+		delete test_2;
+		delete test_3;
+		delete test_4;
+		delete astnode;
 	}
 	return _ISTD iexception::error::noError();
 }
