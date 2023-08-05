@@ -31,7 +31,24 @@ SPACE(i)
 				:public iASTNodeBasic
 			{
 				using istring = _ISTDTEXT istring;
+
+			private:
+
+				double _data;
+
 			public:
+
+				iATSFloatingLiteralNode();
+
+				iATSFloatingLiteralNode(double data);
+
+				~iATSFloatingLiteralNode();
+
+			public:
+
+				[[nodiscard]] double get()const noexcept;
+
+				_ISTD Ptr<iATSFloatingLiteralNode> set(double data);
 
 			};
 

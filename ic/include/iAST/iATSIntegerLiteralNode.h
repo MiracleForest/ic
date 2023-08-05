@@ -31,8 +31,24 @@ SPACE(i)
 				:public iASTNodeBasic
 			{
 				using istring = _ISTDTEXT istring;
+
+			private:
+
+				_ISTD int64 _data;
+
 			public:
 
+				iATSIntegerLiteralNode();
+
+				iATSIntegerLiteralNode(_ISTD int64 data);
+
+				~iATSIntegerLiteralNode();
+
+			public:
+
+				[[nodiscard]] _ISTD int64 get()const noexcept;
+
+				_ISTD Ptr<iATSIntegerLiteralNode> set(_ISTD int64 data);
 			};
 
 		}
