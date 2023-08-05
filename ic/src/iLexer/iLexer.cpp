@@ -131,19 +131,19 @@ int iLexer::readNumber(int pos)
 	int result = 0;
 
 	result = readHexNumber(pos);
-	if (!result)
+	if (result)
 	{
 		return result;
 	}
 
 	result = readOctNumber(pos);
-	if (!result)
+	if (result)
 	{
 		return result;
 	}
 
 	result = readDecNumber(pos);
-	if (!result)
+	if (result)
 	{
 		return result;
 	}
