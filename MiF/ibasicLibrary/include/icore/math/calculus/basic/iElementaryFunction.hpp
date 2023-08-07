@@ -55,7 +55,10 @@ SPACE(i)
 
                 public:
                     iElementaryFunction(OperationCalculateType type, iElementaryFunction left,
-                                        std::optional<iElementaryFunction> right = std::nullopt) { }
+                                        std::optional<iElementaryFunction> right = std::nullopt)
+                    {
+                        
+                    }
 
                 private:
                     std::unique_ptr<iElementaryFunction> left;

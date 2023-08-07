@@ -93,8 +93,8 @@ add_library(libic SHARED ${SRC_FILES} ${THIRD_PARTY_SRC_FILES})
 
 # STATIC
 # SHARED
-target_link_libraries(ic I:/root/ai/Feilulu/WorkArea/Programming/MiracleForest/ic/MiF/lib/iBasicLibrary_debug.lib)
-target_link_libraries(libic I:/root/ai/Feilulu/WorkArea/Programming/MiracleForest/ic/MiF/lib/iBasicLibrary_debug.lib)
+target_link_libraries(ic iBasicLibrary_debug)
+target_link_libraries(libic iBasicLibrary_debug)
 
 target_compile_options(
         ic

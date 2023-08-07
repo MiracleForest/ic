@@ -72,20 +72,22 @@ SPACE(i)
 
 			public:
 
+#define ccolor(r,g,b) type::iColor::getConsoleColoriString({r,g,b})
+
 				template<class...Args>
 				void info(istring fmtstr, RRef<Args>...args)
 				{
 					_lock.lock();
 					iConsole::writeLine(
 						istring::format("{}{}{} Info {}[{}]:{}{}{}",
-							type::iColor::getConsoleColoriString({ 173, 216, 230 }),
+							ccolor(173, 216, 230),
 							getTimeNow(),
-							type::iColor::getConsoleColoriString({ 148, 230, 207 }),
-							type::iColor::getConsoleColoriString({ 204, 204, 204 }),
+							ccolor(148, 230, 207),
+							ccolor(204, 204, 204),
 							_title,
-							type::iColor::getConsoleColoriString({ 164, 164, 164 }),
+							ccolor(164, 164, 164),
 							fmtstr,
-							type::iColor::getConsoleColoriString({ 255, 255, 255 })
+							ccolor(255, 255, 255)
 						), std::forward<Args>(args)...);
 					output2file("[" + getTimeNow() + istring::format("][Info]:" + fmtstr, std::forward<Args>(args)...));
 					_lock.unlock();
@@ -97,15 +99,15 @@ SPACE(i)
 					_lock.lock();
 					iConsole::writeLine(
 						istring::format("{}{}{} Warn {}[{}]:{}{}{}",
-							type::iColor::getConsoleColoriString({ 242, 242, 205 }),
+							ccolor(242, 242, 205),
 							getTimeNow(),
-							type::iColor::getConsoleColoriString({ 242, 220, 100 }),
-							type::iColor::getConsoleColoriString({ 208, 242, 146 }),
+							ccolor(242, 220, 100),
+							ccolor(208, 242, 146),
 							_title,
-							type::iColor::getConsoleColoriString({ 242, 239, 26 }),
+							ccolor(242, 239, 26),
 							fmtstr,
-							type::iColor::getConsoleColoriString({ 255, 255, 255 })
-							), std::forward<Args>(args)...);
+							ccolor(255, 255, 255)
+						), std::forward<Args>(args)...);
 					output2file("[" + getTimeNow() + istring::format("][Warn]:" + fmtstr, std::forward<Args>(args)...));
 					_lock.unlock();
 				}
@@ -116,14 +118,14 @@ SPACE(i)
 					_lock.lock();
 					iConsole::writeLine(
 						istring::format("{}{}{} Error {}[{}]:{}{}{}",
-							type::iColor::getConsoleColoriString({ 242, 180, 180 }),
+							ccolor({ 242, 180, 180 }),
 							getTimeNow(),
-							type::iColor::getConsoleColoriString({ 242, 68, 108 }),
-							type::iColor::getConsoleColoriString({ 242, 122, 122 }),
+							ccolor({ 242, 68, 108 }),
+							ccolor({ 242, 122, 122 }),
 							_title,
-							type::iColor::getConsoleColoriString({ 242, 72, 72 }),
+							ccolor({ 242, 72, 72 }),
 							fmtstr,
-							type::iColor::getConsoleColoriString({ 255, 255, 255 })
+							ccolor({ 255, 255, 255 })
 						), std::forward<Args>(args)...);
 					output2file(
 						"[" + getTimeNow() + istring::format("][Error]:" + fmtstr, std::forward<Args>(args)...));
@@ -139,51 +141,51 @@ SPACE(i)
 					auto time = t.data();
 
 					iConsole::writeLine(
-						istring::sumString(type::iColor::getConsoleColoriString({ 255, 170, 255 }),
+						istring::sumString(ccolor(255, 170, 255),
 							time.years,
-							type::iColor::getConsoleColoriString({ 240, 24, 28 }),
+							ccolor(240, 24, 28),
 							".",
-							type::iColor::getConsoleColoriString({ 170, 255, 255 }),
+							ccolor(170, 255, 255),
 							time.months,
-							type::iColor::getConsoleColoriString({ 240, 24, 28 }),
+							ccolor(240, 24, 28),
 							".",
-							type::iColor::getConsoleColoriString({ 170, 170, 255 }),
+							ccolor(170, 170, 255),
 							time.days,
-							type::iColor::getConsoleColoriString({ 240, 24, 28 }),
+							ccolor(240, 24, 28),
 							".",
-							type::iColor::getConsoleColoriString({ 134, 255, 217 }),
+							ccolor(134, 255, 217),
 							time.hours,
-							type::iColor::getConsoleColoriString({ 240, 24, 28 }),
+							ccolor(240, 24, 28),
 							":",
-							type::iColor::getConsoleColoriString({ 255, 105, 252 }),
+							ccolor(255, 105, 252),
 							time.minutes,
-							type::iColor::getConsoleColoriString({ 240, 24, 28 }),
+							ccolor(240, 24, 28),
 							":",
-							type::iColor::getConsoleColoriString({ 255, 240, 82 }),
+							ccolor(255, 240, 82),
 							time.seconds,
-							type::iColor::getConsoleColoriString({ 240, 24, 28 }),
+							ccolor(240, 24, 28),
 							":",
-							type::iColor::getConsoleColoriString({ 39, 215, 231 }),
+							ccolor(39, 215, 231),
 							time.milliseconds,
-							type::iColor::getConsoleColoriString({ 255, 170, 255 }),
+							ccolor(255, 170, 255),
 							" N",
-							type::iColor::getConsoleColoriString({ 69, 255, 240 }),
+							ccolor(69, 255, 240),
 							"o",
-							type::iColor::getConsoleColoriString({ 255, 255, 0 }),
+							ccolor(255, 255, 0),
 							"t",
-							type::iColor::getConsoleColoriString({ 67, 236, 62 }),
+							ccolor(67, 236, 62),
 							"e ",
-							type::iColor::getConsoleColoriString({ 156, 248, 255 }),
+							ccolor(156, 248, 255),
 							"[",
-							type::iColor::getConsoleColoriString({ 228, 131, 255 }),
+							ccolor(228, 131, 255),
 							_title,
-							type::iColor::getConsoleColoriString({ 156, 248, 255 }),
+							ccolor(156, 248, 255),
 							"]",
-							type::iColor::getConsoleColoriString({ 240, 24, 28 }),
+							ccolor(240, 24, 28),
 							":",
-							type::iColor::getConsoleColoriString({ 137, 221, 255 }),
+							ccolor(137, 221, 255),
 							fmtstr,
-							type::iColor::getConsoleColoriString({ 255, 255, 255 })
+							ccolor(255, 255, 255)
 						), std::forward<Args>(args)...);
 					output2file("[" + getTimeNow() + istring::format("][Note]:" + fmtstr, std::forward<Args>(args)...));
 					_lock.unlock();
@@ -194,20 +196,20 @@ SPACE(i)
 				{
 					_lock.lock();
 					iConsole::writeLine(
-						istring::sumString(type::iColor::getConsoleColoriString({ 168, 255, 204 }),
-                                           getTimeNow(),
-                                           type::iColor::getConsoleColoriString({ 0, 255, 0 }),
-                                           " Debug ",
-                                           type::iColor::getConsoleColoriString({ 156, 248, 255 }),
+						istring::sumString(ccolor({ 168, 255, 204 }),
+							getTimeNow(),
+							ccolor(0, 255, 0),
+							" Debug ",
+							ccolor(156, 248, 255),
 #ifdef __WINDOWS__
 							"[", _title, "][File:", _ISTDTEXT iEncoding::wideChar2ANSI(_ISTDTEXT iEncoding::UTF82wideChar(sl.file_name())), ":", sl.line(), ",",
 							sl.column(), "][Func:", sl.function_name(), "]:",
 #else//^^^^__WINDOWS__^^^^
-                                           "[", _title, "][File:", sl.file_name(), ":", sl.line(), ",", sl.column(), "][Func:", sl.function_name(), "]:",
+							"[", _title, "][File:", sl.file_name(), ":", sl.line(), ",", sl.column(), "][Func:", sl.function_name(), "]:",
 #endif//^^^^!__WINDOWS__^^^^
-                                           type::iColor::getConsoleColoriString({ 131, 255, 162 }),
-                                           fmtstr,
-                                           type::iColor::getConsoleColoriString({ 255, 255, 255 })
+							ccolor(131, 255, 162),
+							fmtstr,
+							ccolor(255, 255, 255)
 						), std::forward<Args>(args)...);
 					output2file(istring::sumString("[", getTimeNow(), "][File:", sl.file_name(), ":", sl.line(), ",",
 						sl.column(), "][Func:", sl.function_name(), "]",
@@ -215,6 +217,8 @@ SPACE(i)
 
 					_lock.unlock();
 				}
+
+#undef ccolor
 
 			public:
 

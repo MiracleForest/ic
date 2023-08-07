@@ -13,7 +13,6 @@
 *
 ****/
 #pragma once
-//#define _USE_WINDOWS_H__
 #pragma warning(disable:4251)
 
 #include <icore/family/imacrofamily.h>
@@ -506,7 +505,7 @@ SPACE(i)
 
                     static std::string toStdString(CPtr<char16_t> value);
 
-                    static std::string toStdString(const wchar_t value);
+                    static std::string toStdString(wchar_t value);
 
                     static std::string toStdString(CPtr<wchar_t> value);
 

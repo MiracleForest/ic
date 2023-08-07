@@ -40,7 +40,7 @@ iMain(_p_start)
 	using Clock = std::chrono::high_resolution_clock;
 
 	auto t1 = Clock::now();//计时开始
-	icSystem::iLexer lexer(inputCode);
+	i::icSystem::iLexer lexer(inputCode);
 	auto tokens = lexer.parse();
 	auto t2 = Clock::now();//计时结束
 
@@ -116,3 +116,4 @@ iMain(_p_start)
 	//}
 	return _ISTD iexception::error::noError();
 }
+iMainEnd

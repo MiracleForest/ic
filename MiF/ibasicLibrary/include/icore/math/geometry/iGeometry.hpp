@@ -40,6 +40,7 @@ SPACE(i)
                 class iLineF;
 
                 class iPoint;
+                class iPointI;
                 class iPointF;
 
                 class iTriangle;
@@ -125,32 +126,21 @@ SPACE(i)
 
                 // iLineI
                 class IAPI iLineI :
-                    public basic::iBasicDataType<iLineI, std::tuple<int, int, int>>
+                    public basic::iBasicDataType<iLineI, std::pair<int, int>>
                 {
                     iObject(iLineI)
                 public:
-                    iLineI(int _a, int _b, int _c)
+                    iLineI(int _k, int _b)
                         :
-                        _A(_a),
-                        _B(_b),
-                        _C(_c)
+                        _K(_k),
+                        _B(_b)
                     {}
 
                 public:
-                    // Ax+By+C=0
-                    iLineI static fromGeneral(CRef<iFraction> _a, CRef<iFraction> _b, CRef<iFraction> _c);
-
-                    // y-y0=k(x-x0)
-                    iLineI static fromDotOblique(CRef<iFraction> x0, CRef<iFraction> y0, CRef<iFraction> k);
-
-                    // y=kx+b
-                    iLineI static fromObliqueCutoff(CRef<iFraction> k, CRef<iFraction> b);
-
-                    iLineI static fromTwoPoint(CRef<iFraction> x1, CRef<iFraction> y1, CRef<iFraction> x2, CRef<iFraction> y2);
-                    iLineI static fromIntercept(CRef<iFraction> a, CRef<iFraction> b);
-
+                    iLineI static fromDotOblique(int x0, int y0, int k);
+                    iLineI static fromObliqueCutoff(int k, int b);
                 public:
-                    virtual std::tuple<int, int, int> data() const;
+                    virtual std::pair<int, int> data() const;
 
                 public:
                     [[nodiscard]] iFraction slope() const;
@@ -166,9 +156,8 @@ SPACE(i)
 
                 private:
 
-                    int _A;
+                    int _K;
                     int _B;
-                    int _C;
                 };
 
                 // iLineF
@@ -250,6 +239,18 @@ SPACE(i)
                 private:
                     double _x;
                     double _y;
+                };
+
+                class iPointI
+                    :public basic::iBasicDataType<iPointI, std::pair<int, int>>
+                {
+                    iObject(iPointI);
+
+                    iPointI() :_x(0), _y(0) {}
+                    iPointI(int a, int b) :_x(a), _y(b) {}
+                private:
+                    int _x;
+                    int _y;
                 };
 
                 //iPointF
@@ -498,10 +499,48 @@ SPACE(i)
                 {
                     return this->_C;
                 }
+            }
 
-                inline std::tuple<int, int, int> iLineI::data() const
+            // iLineI
+            namespace geometry
+            {
+                inline iLineI iLineI::fromDotOblique(int x0, int y0, int k)
                 {
-                    return { _A,_B,_C };
+                    return { k,y0 - k * x0 };
+                }
+
+                inline iLineI iLineI::fromObliqueCutoff(int k, int b)
+                {
+                    return { k,b };
+                }
+/*
+                inline iFraction iLineI::slope() const
+                {}
+
+                inline iFraction iLineI::xIntercept() const
+                {}
+
+                inline iFraction iLineI::yIntercept() const
+                {}
+
+                inline bool iLineI::canPass(iPoint p)
+                {}
+
+                inline int iLineI::passQuadrants()
+                {}
+
+                inline bool iLineI::canPassQuadrant(int quadrant)
+                {}
+
+                inline istring iLineI::toAnalyticExpression(iLineEquationMode m, CRef<istring>, CRef<istring>)
+                {}
+
+                inline istring iLineI::toLatexAnalyticExpression(iLineEquationMode m)
+                {}
+*/
+                inline std::pair<int, int> iLineI::data() const
+                {
+                    return { _K,_B, };
                 }
             }
 
@@ -600,12 +639,12 @@ SPACE(i)
                         int denominatorB = this->_B.getDenominator();
                         int denominatorC = this->_C.getDenominator();
                         int denominatorAB = denominatorA * denominatorB / gcd(denominatorA, denominatorB);
-                        int denominatorMax= denominatorAB * denominatorC / gcd(denominatorAB, denominatorC);
+                        int denominatorMax = denominatorAB * denominatorC / gcd(denominatorAB, denominatorC);
 
                         istring str("");
 
                         // a
-                        istring a = (_A*denominatorMax).toStdString();
+                        istring a = (_A * denominatorMax).toStdString();
                         logger.info("a: {}", a);
 
                         str += remove1(a);

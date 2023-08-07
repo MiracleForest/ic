@@ -13,14 +13,19 @@
 *
 ****/
 #pragma once
+
 #include <icore/family/imacrofamily.h>
 #include <icore/exception/error.h>
 #include <icore/type/type/type.h>
 #include <icore/data/text/istring.h>
 #include <icore/math/iVec2.hpp>
+
 #ifdef __WINDOWS__
+
 #include <Windows.h>
+
 #endif
+
 #include <tuple>
 
 SPACE(i)
@@ -44,63 +49,71 @@ SPACE(i)
 
             public:
 
-                template <class... Args>
+                template<class... Args>
                 static _iError write(CRef<istring> fmt, CRef<Args>... args)
                 {
                     try
                     {
                         istring out = istring::format(fmt, args...);
-                        printf(out.cStr());
+                        printf("%s", out.cStr());
                     }
                     catch (CRef<std::format_error> fmtErr)
                     {
-                        return _iError::make(_iErrorCode::theIllegalFormatString, std::source_location::current(), "", fmtErr.what());
+                        return _iError::make(_iErrorCode::theIllegalFormatString, std::source_location::current(), "",
+                            fmtErr.what());
                     }
                     return _iError::noError();
                 }
 
-                template <class... Args>
+                template<class... Args>
                 static _iError writeLine(CRef<istring> fmt, RRef<Args>... args)
                 {
                     return write(fmt + "\n", std::forward<Args>(args)...);
                 }
 
-                template <class _Ty>
+                template<class _Ty>
                 static _iError writeLine(_Ty data)
                 {
                     return write("{}\n", data);
                 }
 
-                template <class _Ty>
+                static _iError writeLine()
+                {
+                    return write("\n");
+                }
+
+                template<class _Ty>
                 static _iError write(_Ty data)
                 {
                     return write("{}", data);
                 }
 
-                template <class... Args>
+
+                template<class... Args>
                 static _iError print(CRef<istring> fmt, RRef<Args>... args)
                 {
                     return write(fmt, std::forward<Args>(args)...);
                 }
 
-                template <class... Args>
+                template<class... Args>
                 static _iError printl(CRef<istring> fmt, RRef<Args>... args)
                 {
                     return writeLine(fmt, std::forward<Args>(args)...);
                 }
 
-                template <class... Args>
+                template<class... Args>
                 static _iError printLine(CRef<istring> fmt, RRef<Args>... args)
                 {
                     return writeLine(fmt, std::forward<Args>(args)...);
                 }
 
-                template <class... Args>
+                template<class... Args>
                 static _iError read(Ref<Args>... args)
                 {
                     try
                     {
-                        (void)std::initializer_list<int>{
+                        (void)std::initializer_list<int>
+                        {
                             ([&args]()
                                 {
                                     std::cin >> args;
