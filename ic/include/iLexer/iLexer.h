@@ -18,6 +18,7 @@
 #include <icore/exception/error.h>
 #include <icore/console/iconsole.h>
 #include <icore/console/iLogger.h>
+#include <icore/data/text/istring.h>
 #include "iToken.h"
 #include "../family/iicfamily.h"
 
@@ -62,6 +63,9 @@ SPACE(i)
 			//十六进制
 			int readHexNumber(int pos);
 
+			//二进制
+			int readBinNumber(int pos);
+
 			//八进制
 			int readOctNumber(int pos);
 
@@ -88,12 +92,12 @@ SPACE(i)
 												 "opt", "pretreatment", "defspace", "class", "break", "continue", "interface", "for", "foreach",
 												 "if", "elif", "else", "_asm", "_cpp", "attributes", "namespace", "template", "try", "catch",
 												 "throw", "return", "assert", "operator", "delete", "goto", "particulor", "virtual", "export",
-												 "static", "const", "ref", "ptr", "final", "mutable", "explicit", "true", "false", "new", "void",
-												 "default", "null", "nullptr", "or", "not", "and", "is", "nand", "nor", "xor", "xnor", "in", "as",
-												 "add", "sub", "mul", "div", "equal","get","set"
+												 "static", "const", "ref", "ptr", "final", "mutable", "explicit", "true", "false","YES","NO",
+												 "Yes","No", "new", "void","default", "null", "nullptr", "or", "not", "and", "is", "nand", "nor",
+												 "xor", "xnor", "in", "as","add", "sub", "mul", "div", "equal","get","set","onlyread","onlywrite"
 			};
 
-			int pos = 0;
+			int _pos = 0;
 			int len = _inputCode.length();
 		};//iLexer
 	}

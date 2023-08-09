@@ -12,9 +12,6 @@
 #include <streambuf>
 #include <chrono>
 using namespace std::chrono;
-
-//#pragma comment(lib,"iBasicLibrary_debug.lib")
-
 using iEncoding = _ISTDTEXT iEncoding;
 
 
