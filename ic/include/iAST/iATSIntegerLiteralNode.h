@@ -18,7 +18,7 @@
 #include <icore/data/text/istring.h>
 #include <icore/console/iconsole.h>
 #include <icore/console/iLogger.h>
-#include "iASTNodeBasic.h"
+#include "iASTNode.h"
 #include "../family/iicfamily.h"
 
 SPACE(i)
@@ -28,7 +28,7 @@ SPACE(i)
 		SPACE(AST)
 		{
 			class ICAPI iATSIntegerLiteralNode
-				:public iASTNodeBasic
+				:public iASTNode
 			{
 				using istring = _ISTDTEXT istring;
 
