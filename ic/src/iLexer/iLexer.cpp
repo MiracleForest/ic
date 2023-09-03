@@ -6,8 +6,8 @@ using istring = _ISTDTEXT istring;
 using iLogger = _ISTD io::iLogger;
 
 
-iLexer::iLexer(istring targetCode)
-	:_inputCode(targetCode)
+iLexer::iLexer(istring inputCode)
+	:_inputCode(inputCode)
 { }
 
 iToken iLexer::read()

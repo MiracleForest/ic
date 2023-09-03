@@ -35,7 +35,7 @@ SPACE(i)
 
 		public:
 
-			iLexer(istring text);
+			iLexer(istring inputCode);
 
 		public:
 
@@ -94,7 +94,7 @@ SPACE(i)
 												 "throw", "return", "assert", "operator", "delete", "goto", "particulor", "virtual", "export",
 												 "static", "const", "ref", "ptr", "final", "mutable", "explicit", "true", "false","YES","NO",
 												 "Yes","No", "new", "void","default", "null", "nullptr", "or", "not", "and", "is", "nand", "nor",
-												 "xor", "xnor", "in", "as","add", "sub", "mul", "div", "equal","get","set","onlyread","onlywrite"
+												 "xor", "xnor", "in", "as","add", "sub", "mul", "div", "equal","get","set","readonly","writeonly"
 			};
 
 			int _pos = 0;
