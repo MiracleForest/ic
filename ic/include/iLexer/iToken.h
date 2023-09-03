@@ -59,6 +59,9 @@ SPACE(i)
 			//获取文本
 			istring getText()const;
 
+			//设置文本
+			void setText(_ISTD CRef<istring> text);
+
 			//获取编号
 			iTokenID getID()const;
 

@@ -54,6 +54,11 @@ istring iToken::getText()const
 	return this->_text;
 }
 
+void iToken::setText(_ISTD CRef<istring> text)
+{
+	this->_text = text;
+}
+
 iTokenID iToken::getID()const
 {
 	return this->_ID;

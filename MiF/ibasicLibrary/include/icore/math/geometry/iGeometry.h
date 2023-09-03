@@ -20,7 +20,7 @@
 #include <icore/basic/iBasicDataType.h>
 #include <icore/console/iLogger.h>
 
-#include <icore/math/iFraction.hpp>
+#include <icore/math/iFraction.h>
 #include <icore/math/iMath.hpp>
 
 #include "icore/console/iConsole.h"

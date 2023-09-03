@@ -1,4 +1,5 @@
 #include "../../include/iLexer/iLexer.h"
+#include <icore/type/iVector.h>
 using namespace i::icSystem;
 using uchar = _ISTD uchar;
 using uint = _ISTD uint;
@@ -26,6 +27,8 @@ iToken iLexer::read()
 		{
 			auto rtstr = _inputCode.substr(_pos, result);
 			_pos += result;
+			rtstr = rtstr.substr(1);
+			rtstr = rtstr.substr(0, rtstr.size() - 1);
 			return iToken(iTokenID::String, rtstr);
 		}
 
@@ -33,18 +36,19 @@ iToken iLexer::read()
 		{
 			auto rtstr = _inputCode.substr(_pos, result);
 			_pos += result;
+			rtstr.replace("'", "");
 			return iToken(iTokenID::Number, rtstr);
 		}
 
 		if (result = readIdentifier(_pos))
 		{
-			istring token_str = _inputCode.substr(_pos, result);
+			auto rtstr = _inputCode.substr(_pos, result);
 			_pos += result;
-			if (isKeyword(token_str) == true)
+			if (isKeyword(rtstr) == true)
 			{
-				return iToken(iTokenID::Keyword, token_str);
+				return iToken(iTokenID::Keyword, rtstr);
 			}
-			return iToken(iTokenID::Identifier, token_str);
+			return iToken(iTokenID::Identifier, rtstr);
 		}
 
 		if (result = readSpace(_pos))
@@ -59,12 +63,17 @@ iToken iLexer::read()
 		{
 			_pos += result;
 		}
+		else if (result = readOperator(_pos))
+		{
+			auto rtstr = _inputCode.substr(_pos, result);
+			_pos += result;
+			return iToken(iTokenID::Operator, rtstr);
+		}
 		else
 		{
-			//到这里为止什么都没有，肯定是运算符
-			istring op = _inputCode.substr(_pos, 1);
+			istring rtstr = _inputCode.substr(_pos, 1);
 			_pos++;
-			return iToken(iTokenID::Operator, op);
+			return iToken(iTokenID::Unk, rtstr);
 		}
 	}
 
@@ -75,12 +84,62 @@ iToken iLexer::read()
 
 std::vector<iToken> iLexer::parse()
 {
-	std::vector<iToken> result;
-	iToken tok;
+	std::vector<iToken> result{};
+	iToken tok{};
 	while ((tok = read()).getID() != iTokenID::EOF)
 	{
 		result.push_back(tok);
 	}
+	return result;
+}
+
+std::vector<iToken> iLexer::mergeConsecutiveStringsToken(_ISTD CRef<std::vector<iToken>> input)
+{
+	std::vector<iToken> result;
+
+	if (input.empty())
+	{
+		return result;
+	}
+
+	iTokenID currentID = input[0].getID();
+	istring currentText = input[0].getText();
+	int count = 1;
+
+	for (int i = 1; i < input.size(); i++)
+	{
+		if (input[i].getID() == currentID && input[i].getID() == iTokenID::String)
+		{
+			count++;
+			currentText += input[i].getText();
+		}
+		else
+		{
+			if (count > 1)
+			{
+				result.push_back(iToken(currentID, currentText));
+			}
+			else
+			{
+				result.push_back(iToken(currentID, currentText));
+			}
+
+			currentID = input[i].getID();
+			currentText = input[i].getText();
+			count = 1;
+		}
+
+	}
+
+	if (count > 1)
+	{
+		result.push_back(iToken(currentID, currentText));
+	}
+	else
+	{
+		result.push_back(iToken(currentID, currentText));
+	}
+
 	return result;
 }
 
@@ -161,7 +220,19 @@ int iLexer::readDecNumber(int pos)
 {
 	int result = 0;
 
-	while (pos + result < _inputCode.length() && ('0' <= _inputCode[pos + result] && _inputCode[pos + result] <= '9'))
+	while (pos + result < _inputCode.length() 
+		&& ('0' <= _inputCode[pos + result] && _inputCode[pos + result] <= '9')
+		|| '\'' == _inputCode[pos + result])
+	{
+		result++;
+	}
+	if (_inputCode[pos + result] == '.')
+	{
+		result++;
+	}
+	while (pos + result < _inputCode.length()
+		&& ('0' <= _inputCode[pos + result] && _inputCode[pos + result] <= '9')
+		|| '\'' == _inputCode[pos + result])
 	{
 		result++;
 	}
@@ -191,7 +262,9 @@ int iLexer::readHexNumber(int pos)
 	while (pos + result < _inputCode.length()
 		&& (('0' <= _inputCode[pos + result] && _inputCode[pos + result] <= '9') ||
 			('A' <= _inputCode[pos + result] && _inputCode[pos + result] <= 'F') ||
-			('a' <= _inputCode[pos + result] && _inputCode[pos + result] <= 'f')))
+			('a' <= _inputCode[pos + result] && _inputCode[pos + result] <= 'f')
+			)
+		)
 	{
 		result++;
 	}
@@ -243,8 +316,10 @@ int iLexer::readOctNumber(int pos)
 	{
 		return 0;
 	}
-	//至少是个位数
-	//result++;
+	if (_inputCode.length() > pos + 1 && _inputCode[pos + 1] == '.')
+	{
+		return 0;
+	}
 
 	while (pos + result < _inputCode.length()
 		&& ('0' <= _inputCode[pos + result]
@@ -325,6 +400,38 @@ int iLexer::readIdentifier(int pos)
 	}
 
 	return result;
+}
+
+int iLexer::readOperator(int pos)
+{
+	istring buff = "";
+
+	for (int i = 0; _ISTD vector::contains<istring>(this->_operatorsSeparateCharacter, istring::toStdString(_inputCode[pos + i])); i++)
+	{
+		buff += istring::toStdString(_inputCode[pos + i]);
+	}
+
+	if (buff.size() > 3)
+	{
+		buff = buff.substr(0, 3);
+	}
+
+	if (buff.size() == 3 && _ISTD vector::contains<istring>(this->_operatorsMultipleCharacter, buff))
+	{
+		return 3;
+	}
+	buff = buff.substr(0, 2);
+	if (buff.size() == 2 && _ISTD vector::contains<istring>(this->_operatorsMultipleCharacter, buff))
+	{
+		return 2;
+	}
+	buff = buff.substr(0, 1);
+	if (buff.size() == 1 && _ISTD vector::contains<istring>(this->_operatorsSeparateCharacter, buff))
+	{
+		return 1;
+	}
+
+	return 0;
 }
 
 bool iLexer::isKeyword(istring id)const

@@ -86,7 +86,6 @@ SPACE(i)
 			iCuboid,
 			iCube,
 			iBigInteger,
-			iNewBigInteger,
 			iBigDecimal,
 			iElementaryFunction,
 			iProcess,

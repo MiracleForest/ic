@@ -34,20 +34,29 @@ iMain(_p_start)
 	logger.info("输入的代码：{}", iEncoding::UTF82ANSI(inputCode));
 	inputFile.close();
 
-	using Clock = std::chrono::high_resolution_clock;
+	using clock = std::chrono::high_resolution_clock;
+	std::vector<i::icSystem::iToken> tokens;
 
-	auto t1 = Clock::now();//计时开始
+	auto t1 = clock::now();//计时开始
+
 	i::icSystem::iLexer lexer(inputCode);
-	auto tokens = lexer.parse();
-	auto t2 = Clock::now();//计时结束
+	tokens = lexer.parse();
+	auto t2 = clock::now();//计时结束
+	tokens = lexer.mergeConsecutiveStringsToken(tokens);
 
-
-	auto t3 = Clock::now();//计时开始
+	auto t3 = clock::now();//计时开始
 	for (int i = 0; i < tokens.size(); i++)
 	{
-		logger.info("<{}> \t{}", tokens[i].getID2String(), iEncoding::UTF82ANSI(tokens[i].getText().data()));
+		if (tokens[i].getID() != i::icSystem::iTokenID::Unk)
+		{
+			logger.info("<{}> \t{}", tokens[i].getID2String(), iEncoding::UTF82ANSI(tokens[i].getText().data()));
+		}
+		else
+		{
+			logger.warn("<{}> \t{}", tokens[i].getID2String(), iEncoding::UTF82ANSI(tokens[i].getText().data()));
+		}
 	}
-	auto t4 = Clock::now();//计时结束
+	auto t4 = clock::now();//计时结束
 
 
 #define TIMECAST(p1,p2) std::chrono::duration_cast<std::chrono::nanoseconds>(p1-p2).count()

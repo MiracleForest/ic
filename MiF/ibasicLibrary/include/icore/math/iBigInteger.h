@@ -32,10 +32,9 @@ SPACE(i)
 
             using istring = _ISTDTEXT istring;
 
-            class IAPI
-
-                iBigInteger
+            class IAPI iBigInteger :basic::iBasic<iBigInteger>
             {
+                iObject(iBigInteger);
                 std::vector<unsigned> v;
                 bool _flag;
             public:

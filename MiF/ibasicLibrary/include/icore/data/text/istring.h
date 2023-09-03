@@ -86,12 +86,12 @@ SPACE(i)
                     template<typename T>
                     istring(T s)
                     {
+
                         if constexpr (std::is_same<std::string, T>::value ||
                             std::is_same<std::string_view, T>::value)
                         {
                             _data = s;
-                        }
-                        else
+                        } else
                         {
                             _data = toStdString(s);
                         }
@@ -109,7 +109,7 @@ SPACE(i)
 
                     template<class InputIt> istring(InputIt first, InputIt last)
                         : _data(first, last)
-                    { }
+                    {}
 
                     ~istring();
 
@@ -526,10 +526,7 @@ SPACE(i)
                         {
                             return toStdString(value.data());
                         }
-                        else
-                        {
-                            return {};
-                        }
+                        return {};
                     }
 
                     template<Has2StdStringFunction _Ty>

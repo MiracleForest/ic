@@ -17,7 +17,7 @@
 
 #include <icore/family/imacrofamily.h>
 #include <icore/basic/iBasicDataType.h>
-#include "iFraction.hpp"
+#include "iFraction.h"
 
 
 SPACE(i)

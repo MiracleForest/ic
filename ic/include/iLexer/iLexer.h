@@ -32,6 +32,37 @@ SPACE(i)
 			using uchar = _ISTD uchar;
 			using uint = _ISTD uint;
 			using istring = _ISTDTEXT istring;
+		private:
+
+			istring _inputCode;
+			const std::vector<istring> _keywords =
+			{
+			"char", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64",
+			"string", "enum", "label", "keyword", "struct", "symbol", "self", "type", "source", "target",
+			"opt", "pretreatment", "defspace", "class", "break", "continue", "interface", "for", "foreach",
+			"if", "elif", "else", "_asm", "_cpp", "attributes", "namespace", "template", "try", "catch",
+			"throw", "return", "assert", "operator", "delete", "goto", "particulor", "virtual", "export",
+			"static", "const", "ref", "ptr", "final", "mutable", "explicit", "true", "false","YES","NO",
+			"Yes","No", "new", "void","default", "null", "nullptr", "or", "not", "and", "is", "nand", "nor",
+			"xor", "xnor", "in", "as","add", "sub", "mul", "div", "equal","get","set","readonly","writeonly"
+			};
+
+			const std::vector<istring> _operatorsSeparateCharacter =
+			{
+			"+","-","*","/","=","%","<",">","!","^",
+			"|","&",".","[","]","(",")","{","}","@","$","#",";",
+			"~","`","´",",","¥","\\",":","?"
+			};
+
+			const std::vector<istring> _operatorsMultipleCharacter =
+			{
+			"+=","-=","/=","*=","%=","<=",">=","==","!=","<<",">>",
+			"<<=",">>=","^=","|=","&=","..","...",
+			"=>","->","<=>","?=","??=","!?=","?:","!=:","==:","||","&&","::"
+			};
+
+			int _pos = 0;
+			int len = _inputCode.length();
 
 		public:
 
@@ -44,6 +75,8 @@ SPACE(i)
 
 			//返回整个token数组
 			std::vector<iToken> parse();
+
+			static std::vector<iToken> mergeConsecutiveStringsToken(_ISTD CRef<std::vector<iToken>> input);
 
 		protected:
 
@@ -78,6 +111,9 @@ SPACE(i)
 			//读取一个标识符
 			int readIdentifier(int pos);
 
+			//读取一个标识符
+			int readOperator(int pos);
+
 			//判断该标识符是否为关键字
 			bool isKeyword(istring id)const;
 
@@ -85,20 +121,6 @@ SPACE(i)
 
 			_ISTD Ref<iLexer> operator=(_ISTD CRef<iLexer>);
 
-		private:
-			istring _inputCode;
-			const std::vector<istring> _keywords = { "char", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64",
-												 "string", "enum", "label", "keyword", "struct", "symbol", "self", "type", "source", "target",
-												 "opt", "pretreatment", "defspace", "class", "break", "continue", "interface", "for", "foreach",
-												 "if", "elif", "else", "_asm", "_cpp", "attributes", "namespace", "template", "try", "catch",
-												 "throw", "return", "assert", "operator", "delete", "goto", "particulor", "virtual", "export",
-												 "static", "const", "ref", "ptr", "final", "mutable", "explicit", "true", "false","YES","NO",
-												 "Yes","No", "new", "void","default", "null", "nullptr", "or", "not", "and", "is", "nand", "nor",
-												 "xor", "xnor", "in", "as","add", "sub", "mul", "div", "equal","get","set","readonly","writeonly"
-			};
-
-			int _pos = 0;
-			int len = _inputCode.length();
 		};//iLexer
 	}
 }

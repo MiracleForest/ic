@@ -348,29 +348,29 @@ SPACE(i)
         using VA = uint64;
         using RVA = uint;
 
-        template <typename Type>
-        using Ptr = Type*;
+        template <typename _Type>
+        using Ptr = _Type*;
 
-        template <typename Type>
-        using PPtr = Type**;
+        template <typename _Type>
+        using PPtr = _Type**;
 
-        template <typename Type>
-        using CPtr = const Type*;
+        template <typename _Type>
+        using CPtr = const _Type*;
 
-        template <typename Type>
-        using CPPtr = const Type**;
+        template <typename _Type>
+        using CPPtr = const _Type**;
 
-        template <typename Type>
-        using CRef = const Type&;
+        template <typename _Type>
+        using CRef = const _Type&;
 
-        template <typename Type>
-        using CRRef = const Type&&;
+        template <typename _Type>
+        using CRRef = const _Type&&;
 
-        template <typename Type>
-        using Ref = Type&;
+        template <typename _Type>
+        using Ref = _Type&;
 
-        template <typename Type>
-        using RRef = Type&&;
+        template <typename _Type>
+        using RRef = _Type&&;
 
         template <typename _Type>
         struct stdcall_cast_s;
@@ -411,15 +411,14 @@ SPACE(i)
         template <typename _Func>
         using stdcall_cast = typename stdcall_cast_s<_Func>::type;
 
-        template <class _Func>
+        template <typename _Func>
         using cdecl_cast = typename cdecl_cast_s<_Func>::type;
-
-        template <class _Func>
+        
+        template <typename _Func>
         using fastcall_cast = typename fastcall_cast_s<_Func>::type;
 
-        template <class _Func>
+        template <typename _Func>
         using thiscall_cast = typename thiscall_cast_s<_Func>::type;
-
 
     } // SPACE(core)
 } // SPACE(i)

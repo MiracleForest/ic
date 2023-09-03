@@ -18,9 +18,8 @@
 
 #include <icore/family/imacrofamily.h>
 #include <icore/basic/iBasicDataType.h>
-#include <icore/math/iMath.hpp>
 #include <icore/data/text/istring.h>
-#include <icore/math/iFraction.hpp>
+#include <icore/math/iFraction.h>
 
 SPACE(i)
 {
@@ -79,110 +78,35 @@ SPACE(i)
                 {}
             };
 
-            inline Ref<std::ostream> operator<<(Ref<std::ostream> stream, Ref<iComplex> c)
-            {
-                stream << "(" << c.re;
-                if (c.im != 0)
-                {
-                    std::cout << "," << c.im << "i";
-                }
-                std::cout << ")";
-                return stream;
-            }
+            inline IAPI Ref<std::ostream> operator<<(Ref<std::ostream> stream, Ref<iComplex> c);
 
-            inline Ref<std::ostream> operator<<(Ref<std::ostream> stream, RRef<iComplex> c)
-            {
-                stream << "(" << c.re;
-                if (c.im != 0)
-                {
-                    std::cout << "," << c.im << "i";
-                }
-                std::cout << ")";
-                return stream;
-            }
+            inline IAPI Ref<std::ostream> operator<<(Ref<std::ostream> stream, RRef<iComplex> c);
 
-            inline iComplex operator +(CRef<iComplex> l, CRef<iComplex> r)
-            {
-                return { l.re + r.re, l.im + r.im };
-            }
+            inline IAPI iComplex operator +(CRef<iComplex> l, CRef<iComplex> r);
 
-            inline iComplex operator -(CRef<iComplex> l, CRef<iComplex> r)
-            {
-                return { l.re - r.re, l.im - r.im };
-            }
+            inline IAPI iComplex operator -(CRef<iComplex> l, CRef<iComplex> r);
 
-            inline iComplex operator *(CRef<iComplex> l, const double r)
-            {
-                return { l.re + r, l.im };
-            }
+            inline IAPI iComplex operator *(CRef<iComplex> l, double r);
 
-            inline iComplex operator *(const double l, CRef<iComplex> r)
-            {
-                return r * l;
-            }
+            inline IAPI iComplex operator *(double l, CRef<iComplex> r);
 
-            inline iComplex operator *(CRef<iComplex> l, CRef<iComplex> r)
-            {
-                // (a+bi)*(c+di) = (ac-bd)+(ad+bc)i
-                // std::cout << l.re * r.re - l.im * r.im << " " << l.im * r.re + l.re * r.im << std::endl;
-                return { (l.re * r.re - l.im * r.im), (l.im * r.re + l.re * r.im) };
-            }
+            inline IAPI iComplex operator *(CRef<iComplex> l, CRef<iComplex> r);
 
-            inline iComplex operator /(CRef<iComplex> l, const double r)
-            {
-                return { l.re / r, l.im / r };
-            }
+            inline IAPI iComplex operator /(CRef<iComplex> l, double r);
 
-            inline iComplex operator /(CRef<iComplex> l, CRef<iComplex> r)
-            {
-                // (a+bi)/(c+di) =
-                return
-                { (l.re * r.re + l.im * r.im), (l.im * r.re - l.re * r.im) / (r.re * r.re + r.im * r.im) };
-            }
+            inline IAPI iComplex operator /(CRef<iComplex> l, CRef<iComplex> r);
 
-            inline iComplex operator /(const double l, CRef<iComplex> r)
-            {
-                return iComplex(l) / r;
-            }
+            inline IAPI iComplex operator /(double l, CRef<iComplex> r);
 
-            inline iComplex operator !(CRef<iComplex> c)
-            {
-                return { -c.re, -c.im };
-            }
+            inline IAPI iComplex operator !(CRef<iComplex> c);
 
-            inline Ref<iComplex> operator +=(Ref<iComplex> l, CRef<iComplex> r)
-            {
-                const iComplex i = l;
-                l.re = (i + r).re;
-                l.im = (i + r).im;
-                return l;
-            }
+            inline IAPI Ref<iComplex> operator +=(Ref<iComplex> l, CRef<iComplex> r);
 
-            inline Ref<iComplex> operator -=(Ref<iComplex> l, CRef<iComplex> r)
-            {
-                const iComplex i = l;
-                l.re = (i - r).re;
-                l.im = (i - r).im;
-                return l;
-            }
+            inline IAPI Ref<iComplex> operator -=(Ref<iComplex> l, CRef<iComplex> r);
 
-            inline Ref<iComplex> operator *=(Ref<iComplex> l, CRef<iComplex> r)
-            {
-                const iComplex i = l;
-                l.re = (i * r).re;
-                l.im = (i * r).im;
-                return l;
-            }
+            inline IAPI Ref<iComplex> operator *=(Ref<iComplex> l, CRef<iComplex> r);
 
-            inline Ref<iComplex> operator /=(Ref<iComplex> l, CRef<iComplex> r)
-            {
-                const iComplex i = l;
-                l.re = (i / r).re;
-                l.im = (i / r).im;
-                return l;
-            }
+            inline IAPI Ref<iComplex> operator /=(Ref<iComplex> l, CRef<iComplex> r);
         }
     }
 }
-
-#pragma clang diagnostic pop

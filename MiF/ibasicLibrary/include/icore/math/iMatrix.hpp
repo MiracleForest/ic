@@ -20,7 +20,7 @@
 #include <icore/basic/iBasicDataType.h>
 #include <icore/exception/exception.h>
 #include <icore/data/text/istring.h>
-#include <icore/math/iFraction.hpp>
+#include <icore/math/iFraction.h>
 #include <icore/math/iMath.hpp>
 
 SPACE(i)
