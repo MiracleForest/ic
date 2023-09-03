@@ -33,7 +33,10 @@ SPACE(i)
 				iASTGlobalAreaNode,
 				iASTStringLiteralNode,
 				iATSFloatingLiteralNode,
-				iATSIntegerLiteralNode
+				iATSIntegerLiteralNode,
+				iATSBinaryOperatorNode,
+				iATSTernaryOperatorNode,
+				iATSUnaryOperatorNode
 			};
 
 
