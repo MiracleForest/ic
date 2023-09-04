@@ -16,11 +16,11 @@ iATSIntegerLiteralNode::~iATSIntegerLiteralNode()
 
 [[nodiscard]] _ISTD int64 iATSIntegerLiteralNode::get()const noexcept
 {
-	return _data;
+	return this->data;
 }
 
 _ISTD Ptr<iATSIntegerLiteralNode> iATSIntegerLiteralNode::set(_ISTD int64 data)
 {
-	_data = data;
+	this->data = data;
 	return this;
 }

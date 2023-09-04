@@ -3,24 +3,24 @@ using namespace i::icSystem::AST;
 using namespace i::core;
 
 iATSFloatingLiteralNode::iATSFloatingLiteralNode()
-	:_data(.0)
+	:data(.0)
 { }
 
 iATSFloatingLiteralNode::iATSFloatingLiteralNode(double data)
-	:_data(data)
+	:data(data)
 { }
 
 iATSFloatingLiteralNode::~iATSFloatingLiteralNode()
 { }
 
 
-[[nodiscard]] auto iATSFloatingLiteralNode::get()const noexcept->double
+auto iATSFloatingLiteralNode::get()const noexcept->double
 {
-	return _data;
+	return this->data;
 }
 
 _ISTD Ptr<iATSFloatingLiteralNode> iATSFloatingLiteralNode::set(double data)
 {
-	_data = data;
+	this->data = data;
 	return this;
 }

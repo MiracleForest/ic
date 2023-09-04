@@ -23,33 +23,33 @@ iATSTernaryOperatorNode::~iATSTernaryOperatorNode()
 
 _ISTD Ptr<iASTNode> iATSTernaryOperatorNode::getLeft()const noexcept
 {
-	return left;
+	return this->left;
 }
 
 _ISTD Ptr<iASTNode> iATSTernaryOperatorNode::getMiddle()const noexcept
 {
-	return middle;
+	return this->middle;
 }
 
 _ISTD Ptr<iASTNode> iATSTernaryOperatorNode::getRight()const noexcept
 {
-	return right;
+	return this->right;
 }
 
 _ISTD Ptr<iATSTernaryOperatorNode> iATSTernaryOperatorNode::setLeft(_ISTD Ptr<iASTNode> leftData)
 {
-	left = leftData;
+	this->left = leftData;
 	return this;
 }
 
 _ISTD Ptr<iATSTernaryOperatorNode> iATSTernaryOperatorNode::setMiddle(_ISTD Ptr<iASTNode> middleData)
 {
-	middle = middleData;
+	this->middle = middleData;
 	return this;
 }
 
 _ISTD Ptr<iATSTernaryOperatorNode> iATSTernaryOperatorNode::setRight(_ISTD Ptr<iASTNode> rightData)
 {
-	left = rightData;
+	this->left = rightData;
 	return this;
 }

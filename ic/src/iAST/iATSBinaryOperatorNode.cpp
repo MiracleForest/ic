@@ -21,22 +21,22 @@ iATSBinaryOperatorNode::~iATSBinaryOperatorNode()
 
 _ISTD Ptr<iASTNode> iATSBinaryOperatorNode::getLeft()const noexcept
 {
-	return left;
+	return this->left;
 }
 
 _ISTD Ptr<iASTNode> iATSBinaryOperatorNode::getRight()const noexcept
 {
-	return right;
+	return this->right;
 }
 
 _ISTD Ptr<iATSBinaryOperatorNode> iATSBinaryOperatorNode::setLeft(_ISTD Ptr<iASTNode> leftData)
 {
-	left = leftData;
+	this->left = leftData;
 	return this;
 }
 
 _ISTD Ptr<iATSBinaryOperatorNode> iATSBinaryOperatorNode::setRight(_ISTD Ptr<iASTNode> rightData)
 {
-	left = rightData;
+	lthis->eft = rightData;
 	return this;
 }

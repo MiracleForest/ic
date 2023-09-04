@@ -32,9 +32,9 @@ SPACE(i)
 			{
 				using istring = _ISTDTEXT istring;
 
-			private:
+			public:
 
-				_ISTD int64 _data;
+				_ISTD int64 data;
 
 			public:
 

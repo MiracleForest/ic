@@ -18,13 +18,13 @@ iASTStringLiteralNode::~iASTStringLiteralNode()
 }
 
 
-[[nodiscard]] auto iASTStringLiteralNode::get()const noexcept->istring
+auto iASTStringLiteralNode::get()const noexcept->istring
 {
-	return _data;
+	return this->data;
 }
 
 _ISTD Ptr<iASTStringLiteralNode> iASTStringLiteralNode::set(CRef<istring> data)
 {
-	_data = data;
+	this->data = data;
 	return this;
 }

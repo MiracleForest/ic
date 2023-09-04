@@ -19,7 +19,7 @@ iATSUnaryOperatorNode::~iATSUnaryOperatorNode()
 
 _ISTD Ptr<iASTNode> iATSUnaryOperatorNode::get()const noexcept
 {
-	return data;
+	return this->data;
 }
 
 _ISTD Ptr<iATSUnaryOperatorNode> iATSUnaryOperatorNode::set(_ISTD Ptr<iASTNode> data)
