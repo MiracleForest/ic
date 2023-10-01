@@ -3,11 +3,11 @@ using namespace i::icSystem::AST;
 using namespace i::core;
 
 iATSIntegerLiteralNode::iATSIntegerLiteralNode()
-	:_data(0)
+	:data(0)
 { }
 
 iATSIntegerLiteralNode::iATSIntegerLiteralNode(_ISTD int64 data)
-	:_data(data)
+	:data(data)
 { }
 
 iATSIntegerLiteralNode::~iATSIntegerLiteralNode()

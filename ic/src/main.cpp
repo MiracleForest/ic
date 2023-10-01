@@ -70,7 +70,7 @@ iMain(_p_start)
 
 	//for (;;)
 	//{
-	//	Ptr<icSystem::AST::iASTGlobalAreaNode> astnode = new icSystem::AST::iASTGlobalAreaNode;
+	//	Ptr<i::icSystem::AST::iASTGlobalAreaNode> astnode = new i::icSystem::AST::iASTGlobalAreaNode;
 	//	logger.info("hasTag:{}", astnode->hasTag("1"));
 	//	logger.info("addTag:{}", astnode->addTag("1")->getAllTag()[0]);
 	//	logger.info("getTagIndex:{}", astnode->getTagIndex("1"));
@@ -81,10 +81,10 @@ iMain(_p_start)
 	//	logger.info("additionalNode:{}", astnode->setAdditionalNode()->additionalNode);
 	//	logger.info("name:{}", astnode->name);
 	//	logger.info("type:{}", (int)astnode->type);
-	//	Ptr<icSystem::AST::iASTStringLiteralNode> test_1 = new icSystem::AST::iASTStringLiteralNode(1);
-	//	Ptr<icSystem::AST::iASTStringLiteralNode> test_2 = new icSystem::AST::iASTStringLiteralNode(2);
-	//	Ptr<icSystem::AST::iASTStringLiteralNode> test_3 = new icSystem::AST::iASTStringLiteralNode(3);
-	//	Ptr<icSystem::AST::iASTStringLiteralNode> test_4 = new icSystem::AST::iASTStringLiteralNode(4);
+	//	Ptr<i::icSystem::AST::iASTStringLiteralNode> test_1 = new i::icSystem::AST::iASTStringLiteralNode(1);
+	//	Ptr<i::icSystem::AST::iASTStringLiteralNode> test_2 = new i::icSystem::AST::iASTStringLiteralNode(2);
+	//	Ptr<i::icSystem::AST::iASTStringLiteralNode> test_3 = new i::icSystem::AST::iASTStringLiteralNode(3);
+	//	Ptr<i::icSystem::AST::iASTStringLiteralNode> test_4 = new i::icSystem::AST::iASTStringLiteralNode(4);
 	//	astnode->add(test_1);
 	//	astnode->add(test_2);
 	//	astnode->add(test_3);
@@ -92,34 +92,34 @@ iMain(_p_start)
 	//	logger.info("getCount:{}", astnode->getCount());
 	//	astnode->next();
 	//	logger.info("getIndex:{}", astnode->getIndex());
-	//	if (auto buf = astnode->get(); buf->type == icSystem::AST::iASTNodeType::iASTStringLiteralNode)
+	//	if (auto buf = astnode->get(); buf->type == i::icSystem::AST::iASTNodeType::iASTStringLiteralNode)
 	//	{
-	//		Ptr<icSystem::AST::iASTStringLiteralNode> b = (Ptr<icSystem::AST::iASTStringLiteralNode>)buf;
+	//		Ptr<i::icSystem::AST::iASTStringLiteralNode> b = (Ptr<i::icSystem::AST::iASTStringLiteralNode>)buf;
 	//		istring test2 = b->get();
 	//		logger.info("test2:{}", test2);
 	//		logger.info("getIndex:{}", astnode->getIndex());
 	//	}
 	//	astnode->remove();
 	//	//astnode->setIndex(2);
-	//	if (auto buf = astnode->get(); buf->type == icSystem::AST::iASTNodeType::iASTStringLiteralNode)
+	//	if (auto buf = astnode->get(); buf->type == i::icSystem::AST::iASTNodeType::iASTStringLiteralNode)
 	//	{
-	//		Ptr<icSystem::AST::iASTStringLiteralNode> b = (Ptr<icSystem::AST::iASTStringLiteralNode>)buf;
+	//		Ptr<i::icSystem::AST::iASTStringLiteralNode> b = (Ptr<i::icSystem::AST::iASTStringLiteralNode>)buf;
 	//		istring test2 = b->get();
 	//		logger.info("test2:{}", test2);
 	//		logger.info("getCount:{}", astnode->getCount());
 	//	}
 
-	//	_ISTD basic::iBasic<icSystem::AST::iASTStringLiteralNode>::destroy(test_1);
-	//	_ISTD basic::iBasic<icSystem::AST::iASTStringLiteralNode>::destroy(test_2);
-	//	_ISTD basic::iBasic<icSystem::AST::iASTStringLiteralNode>::destroy(test_3);
-	//	_ISTD basic::iBasic<icSystem::AST::iASTStringLiteralNode>::destroy(test_4);
-	//	_ISTD basic::iBasic<icSystem::AST::iASTGlobalAreaNode>::destroy(astnode);
-	//	delete test_1;
-	//	delete test_2;
-	//	delete test_3;
-	//	delete test_4;
-	//	delete astnode;
+		//_ISTD basic::iBasic<i::icSystem::AST::iASTStringLiteralNode>::destroy(test_1);
+		//_ISTD basic::iBasic<i::icSystem::AST::iASTStringLiteralNode>::destroy(test_2);
+		//_ISTD basic::iBasic<i::icSystem::AST::iASTStringLiteralNode>::destroy(test_3);
+		//_ISTD basic::iBasic<i::icSystem::AST::iASTStringLiteralNode>::destroy(test_4);
+		//_ISTD basic::iBasic<i::icSystem::AST::iASTGlobalAreaNode>::destroy(astnode);
+		//delete test_1;
+		//delete test_2;
+		//delete test_3;
+		//delete test_4;
+		//delete astnode;
 	//}
-	return _ISTD iexception::error::noError();
+	//return _ISTD iexception::error::noError();
 }
 iMainEnd

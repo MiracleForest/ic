@@ -36,7 +36,8 @@ SPACE(i)
 				iATSIntegerLiteralNode,
 				iATSBinaryOperatorNode,
 				iATSTernaryOperatorNode,
-				iATSUnaryOperatorNode
+				iATSUnaryOperatorNode,
+				iATSTypeNode
 			};
 
 

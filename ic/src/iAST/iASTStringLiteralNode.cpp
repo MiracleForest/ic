@@ -3,12 +3,12 @@ using namespace i::icSystem::AST;
 using namespace i::core;
 
 iASTStringLiteralNode::iASTStringLiteralNode()
-	:_data("")
+	:data("")
 	, iASTNode(nullptr, iASTNodeType::iASTStringLiteralNode, "iASTStringLiteralNode", 0, false, {})
 { }
 
 iASTStringLiteralNode::iASTStringLiteralNode(istring data)
-	:_data(data)
+	:data(data)
 	, iASTNode(nullptr, iASTNodeType::iASTStringLiteralNode, "iASTStringLiteralNode", 0, false, {})
 { }
 

@@ -37,6 +37,6 @@ _ISTD Ptr<iATSBinaryOperatorNode> iATSBinaryOperatorNode::setLeft(_ISTD Ptr<iAST
 
 _ISTD Ptr<iATSBinaryOperatorNode> iATSBinaryOperatorNode::setRight(_ISTD Ptr<iASTNode> rightData)
 {
-	lthis->eft = rightData;
+	this->left = rightData;
 	return this;
 }
