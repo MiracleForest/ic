@@ -72,60 +72,59 @@ SPACE(i)
 
 			public:
 
-#define ccolor(r,g,b) type::iColor::getConsoleColoriString({r,g,b})
 
 				template<class...Args>
-				void info(istring fmtstr, RRef<Args>...args)
+				void info(CRef<istring> fmtstr, RRef<Args>...args)
 				{
 					_lock.lock();
 					iConsole::writeLine(
 						istring::format("{}{}{} Info {}[{}]:{}{}{}",
-							ccolor(173, 216, 230),
+							COLORCAST(173, 216, 230),
 							getTimeNow(),
-							ccolor(148, 230, 207),
-							ccolor(204, 204, 204),
+							COLORCAST(148, 230, 207),
+							COLORCAST(204, 204, 204),
 							_title,
-							ccolor(164, 164, 164),
+							COLORCAST(164, 164, 164),
 							fmtstr,
-							ccolor(255, 255, 255)
+							COLORCAST(255, 255, 255)
 						), std::forward<Args>(args)...);
 					output2file("[" + getTimeNow() + istring::format("][Info]:" + fmtstr, std::forward<Args>(args)...));
 					_lock.unlock();
 				}
 
 				template<class...Args>
-				void warn(istring fmtstr, RRef<Args>...args)
+				void warn(CRef<istring> fmtstr, RRef<Args>...args)
 				{
 					_lock.lock();
 					iConsole::writeLine(
 						istring::format("{}{}{} Warn {}[{}]:{}{}{}",
-							ccolor(242, 242, 205),
+							COLORCAST(242, 242, 205),
 							getTimeNow(),
-							ccolor(242, 220, 100),
-							ccolor(208, 242, 146),
+							COLORCAST(242, 220, 100),
+							COLORCAST(208, 242, 146),
 							_title,
-							ccolor(242, 239, 26),
+							COLORCAST(242, 239, 26),
 							fmtstr,
-							ccolor(255, 255, 255)
+							COLORCAST(255, 255, 255)
 						), std::forward<Args>(args)...);
 					output2file("[" + getTimeNow() + istring::format("][Warn]:" + fmtstr, std::forward<Args>(args)...));
 					_lock.unlock();
 				}
 
 				template<class...Args>
-				void error(istring fmtstr, RRef<Args>...args)
+				void error(CRef<istring> fmtstr, RRef<Args>...args)
 				{
 					_lock.lock();
 					iConsole::writeLine(
 						istring::format("{}{}{} Error {}[{}]:{}{}{}",
-							ccolor({ 242, 180, 180 }),
+							COLORCAST({ 242, 180, 180 }),
 							getTimeNow(),
-							ccolor({ 242, 68, 108 }),
-							ccolor({ 242, 122, 122 }),
+							COLORCAST({ 242, 68, 108 }),
+							COLORCAST({ 242, 122, 122 }),
 							_title,
-							ccolor({ 242, 72, 72 }),
+							COLORCAST({ 242, 72, 72 }),
 							fmtstr,
-							ccolor({ 255, 255, 255 })
+							COLORCAST({ 255, 255, 255 })
 						), std::forward<Args>(args)...);
 					output2file(
 						"[" + getTimeNow() + istring::format("][Error]:" + fmtstr, std::forward<Args>(args)...));
@@ -133,7 +132,7 @@ SPACE(i)
 				}
 
 				template<class...Args>
-				void note(istring fmtstr, RRef<Args>...args)
+				void note(CRef<istring> fmtstr, RRef<Args>...args)
 				{
 					_lock.lock();
 					type::iTime t;
@@ -141,75 +140,75 @@ SPACE(i)
 					auto time = t.data();
 
 					iConsole::writeLine(
-						istring::sumString(ccolor(255, 170, 255),
+						istring::sumString(COLORCAST(255, 170, 255),
 							time.years,
-							ccolor(240, 24, 28),
+							COLORCAST(240, 24, 28),
 							".",
-							ccolor(170, 255, 255),
+							COLORCAST(170, 255, 255),
 							time.months,
-							ccolor(240, 24, 28),
+							COLORCAST(240, 24, 28),
 							".",
-							ccolor(170, 170, 255),
+							COLORCAST(170, 170, 255),
 							time.days,
-							ccolor(240, 24, 28),
+							COLORCAST(240, 24, 28),
 							".",
-							ccolor(134, 255, 217),
+							COLORCAST(134, 255, 217),
 							time.hours,
-							ccolor(240, 24, 28),
+							COLORCAST(240, 24, 28),
 							":",
-							ccolor(255, 105, 252),
+							COLORCAST(255, 105, 252),
 							time.minutes,
-							ccolor(240, 24, 28),
+							COLORCAST(240, 24, 28),
 							":",
-							ccolor(255, 240, 82),
+							COLORCAST(255, 240, 82),
 							time.seconds,
-							ccolor(240, 24, 28),
+							COLORCAST(240, 24, 28),
 							":",
-							ccolor(39, 215, 231),
+							COLORCAST(39, 215, 231),
 							time.milliseconds,
-							ccolor(255, 170, 255),
+							COLORCAST(255, 170, 255),
 							" N",
-							ccolor(69, 255, 240),
+							COLORCAST(69, 255, 240),
 							"o",
-							ccolor(255, 255, 0),
+							COLORCAST(255, 255, 0),
 							"t",
-							ccolor(67, 236, 62),
+							COLORCAST(67, 236, 62),
 							"e ",
-							ccolor(156, 248, 255),
+							COLORCAST(156, 248, 255),
 							"[",
-							ccolor(228, 131, 255),
+							COLORCAST(228, 131, 255),
 							_title,
-							ccolor(156, 248, 255),
+							COLORCAST(156, 248, 255),
 							"]",
-							ccolor(240, 24, 28),
+							COLORCAST(240, 24, 28),
 							":",
-							ccolor(137, 221, 255),
+							COLORCAST(137, 221, 255),
 							fmtstr,
-							ccolor(255, 255, 255)
+							COLORCAST(255, 255, 255)
 						), std::forward<Args>(args)...);
 					output2file("[" + getTimeNow() + istring::format("][Note]:" + fmtstr, std::forward<Args>(args)...));
 					_lock.unlock();
 				}
 
 				template<class...Args>
-				void debug(istring fmtstr, std::source_location sl, RRef<Args>...args)
+				void debug(CRef<istring> fmtstr, std::source_location sl, RRef<Args>...args)
 				{
 					_lock.lock();
 					iConsole::writeLine(
-						istring::sumString(ccolor({ 168, 255, 204 }),
+						istring::sumString(COLORCAST({ 168, 255, 204 }),
 							getTimeNow(),
-							ccolor(0, 255, 0),
+							COLORCAST(0, 255, 0),
 							" Debug ",
-							ccolor(156, 248, 255),
+							COLORCAST(156, 248, 255),
 #ifdef __WINDOWS__
 							"[", _title, "][File:", _ISTDTEXT iEncoding::wideChar2ANSI(_ISTDTEXT iEncoding::UTF82wideChar(sl.file_name())), ":", sl.line(), ",",
 							sl.column(), "][Func:", sl.function_name(), "]:",
 #else//^^^^__WINDOWS__^^^^
 							"[", _title, "][File:", sl.file_name(), ":", sl.line(), ",", sl.column(), "][Func:", sl.function_name(), "]:",
 #endif//^^^^!__WINDOWS__^^^^
-							ccolor(131, 255, 162),
+							COLORCAST(131, 255, 162),
 							fmtstr,
-							ccolor(255, 255, 255)
+							COLORCAST(255, 255, 255)
 						), std::forward<Args>(args)...);
 					output2file(istring::sumString("[", getTimeNow(), "][File:", sl.file_name(), ":", sl.line(), ",",
 						sl.column(), "][Func:", sl.function_name(), "]",
@@ -218,11 +217,9 @@ SPACE(i)
 					_lock.unlock();
 				}
 
-#undef ccolor
-
 			public:
 
-				void output2file(istring istr);
+				void output2file(CRef<istring> istr);
 
 			public:
 

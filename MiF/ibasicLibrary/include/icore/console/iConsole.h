@@ -147,6 +147,10 @@ SPACE(i)
 
 #endif//^^^^__WINDOWS__^^^^
 
+                static inline void resetTextColor()
+                {
+                    write("\033[0m");
+                }
             private:
             }; //class iConsole
         } //SPACE(console)

@@ -35,7 +35,7 @@ SPACE(i)
                 ushort g = 0;
                 ushort b = 0;
 
-                static iRGB makeiRGB(ushort r, ushort g, ushort b)
+                static inline iRGB makeiRGB(ushort r, ushort g, ushort b)
                 {
                     iRGB rgb{ r, g, b };
                     return rgb;
@@ -59,7 +59,7 @@ SPACE(i)
                 iRGB rgb{};
                 ushort a = 255;
 
-                static iRGBA makeiRGBA(ushort r, ushort g, ushort b, ushort a = 255)
+                static inline iRGBA makeiRGBA(ushort r, ushort g, ushort b, ushort a = 255)
                 {
                     iRGBA rgba;
                     rgba.rgb = { r, g, b };
@@ -67,7 +67,7 @@ SPACE(i)
                     return rgba;
                 }
 
-                static iRGBA makeiRGBA(iRGB rgb, ushort a = 255)
+                static inline iRGBA makeiRGBA(iRGB rgb, ushort a = 255)
                 {
                     iRGBA rgba;
                     rgba.rgb = rgb;
@@ -84,14 +84,14 @@ SPACE(i)
                 iHSL hsl{};
                 ushort a = 255;
 
-                static iHSLA makeiHSLA(float h, float s, float l, ushort a = 255)
+                static inline iHSLA makeiHSLA(float h, float s, float l, ushort a = 255)
                 {
                     iHSLA hsla;
                     hsla.hsl = { h,s,l };
                     hsla.a = a;
                     return hsla;
                 }
-                static iHSLA makeiHSLA(iHSL hsl, ushort a = 255)
+                static inline iHSLA makeiHSLA(iHSL hsl, ushort a = 255)
                 {
                     iHSLA hsla;
                     hsla.hsl = hsl;
@@ -328,11 +328,11 @@ SPACE(i)
 
                 static std::wstring getConsoleColoriString(CRef<iColor> _color);
 
-                static double sRGBFromLinear(double l);
+                static constexpr double sRGBFromLinear(double l);
 
-                static double linearFromSRGB(double s);
+                static constexpr double linearFromSRGB(double s);
 
-                static double yfromRGB(double r, double g, double b);
+                static constexpr double yfromRGB(double r, double g, double b);
 
             public:
                 static iHSL iRGB2iSHL(iRGB rgb);
@@ -344,6 +344,7 @@ SPACE(i)
                 iRGB _rgb;
             };//class iColor 
 
+#define COLORCAST(r,g,b) "\033[38;2;" #r ";" #g ";" #b "m"
 
         }//SPACE(type)
     }//SPACE(core)
