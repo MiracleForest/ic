@@ -91,8 +91,6 @@ set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEB
 add_executable(ic ${SRC_FILES} ${THIRD_PARTY_SRC_FILES} ${SRC_FILES_EXE})
 add_library(libic SHARED ${SRC_FILES} ${THIRD_PARTY_SRC_FILES})
 
-# STATIC
-# SHARED
 target_link_libraries(ic iBasicLibrary_debug)
 target_link_libraries(libic iBasicLibrary_debug)
 

@@ -2,8 +2,8 @@
 #include <icore/console/iconsole.h>
 #include <icore/console/iLogger.h>
 #include <icore/type/iVector.h>
-#include <vector>
 #include <iostream>
+#include <vector>
 using namespace i::icSystem::AST;
 using namespace i::core;
 

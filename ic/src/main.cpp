@@ -1,16 +1,16 @@
-#include <icore/family/ifamily.h>
 #include <icore/console/iconsole.h>
 #include <icore/console/iLogger.h>
-#include <icore/exception/error.h>
 #include <icore/data/text/istring.h>
+#include <icore/exception/error.h>
+#include <icore/family/ifamily.h>
 
 #include "../include/iLexer/iLexer.h"
 #include "../include/iParse/iParser.h"
 
-#include <iostream>
-#include <fstream>
-#include <streambuf>
 #include <chrono>
+#include <fstream>
+#include <iostream>
+#include <streambuf>
 using namespace std::chrono;
 using iEncoding = _ISTDTEXT iEncoding;
 

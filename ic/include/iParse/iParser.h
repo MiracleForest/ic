@@ -13,13 +13,13 @@
  */
 #pragma once
 
-#include <icore/family/imacrofamily.h>
-#include <icore/exception/error.h>
-#include <icore/data/text/istring.h>
+#include "../family/iicfamily.h"
+#include "../iAST/iASTGlobalAreaNode.h"
 #include <icore/console/iconsole.h>
 #include <icore/console/iLogger.h>
-#include "../iAST/iASTGlobalAreaNode.h"
-#include "../family/iicfamily.h"
+#include <icore/data/text/istring.h>
+#include <icore/exception/error.h>
+#include <icore/family/imacrofamily.h>
 
 SPACE(i)
 {
