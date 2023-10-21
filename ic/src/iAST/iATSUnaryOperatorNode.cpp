@@ -1,5 +1,5 @@
 #include "../../include/iAST/iATSUnaryOperatorNode.h"
-using namespace i::icSystem::AST;
+using namespace i::icFamily::AST;
 using namespace i::core;
 
 iATSUnaryOperatorNode::iATSUnaryOperatorNode()
@@ -7,22 +7,22 @@ iATSUnaryOperatorNode::iATSUnaryOperatorNode()
 	, iASTNode(nullptr, iASTNodeType::iATSUnaryOperatorNode, "iATSUnaryOperatorNode", 0, false, {})
 { }
 
-iATSUnaryOperatorNode::iATSUnaryOperatorNode(_ISTD Ptr<iASTNode> data)
+iATSUnaryOperatorNode::iATSUnaryOperatorNode(Ptr<iASTNode> data)
 	:data(data)
 	, iASTNode(nullptr, iASTNodeType::iATSUnaryOperatorNode, "iATSUnaryOperatorNode", 0, false, {})
 { }
 
 iATSUnaryOperatorNode::~iATSUnaryOperatorNode()
 {
-	//_ISTD basic::iBasic<iASTNode>::destroy(parent);
+	//basic::iBasic<iASTNode>::destroy(parent);
 }
 
-_ISTD Ptr<iASTNode> iATSUnaryOperatorNode::get()const noexcept
+Ptr<iASTNode> iATSUnaryOperatorNode::get()const noexcept
 {
 	return this->data;
 }
 
-_ISTD Ptr<iATSUnaryOperatorNode> iATSUnaryOperatorNode::set(_ISTD Ptr<iASTNode> data)
+Ptr<iATSUnaryOperatorNode> iATSUnaryOperatorNode::set(Ptr<iASTNode> data)
 {
 	this->data = data;
 	return this;

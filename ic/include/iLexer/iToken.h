@@ -23,7 +23,7 @@
 SPACE(i)
 {
 
-	SPACE(icSystem)
+	SPACE(icFamily)
 	{
 
 #ifdef EOF
@@ -52,18 +52,22 @@ SPACE(i)
 
 			iToken();
 
-			iToken(iTokenID token_id, istring text);
+			iToken(iTokenID token_id, int currentLine, istring text);
+
+			iToken(_ISTD CRef<iToken> itoken);
 
 		public:
 
 			//获取文本
-			istring getText()const;
+			istring getText()const noexcept;
+
+			//获取编号
+			iTokenID getID()const noexcept;
+
+			int getLine()const noexcept;
 
 			//设置文本
 			void setText(_ISTD CRef<istring> text);
-
-			//获取编号
-			iTokenID getID()const;
 
 		public:
 
@@ -77,6 +81,7 @@ SPACE(i)
 
 			istring _text;
 			iTokenID _ID;
+			int _currentLine;
 
 		};//iToken
 

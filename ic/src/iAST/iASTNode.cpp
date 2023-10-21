@@ -4,7 +4,7 @@
 #include <icore/type/iVector.h>
 #include <iostream>
 #include <vector>
-using namespace i::icSystem::AST;
+using namespace i::icFamily::AST;
 using namespace i::core;
 
 iASTNode::iASTNode()
@@ -17,9 +17,9 @@ iASTNode::iASTNode()
 { }
 
 iASTNode::iASTNode(
-	_ISTD Ptr<iASTNode> parent,
+	Ptr<iASTNode> parent,
 	iASTNodeType type,
-	_ISTD CRef<istring>name,
+	CRef<istring>name,
 	int line,
 	bool additionalNode,
 	std::vector<istring> tags
@@ -43,18 +43,18 @@ iASTNode::~iASTNode()
 	//}
 }
 
-Ptr<iASTNode> iASTNode::addTag(_ISTD CRef<istring> tag)
+Ptr<iASTNode> iASTNode::addTag(CRef<istring> tag)
 {
 	tags.push_back(tag);
 	return this;
 }
 
-bool iASTNode::hasTag(_ISTD CRef<istring> tag)const
+bool iASTNode::hasTag(CRef<istring> tag)const
 {
-	return _ISTD vector::contains(tags, tag);
+	return  vector::contains(tags, tag);
 }
 
-int iASTNode::getTagIndex(_ISTD CRef<istring> tag)const
+int iASTNode::getTagIndex(CRef<istring> tag)const
 {
 	if (!hasTag(tag))
 	{
@@ -71,7 +71,7 @@ int iASTNode::getTagIndex(_ISTD CRef<istring> tag)const
 	return -1;
 }
 
-bool iASTNode::removeTag(_ISTD CRef<istring> tag)
+bool iASTNode::removeTag(CRef<istring> tag)
 {
 	if (!hasTag(tag))
 	{

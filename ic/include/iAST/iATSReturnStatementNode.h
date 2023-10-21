@@ -1,12 +1,12 @@
 /*
  *
- * Copyright(C) 2022 MiracleForest Studio. All Rights Reserved.
+ * Copyright(C) 2023 MiracleForest Studio. All Rights Reserved.
  *
- * @文件名:iASTStringLiteralNode.h
- * @创建时间:2022.7.21.17:42
+ * @文件名:iATSReturnStatementNode.h
+ * @创建时间:2023.10.21.16:41
  * @创建者:Lovelylavender4
  * -----------------------------------------------------------------------------
- * iASTStringLiteralNode
+ * iATSReturnStatementNode
  * -----------------------------------------------------------------------------
  * 如果你发现了bug，你可以去Github或邮箱(MiracleForest@Outlook.com)反馈给我们！
  * 我们一定会努力做得更好的！
@@ -27,28 +27,27 @@ SPACE(i)
 	{
 		SPACE(AST)
 		{
-			class ICAPI iASTStringLiteralNode
+			class ICAPI iATSReturnStatementNode
 				:public iASTNode
 			{
 				using istring = _ISTDTEXT istring;
 
 			public:
 
-				istring data;
+				_ISTD Ptr<iASTNode> value;
 
 			public:
 
-				iASTStringLiteralNode();
+				iATSReturnStatementNode();
 
-				iASTStringLiteralNode(istring data);
+				iATSReturnStatementNode(_ISTD  Ptr<iASTNode> value);
 
-				~iASTStringLiteralNode();
+				~iATSReturnStatementNode();
 
 			public:
 
-				[[nodiscard]] istring get()const noexcept;
-
-				_ISTD Ptr<iASTStringLiteralNode> set(_ISTD CRef<istring> data);
+				[[nodiscard]] _ISTD  Ptr<iASTNode> getReturnValue()const noexcept;
+				_ISTD  Ptr<iATSReturnStatementNode> setReturnValue(_ISTD  Ptr<iASTNode> pvalue);
 
 			};
 

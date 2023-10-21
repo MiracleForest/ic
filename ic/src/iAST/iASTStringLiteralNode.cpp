@@ -1,5 +1,5 @@
 #include "../../include/iAST/iASTStringLiteralNode.h"
-using namespace i::icSystem::AST;
+using namespace i::icFamily::AST;
 using namespace i::core;
 
 iASTStringLiteralNode::iASTStringLiteralNode()
@@ -14,7 +14,7 @@ iASTStringLiteralNode::iASTStringLiteralNode(istring data)
 
 iASTStringLiteralNode::~iASTStringLiteralNode()
 {
-	//_ISTD basic::iBasic<iASTNode>::destroy(parent);
+	//basic::iBasic<iASTNode>::destroy(parent);
 }
 
 
@@ -23,7 +23,7 @@ auto iASTStringLiteralNode::get()const noexcept->istring
 	return this->data;
 }
 
-_ISTD Ptr<iASTStringLiteralNode> iASTStringLiteralNode::set(CRef<istring> data)
+Ptr<iASTStringLiteralNode> iASTStringLiteralNode::set(CRef<istring> data)
 {
 	this->data = data;
 	return this;

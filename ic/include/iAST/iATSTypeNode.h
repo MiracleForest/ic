@@ -23,7 +23,7 @@
 
 SPACE(i)
 {
-	SPACE(icSystem)
+	SPACE(icFamily)
 	{
 		SPACE(AST)
 		{
@@ -32,6 +32,7 @@ SPACE(i)
 				:public iASTNode
 			{
 				using istring = _ISTDTEXT istring;
+			public:
 
 				enum class TypeNodeType
 					:int
@@ -41,6 +42,7 @@ SPACE(i)
 				};
 
 			public:
+
 				TypeNodeType type;
 				istring value;
 
@@ -58,7 +60,7 @@ SPACE(i)
 				[[nodiscard]] istring getValue()const noexcept;
 
 				_ISTD Ptr<iATSTypeNode> setType(TypeNodeType typeData);
-				_ISTD Ptr<iATSTypeNode> setValue(istring valueData);
+				 _ISTD Ptr<iATSTypeNode> setValue(istring valueData);
 			};
 
 		}

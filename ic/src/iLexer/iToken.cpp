@@ -1,15 +1,24 @@
 #include "../../include/iLexer/iToken.h"
-using namespace i::icSystem;
-using uchar = i::core::uchar;
-using uint = i::core::uint;
+using namespace i::icFamily;
+using namespace i::core;
 using istring = _ISTDTEXT istring;
 
-iToken::iToken(iTokenID token_id, istring text)
-	:_ID(token_id), _text(text)
+iToken::iToken(iTokenID token_id, int currentLine, istring text)
+	: _ID(token_id)
+	, _text(text)
+	, _currentLine(currentLine)
 { }
 
 iToken::iToken()
-	:_ID(iTokenID::Unk), _text("")
+	: _ID(iTokenID::Unk)
+	, _text("")
+	, _currentLine(0)
+{ }
+
+iToken::iToken(CRef<iToken> itoken)
+	: _ID(itoken._ID)
+	, _text(itoken._text)
+	, _currentLine(itoken._currentLine)
 { }
 
 istring iToken::getID2String()const
@@ -49,7 +58,7 @@ istring iToken::getID2String()const
 	}
 }
 
-istring iToken::getText()const
+istring iToken::getText()const noexcept
 {
 	return this->_text;
 }
@@ -59,7 +68,7 @@ void iToken::setText(_ISTD CRef<istring> text)
 	this->_text = text;
 }
 
-iTokenID iToken::getID()const
+iTokenID iToken::getID()const noexcept
 {
 	return this->_ID;
 }
@@ -69,4 +78,9 @@ _ISTD Ref<iToken> iToken::operator=(_ISTD CRef<iToken> t)
 	this->_ID = t.getID();
 	this->_text = t.getText();
 	return *this;
+}
+
+int iToken::getLine()const noexcept
+{
+	return _currentLine;
 }

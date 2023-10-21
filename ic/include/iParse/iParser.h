@@ -23,7 +23,7 @@
 
 SPACE(i)
 {
-	SPACE(icSystem)
+	SPACE(icFamily)
 	{ 
 		class ICAPI iParser
 		{

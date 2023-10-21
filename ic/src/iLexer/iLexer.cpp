@@ -1,6 +1,6 @@
 #include "../../include/iLexer/iLexer.h"
 #include <icore/type/iVector.h>
-using namespace i::icSystem;
+using namespace i::icFamily;
 using uchar = _ISTD uchar;
 using uint = _ISTD uint;
 using istring = _ISTDTEXT istring;
@@ -9,6 +9,9 @@ using iLogger = _ISTD io::iLogger;
 
 iLexer::iLexer(istring inputCode)
 	:_inputCode(inputCode)
+	, _currentLine(0)
+	, _pos(0)
+	, _len(_inputCode.length())
 { }
 
 iToken iLexer::read()
@@ -20,7 +23,8 @@ iToken iLexer::read()
 		if (_inputCode[_pos] == '\n')
 		{
 			_pos++;
-			return iToken(iTokenID::EOL, "");
+			_currentLine++;
+			return iToken(iTokenID::EOL, _currentLine, "");
 		}
 
 		if (result = readString(_pos))
@@ -29,7 +33,7 @@ iToken iLexer::read()
 			_pos += result;
 			rtstr = rtstr.substr(1);
 			rtstr = rtstr.substr(0, rtstr.size() - 1);
-			return iToken(iTokenID::String, rtstr);
+			return iToken(iTokenID::String, _currentLine, rtstr);
 		}
 
 		if (result = readNumber(_pos))
@@ -37,7 +41,7 @@ iToken iLexer::read()
 			auto rtstr = _inputCode.substr(_pos, result);
 			_pos += result;
 			rtstr.replace("'", "");
-			return iToken(iTokenID::Number, rtstr);
+			return iToken(iTokenID::Number, _currentLine, rtstr);
 		}
 
 		if (result = readIdentifier(_pos))
@@ -46,9 +50,9 @@ iToken iLexer::read()
 			_pos += result;
 			if (isKeyword(rtstr) == true)
 			{
-				return iToken(iTokenID::Keyword, rtstr);
+				return iToken(iTokenID::Keyword, _currentLine, rtstr);
 			}
-			return iToken(iTokenID::Identifier, rtstr);
+			return iToken(iTokenID::Identifier, _currentLine, rtstr);
 		}
 
 		if (result = readSpace(_pos))
@@ -67,18 +71,18 @@ iToken iLexer::read()
 		{
 			auto rtstr = _inputCode.substr(_pos, result);
 			_pos += result;
-			return iToken(iTokenID::Operator, rtstr);
+			return iToken(iTokenID::Operator, _currentLine, rtstr);
 		}
 		else
 		{
 			istring rtstr = _inputCode.substr(_pos, 1);
 			_pos++;
-			return iToken(iTokenID::Unk, rtstr);
+			return iToken(iTokenID::Unk, _currentLine, rtstr);
 		}
 	}
 
 	//未找到可用Token，返回EOF
-	return iToken(iTokenID::EOF, "");
+	return iToken(iTokenID::EOF, _currentLine, "");
 }
 
 
@@ -104,6 +108,7 @@ std::vector<iToken> iLexer::mergeConsecutiveStringsToken(_ISTD CRef<std::vector<
 
 	iTokenID currentID = input[0].getID();
 	istring currentText = input[0].getText();
+	int currentLine = input[0].getLine();
 	int count = 1;
 
 	for (int i = 1; i < input.size(); i++)
@@ -117,11 +122,11 @@ std::vector<iToken> iLexer::mergeConsecutiveStringsToken(_ISTD CRef<std::vector<
 		{
 			if (count > 1)
 			{
-				result.push_back(iToken(currentID, currentText));
+				result.push_back(iToken(currentID, currentLine, currentText));
 			}
 			else
 			{
-				result.push_back(iToken(currentID, currentText));
+				result.push_back(iToken(currentID, currentLine, currentText));
 			}
 
 			currentID = input[i].getID();
@@ -133,11 +138,11 @@ std::vector<iToken> iLexer::mergeConsecutiveStringsToken(_ISTD CRef<std::vector<
 
 	if (count > 1)
 	{
-		result.push_back(iToken(currentID, currentText));
+		result.push_back(iToken(currentID, currentLine, currentText));
 	}
 	else
 	{
-		result.push_back(iToken(currentID, currentText));
+		result.push_back(iToken(currentID, currentLine, currentText));
 	}
 
 	return result;
@@ -220,7 +225,7 @@ int iLexer::readDecNumber(int pos)
 {
 	int result = 0;
 
-	while (pos + result < _inputCode.length() 
+	while (pos + result < _inputCode.length()
 		&& ('0' <= _inputCode[pos + result] && _inputCode[pos + result] <= '9')
 		|| '\'' == _inputCode[pos + result])
 	{

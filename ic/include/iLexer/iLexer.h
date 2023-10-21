@@ -24,7 +24,7 @@
 
 SPACE(i)
 {
-	SPACE(icSystem)
+	SPACE(icFamily)
 	{
 
 		class ICAPI iLexer
@@ -35,6 +35,7 @@ SPACE(i)
 		private:
 
 			istring _inputCode;
+
 			const std::vector<istring> _keywords =
 			{
 			"char", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64",
@@ -61,8 +62,9 @@ SPACE(i)
 			"=>","->","<=>","?=","??=","!?=","?:","!=:","==:","||","&&","::"
 			};
 
-			int _pos = 0;
-			int len = _inputCode.length();
+			int _pos;
+			int _len;
+			int _currentLine;
 
 		public:
 
@@ -80,7 +82,6 @@ SPACE(i)
 
 		protected:
 
-			/*模拟正则，每个分组判断过去，符合则返回配对长度，不符合返回0*/
 			//读取空白字符
 			int readSpace(int pos);
 

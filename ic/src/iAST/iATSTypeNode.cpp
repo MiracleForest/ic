@@ -1,5 +1,5 @@
 #include "../../include/iAST/iATSTypeNode.h"
-using namespace i::icSystem::AST;
+using namespace i::icFamily::AST;
 using namespace i::core;
 
 iATSTypeNode::iATSTypeNode()
@@ -16,7 +16,7 @@ iATSTypeNode::iATSTypeNode(TypeNodeType typeData, istring valueData)
 
 iATSTypeNode::~iATSTypeNode()
 {
-	_ISTD basic::iBasic<iASTNode>::destroy(parent);
+	basic::iBasic<iASTNode>::destroy(parent);
 }
 
 iATSTypeNode::TypeNodeType iATSTypeNode::getType()const noexcept
@@ -29,13 +29,13 @@ _ISTDTEXT istring iATSTypeNode::getValue()const noexcept
 	return this->value;
 }
 
-_ISTD Ptr<iATSTypeNode> iATSTypeNode::setType(iATSTypeNode::TypeNodeType typeData)
+Ptr<iATSTypeNode> iATSTypeNode::setType(iATSTypeNode::TypeNodeType typeData)
 {
 	this->type = typeData;
 	return this;
 }
 
-_ISTD Ptr<iATSTypeNode> iATSTypeNode::setValue(istring valueData)
+Ptr<iATSTypeNode> iATSTypeNode::setValue(istring valueData)
 {
 	this->value = valueData;
 	return this;

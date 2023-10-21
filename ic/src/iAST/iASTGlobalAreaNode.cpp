@@ -1,5 +1,5 @@
 #include "../../include/iAST/iASTGlobalAreaNode.h"
-using namespace i::icSystem::AST;
+using namespace i::icFamily::AST;
 using namespace i::core;
 
 iASTGlobalAreaNode::iASTGlobalAreaNode()
@@ -40,7 +40,7 @@ int iASTGlobalAreaNode::getIndex()const
 	return _childElementsListIndex;
 }
 
-_ISTD Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::setIndex(int index)
+Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::setIndex(int index)
 {
 	_childElementsListIndex = index;
 	return this;
@@ -82,17 +82,17 @@ Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::set(Ptr<iASTNode> node)
 	return this;
 }
 
-_ISTD Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::add(_ISTD Ptr<iASTNode> node)
+Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::add(Ptr<iASTNode> node)
 {
 	this->childElementsList.push_back(node);
 	node->setParent(this);
 	return this;
 }
 
-_ISTD Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::remove()
+Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::remove()
 {
 	std::cout << "-\n";
-	_ISTD basic::iBasic<iASTNode>::destroy(this->get());
+	basic::iBasic<iASTNode>::destroy(this->get());
 	this->childElementsList.erase(this->childElementsList.begin() + this->_childElementsListIndex);
 	_childElementsListIndex--;
 	std::cout << "--\n";

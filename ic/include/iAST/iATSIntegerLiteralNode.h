@@ -23,7 +23,7 @@
 
 SPACE(i)
 {
-	SPACE(icSystem)
+	SPACE(icFamily)
 	{
 		SPACE(AST)
 		{
@@ -48,7 +48,7 @@ SPACE(i)
 
 				[[nodiscard]] _ISTD int64 get()const noexcept;
 
-				_ISTD Ptr<iATSIntegerLiteralNode> set(_ISTD int64 data);
+				_ISTD  Ptr<iATSIntegerLiteralNode> set(_ISTD int64 data);
 			};
 
 		}

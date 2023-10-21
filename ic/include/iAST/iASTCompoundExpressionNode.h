@@ -1,12 +1,12 @@
 /*
  *
- * Copyright(C) 2022 MiracleForest Studio. All Rights Reserved.
+ * Copyright(C) 2023 MiracleForest Studio. All Rights Reserved.
  *
- * @文件名:iASTStringLiteralNode.h
- * @创建时间:2022.7.21.17:42
+ * @文件名:iASTCompoundExpressionNode.h
+ * @创建时间:2023.10.21.19:32
  * @创建者:Lovelylavender4
  * -----------------------------------------------------------------------------
- * iASTStringLiteralNode
+ * iASTCompoundExpressionNode
  * -----------------------------------------------------------------------------
  * 如果你发现了bug，你可以去Github或邮箱(MiracleForest@Outlook.com)反馈给我们！
  * 我们一定会努力做得更好的！
@@ -15,6 +15,7 @@
 
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
+#include "iATSTypeNode.h"
 #include <icore/console/iconsole.h>
 #include <icore/console/iLogger.h>
 #include <icore/data/text/istring.h>
@@ -27,28 +28,28 @@ SPACE(i)
 	{
 		SPACE(AST)
 		{
-			class ICAPI iASTStringLiteralNode
+			class ICAPI iASTCompoundExpressionNode
 				:public iASTNode
 			{
 				using istring = _ISTDTEXT istring;
 
 			public:
 
-				istring data;
+				Ptr<iASTNode> expression;
 
 			public:
 
-				iASTStringLiteralNode();
+				iASTCompoundExpressionNode();
 
-				iASTStringLiteralNode(istring data);
+				iASTCompoundExpressionNode(Ptr<iASTNode> pexpression);
 
-				~iASTStringLiteralNode();
+				~iASTCompoundExpressionNode();
 
 			public:
 
-				[[nodiscard]] istring get()const noexcept;
+				[[nodiscard]] Ptr<iASTNode> getExpression()const noexcept;
 
-				_ISTD Ptr<iASTStringLiteralNode> set(_ISTD CRef<istring> data);
+				Ptr<iASTCompoundExpressionNode> setExpression(Ptr<iASTNode> pexpression);
 
 			};
 

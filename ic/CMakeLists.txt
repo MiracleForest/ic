@@ -54,25 +54,15 @@ file(
         GLOB_RECURSE SRC_FILES
         ${PROJECT_SOURCE_DIR}/include/*.h
         ${PROJECT_SOURCE_DIR}/include/*.hpp
+
         ${PROJECT_SOURCE_DIR}/include/family/*.h
         ${PROJECT_SOURCE_DIR}/include/iLexer/*.h
-        ${PROJECT_SOURCE_DIR}/include/iLexer/*.hpp
-        ${PROJECT_SOURCE_DIR}/include/iLexer/*.inl
         ${PROJECT_SOURCE_DIR}/include/iParse/*.h
-        ${PROJECT_SOURCE_DIR}/include/iParse/*.hpp
-        ${PROJECT_SOURCE_DIR}/include/iParse/*.inl
         ${PROJECT_SOURCE_DIR}/include/iAST/*.h
-        ${PROJECT_SOURCE_DIR}/include/iAST/*.hpp
-        ${PROJECT_SOURCE_DIR}/include/iAST/*.inl
+
         ${PROJECT_SOURCE_DIR}/src/iLexer/*.cpp
-        ${PROJECT_SOURCE_DIR}/src/iLexer/*.hpp
-        ${PROJECT_SOURCE_DIR}/src/iLexer/*.h
         ${PROJECT_SOURCE_DIR}/src/iParse/*.cpp
-        ${PROJECT_SOURCE_DIR}/src/iParse/*.hpp
-        ${PROJECT_SOURCE_DIR}/src/iParse/*.h
         ${PROJECT_SOURCE_DIR}/src/iAST/*.cpp
-        ${PROJECT_SOURCE_DIR}/src/iAST/*.hpp
-        ${PROJECT_SOURCE_DIR}/src/iAST/*.h
 )
 
 file(

@@ -22,7 +22,7 @@
 
 SPACE(i)
 {
-	SPACE(icSystem)
+	SPACE(icFamily)
 	{
 		SPACE(AST)
 		{
@@ -37,7 +37,12 @@ SPACE(i)
 				iATSBinaryOperatorNode,
 				iATSTernaryOperatorNode,
 				iATSUnaryOperatorNode,
-				iATSTypeNode
+				iATSTypeNode,
+				iATSReturnStatementNode,
+				iATSVariableDefinitionNode,
+				iASTImportStatementNode,
+				iASTCompoundExpressionNode,
+				iASTForStatementNode
 			};
 
 
@@ -66,7 +71,7 @@ SPACE(i)
 
 				virtual _CSETVF2(iASTNode, _ISTD Ptr<iASTNode>, Name, name);
 
-				virtual _ISTD Ptr<iASTNode> setAdditionalNode()
+				virtual _ISTD  Ptr<iASTNode> setAdditionalNode()
 				{
 					additionalNode = true;
 					return this;
@@ -75,13 +80,13 @@ SPACE(i)
 			public:
 
 			public:
-				virtual _ISTD Ptr<iASTNode> addTag(_ISTD CRef<istring> tag);
+				virtual _ISTD  Ptr<iASTNode> addTag(_ISTD  CRef<istring> tag);
 
-				virtual bool hasTag(_ISTD CRef<istring> tag)const;
+				virtual bool hasTag(_ISTD  CRef<istring> tag)const;
 
-				virtual int getTagIndex(_ISTD CRef<istring> tag)const;
+				virtual int getTagIndex(_ISTD  CRef<istring> tag)const;
 
-				virtual bool removeTag(_ISTD CRef<istring> tag);
+				virtual bool removeTag(_ISTD  CRef<istring> tag);
 
 				virtual std::vector<istring> getAllTag()const;
 
@@ -90,9 +95,9 @@ SPACE(i)
 				iASTNode();
 
 				iASTNode(
-					_ISTD Ptr<iASTNode> parent,
+					_ISTD  Ptr<iASTNode> parent,
 					iASTNodeType type,
-					_ISTD CRef<istring>name,
+					_ISTD  CRef<istring>name,
 					int line,
 					bool additionalNode,
 					std::vector<istring> tags

@@ -35,11 +35,11 @@ iMain(_p_start)
 	inputFile.close();
 
 	using clock = std::chrono::high_resolution_clock;
-	std::vector<i::icSystem::iToken> tokens;
+	std::vector<i::icFamily::iToken> tokens;
 
 	auto t1 = clock::now();//计时开始
 
-	i::icSystem::iLexer lexer(inputCode);
+	i::icFamily::iLexer lexer(inputCode);
 	tokens = lexer.parse();
 	auto t2 = clock::now();//计时结束
 	tokens = lexer.mergeConsecutiveStringsToken(tokens);
@@ -47,13 +47,13 @@ iMain(_p_start)
 	auto t3 = clock::now();//计时开始
 	for (int i = 0; i < tokens.size(); i++)
 	{
-		if (tokens[i].getID() != i::icSystem::iTokenID::Unk)
+		if (tokens[i].getID() != i::icFamily::iTokenID::Unk)
 		{
-			logger.info("<{}> \t{}", tokens[i].getID2String(), iEncoding::UTF82ANSI(tokens[i].getText().data()));
+			logger.info("<{},{}> \t{}", tokens[i].getID2String(), tokens[i].getLine(), iEncoding::UTF82ANSI(tokens[i].getText().data()));
 		}
 		else
 		{
-			logger.warn("<{}> \t{}", tokens[i].getID2String(), iEncoding::UTF82ANSI(tokens[i].getText().data()));
+			logger.warn("<{},{}> \t{}", tokens[i].getID2String(), tokens[i].getLine(), iEncoding::UTF82ANSI(tokens[i].getText().data()));
 		}
 	}
 	auto t4 = clock::now();//计时结束
@@ -120,6 +120,6 @@ iMain(_p_start)
 		//delete test_4;
 		//delete astnode;
 	//}
-	//return _ISTD iexception::error::noError();
+	return _ISTD iexception::error::noError();
 }
 iMainEnd

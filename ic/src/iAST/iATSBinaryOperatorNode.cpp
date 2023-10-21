@@ -1,5 +1,5 @@
 #include "../../include/iAST/iATSBinaryOperatorNode.h"
-using namespace i::icSystem::AST;
+using namespace i::icFamily::AST;
 using namespace i::core;
 
 iATSBinaryOperatorNode::iATSBinaryOperatorNode()
@@ -8,7 +8,7 @@ iATSBinaryOperatorNode::iATSBinaryOperatorNode()
 	, iASTNode(nullptr, iASTNodeType::iATSBinaryOperatorNode, "iATSBinaryOperatorNode", 0, false, {})
 { }
 
-iATSBinaryOperatorNode::iATSBinaryOperatorNode(_ISTD Ptr<iASTNode> leftData, _ISTD Ptr<iASTNode> rightData)
+iATSBinaryOperatorNode::iATSBinaryOperatorNode(Ptr<iASTNode> leftData, Ptr<iASTNode> rightData)
 	:left(leftData)
 	, right(rightData)
 	, iASTNode(nullptr, iASTNodeType::iATSBinaryOperatorNode, "iATSBinaryOperatorNode", 0, false, {})
@@ -16,26 +16,26 @@ iATSBinaryOperatorNode::iATSBinaryOperatorNode(_ISTD Ptr<iASTNode> leftData, _IS
 
 iATSBinaryOperatorNode::~iATSBinaryOperatorNode()
 {
-	//_ISTD basic::iBasic<iASTNode>::destroy(parent);
+	//basic::iBasic<iASTNode>::destroy(parent);
 }
 
-_ISTD Ptr<iASTNode> iATSBinaryOperatorNode::getLeft()const noexcept
+Ptr<iASTNode> iATSBinaryOperatorNode::getLeft()const noexcept
 {
 	return this->left;
 }
 
-_ISTD Ptr<iASTNode> iATSBinaryOperatorNode::getRight()const noexcept
+Ptr<iASTNode> iATSBinaryOperatorNode::getRight()const noexcept
 {
 	return this->right;
 }
 
-_ISTD Ptr<iATSBinaryOperatorNode> iATSBinaryOperatorNode::setLeft(_ISTD Ptr<iASTNode> leftData)
+Ptr<iATSBinaryOperatorNode> iATSBinaryOperatorNode::setLeft(Ptr<iASTNode> leftData)
 {
 	this->left = leftData;
 	return this;
 }
 
-_ISTD Ptr<iATSBinaryOperatorNode> iATSBinaryOperatorNode::setRight(_ISTD Ptr<iASTNode> rightData)
+Ptr<iATSBinaryOperatorNode> iATSBinaryOperatorNode::setRight(Ptr<iASTNode> rightData)
 {
 	this->left = rightData;
 	return this;
