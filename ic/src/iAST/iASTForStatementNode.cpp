@@ -19,34 +19,34 @@ iASTForStatementNode::iASTForStatementNode(Ptr<iATSVariableDefinitionNode> ploop
 iASTForStatementNode::~iASTForStatementNode()
 { }
 
-_ISTD Ptr<iATSVariableDefinitionNode> iASTForStatementNode::getLoopDefineVariable()const noexcept
+ Ptr<iATSVariableDefinitionNode> iASTForStatementNode::getLoopDefineVariable()const noexcept
 {
     return this->loopDefineVariable;
 }
 
-_ISTD Ptr<iASTCompoundExpressionNode> iASTForStatementNode::getLoopCondition()const noexcept
+ Ptr<iASTCompoundExpressionNode> iASTForStatementNode::getLoopCondition()const noexcept
 {
     return this->loopCondition;
 }
 
-_ISTD Ptr<iASTNode> iASTForStatementNode::getEachLoopExecute()const noexcept
+ Ptr<iASTNode> iASTForStatementNode::getEachLoopExecute()const noexcept
 {
     return this->eachLoopExecute;
 }
 
-_ISTD Ptr<iASTForStatementNode> iASTForStatementNode::getLoopsDefineVariable(_ISTD Ptr<iATSVariableDefinitionNode> ploopDefineVariable)
+ Ptr<iASTForStatementNode> iASTForStatementNode::getLoopsDefineVariable( Ptr<iATSVariableDefinitionNode> ploopDefineVariable)
 {
     this->loopDefineVariable = ploopDefineVariable;
     return this;
 }
 
-_ISTD Ptr<iASTForStatementNode> iASTForStatementNode::getLoopCondition(_ISTD Ptr<iASTCompoundExpressionNode> ploopCondition)
+ Ptr<iASTForStatementNode> iASTForStatementNode::getLoopCondition( Ptr<iASTCompoundExpressionNode> ploopCondition)
 {
     this->loopCondition = ploopCondition;
     return this;
 }
 
-_ISTD Ptr<iASTForStatementNode> iASTForStatementNode::getEachLoopExecute(_ISTD Ptr<iASTNode> peachLoopExecute)
+ Ptr<iASTForStatementNode> iASTForStatementNode::getEachLoopExecute( Ptr<iASTNode> peachLoopExecute)
 {
     this->eachLoopExecute = peachLoopExecute;
     return this;
