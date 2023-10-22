@@ -37,27 +37,27 @@ SPACE(i)
 
 			public:
 
-				 Ptr<iATSVariableDefinitionNode> loopDefineVariable;
-				 Ptr<iASTCompoundExpressionNode> loopCondition;
-				 Ptr<iASTNode> eachLoopExecute;
+				_ISTD Ptr<iATSVariableDefinitionNode> loopDefineVariable;
+				_ISTD Ptr<iASTCompoundExpressionNode> loopCondition;
+				_ISTD Ptr<iASTNode> eachLoopExecute;
 
 			public:
 
 				iASTForStatementNode();
 
-				iASTForStatementNode( Ptr<iATSVariableDefinitionNode> ploopDefineVariable,  Ptr<iASTCompoundExpressionNode> ploopCondition,  Ptr<iASTNode> peachLoopExecute);
+				iASTForStatementNode(_ISTD Ptr<iATSVariableDefinitionNode> ploopDefineVariable, _ISTD Ptr<iASTCompoundExpressionNode> ploopCondition, _ISTD Ptr<iASTNode> peachLoopExecute);
 
 				~iASTForStatementNode();
 
 			public:
 
-				[[nodiscard]]  Ptr<iASTNode> getLoopsDefineVariable()const noexcept;
-				[[nodiscard]]  Ptr<iASTNode> getLoopCondition()const noexcept;
-				[[nodiscard]]  Ptr<iASTNode> getEachLoopExecute()const noexcept;
+				[[nodiscard]] _ISTD Ptr<iATSVariableDefinitionNode> getLoopDefineVariable()const noexcept;
+				[[nodiscard]] _ISTD Ptr<iASTCompoundExpressionNode> getLoopCondition()const noexcept;
+				[[nodiscard]] _ISTD Ptr<iASTNode> getEachLoopExecute()const noexcept;
 
-				 Ptr<iASTForStatementNode> getLoopsDefineVariable( Ptr<iASTNode> ploopDefineVariable);
-				 Ptr<iASTForStatementNode> getLoopCondition( Ptr<iASTNode> ploopCondition);
-				 Ptr<iASTForStatementNode> getEachLoopExecute( Ptr<iASTNode> peachLoopExecute);
+				_ISTD Ptr<iASTForStatementNode> getLoopsDefineVariable(_ISTD Ptr<iATSVariableDefinitionNode> ploopDefineVariable);
+				_ISTD Ptr<iASTForStatementNode> getLoopCondition(_ISTD Ptr<iASTCompoundExpressionNode> ploopCondition);
+				_ISTD Ptr<iASTForStatementNode> getEachLoopExecute(_ISTD Ptr<iASTNode> peachLoopExecute);
 
 			};
 

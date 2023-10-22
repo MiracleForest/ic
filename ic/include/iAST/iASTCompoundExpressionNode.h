@@ -35,21 +35,21 @@ SPACE(i)
 
 			public:
 
-				Ptr<iASTNode> expression;
+				_ISTD Ptr<iASTNode> expression;
 
 			public:
 
 				iASTCompoundExpressionNode();
 
-				iASTCompoundExpressionNode(Ptr<iASTNode> pexpression);
+				iASTCompoundExpressionNode(_ISTD Ptr<iASTNode> pexpression);
 
 				~iASTCompoundExpressionNode();
 
 			public:
 
-				[[nodiscard]] Ptr<iASTNode> getExpression()const noexcept;
+				[[nodiscard]] _ISTD Ptr<iASTNode> getExpression()const noexcept;
 
-				Ptr<iASTCompoundExpressionNode> setExpression(Ptr<iASTNode> pexpression);
+				_ISTD Ptr<iASTCompoundExpressionNode> setExpression(_ISTD Ptr<iASTNode> pexpression);
 
 			};
 

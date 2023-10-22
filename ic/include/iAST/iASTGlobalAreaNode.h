@@ -40,15 +40,15 @@ SPACE(i)
 
 			public:
 
-				std::vector<_ISTD  Ptr<iASTNode>> childElementsList;
+				std::vector<_ISTD Ptr<iASTNode>> childElementsList;
 
 			public:
 
 				iASTGlobalAreaNode();
 
-				iASTGlobalAreaNode(_ISTD  Ptr<iASTNode> childElements);
+				iASTGlobalAreaNode(_ISTD Ptr<iASTNode> childElements);
 
-				iASTGlobalAreaNode(std::vector<_ISTD  Ptr<iASTNode>> childElementsList);
+				iASTGlobalAreaNode(std::vector<_ISTD Ptr<iASTNode>> childElementsList);
 
 				~iASTGlobalAreaNode();
 
@@ -58,16 +58,16 @@ SPACE(i)
 
 				int getCount()const;
 				int getIndex()const;
-				_ISTD  Ptr<iASTNode> getNext()const;
-				_ISTD  Ptr<iASTNode> get()const;
+				_ISTD Ptr<iASTNode> getNext()const;
+				_ISTD Ptr<iASTNode> get()const;
 
-				_ISTD  Ptr<iASTGlobalAreaNode> setNext(_ISTD  Ptr<iASTNode> node);
-				_ISTD  Ptr<iASTGlobalAreaNode> set(_ISTD  Ptr<iASTNode> node);
-				_ISTD  Ptr<iASTGlobalAreaNode> setIndex(int index);
+				_ISTD Ptr<iASTGlobalAreaNode> setNext(_ISTD Ptr<iASTNode> node);
+				_ISTD Ptr<iASTGlobalAreaNode> set(_ISTD Ptr<iASTNode> node);
+				_ISTD Ptr<iASTGlobalAreaNode> setIndex(int index);
 
-				_ISTD  Ptr<iASTGlobalAreaNode> add(_ISTD  Ptr<iASTNode> node);
-				_ISTD  Ptr<iASTGlobalAreaNode> remove();
-				_ISTD  Ptr<iASTGlobalAreaNode> next()const;
+				_ISTD Ptr<iASTGlobalAreaNode> add(_ISTD Ptr<iASTNode> node);
+				_ISTD Ptr<iASTGlobalAreaNode> remove();
+				_ISTD Ptr<iASTGlobalAreaNode> next()const;
 
 			};
 

@@ -41,7 +41,7 @@ SPACE(i)
 
 				iATSBinaryOperatorNode();
 
-				iATSBinaryOperatorNode(_ISTD Ptr<iASTNode> leftData, _ISTD  Ptr<iASTNode> rightData);
+				iATSBinaryOperatorNode(_ISTD Ptr<iASTNode> leftData, _ISTD Ptr<iASTNode> rightData);
 
 				~iATSBinaryOperatorNode();
 

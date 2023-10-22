@@ -40,14 +40,14 @@ SPACE(i)
 
 				iATSReturnStatementNode();
 
-				iATSReturnStatementNode(_ISTD  Ptr<iASTNode> value);
+				iATSReturnStatementNode(_ISTD Ptr<iASTNode> value);
 
 				~iATSReturnStatementNode();
 
 			public:
 
-				[[nodiscard]] _ISTD  Ptr<iASTNode> getReturnValue()const noexcept;
-				_ISTD  Ptr<iATSReturnStatementNode> setReturnValue(_ISTD  Ptr<iASTNode> pvalue);
+				[[nodiscard]] _ISTD Ptr<iASTNode> getReturnValue()const noexcept;
+				_ISTD Ptr<iATSReturnStatementNode> setReturnValue(_ISTD Ptr<iASTNode> pvalue);
 
 			};
 

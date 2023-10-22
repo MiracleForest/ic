@@ -43,26 +43,26 @@ SPACE(i)
 
 				iASTImportStatementNode();
 
-				iASTImportStatementNode(std::vector<istring> pparentModuleList,  CRef<istring> pimportModule, std::vector<istring> pnicknameList);
+				iASTImportStatementNode(std::vector<istring> pparentModuleList, _ISTD CRef<istring> pimportModule, std::vector<istring> pnicknameList);
 
 				~iASTImportStatementNode();
 
 			public:
 
-				 Ptr<iASTImportStatementNode> addNickname( CRef<istring> nickname);
+				_ISTD Ptr<iASTImportStatementNode> addNickname(_ISTD CRef<istring> nickname);
 
 				/*
 				* @warning vector<istring>的顺序代表着各级模块的所属关系
 				*/
-				 Ptr<iASTImportStatementNode> pushBackParentModule( CRef<istring> parentModule);
+				_ISTD Ptr<iASTImportStatementNode> pushBackParentModule(_ISTD CRef<istring> parentModule);
 
 				[[nodiscard]] istring getImportModule()const noexcept;
 				[[nodiscard]] std::vector<istring> getParentModuleList()const noexcept;
 				[[nodiscard]] std::vector<istring> getNicknameList()const noexcept;
 
-				 Ptr<iASTImportStatementNode> setParentModuleList(std::vector<istring> pparentModuleList);
-				 Ptr<iASTImportStatementNode> setImportModule(CRef<istring> pimportModule);
-				 Ptr<iASTImportStatementNode> setNicknameList(std::vector<istring> pnicknameList);
+				_ISTD Ptr<iASTImportStatementNode> setParentModuleList(std::vector<istring> pparentModuleList);
+				_ISTD Ptr<iASTImportStatementNode> setImportModule(_ISTD CRef<istring> pimportModule);
+				_ISTD Ptr<iASTImportStatementNode> setNicknameList(std::vector<istring> pnicknameList);
 
 			};
 

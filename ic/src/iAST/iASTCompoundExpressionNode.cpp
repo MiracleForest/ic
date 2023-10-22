@@ -7,12 +7,12 @@ iASTCompoundExpressionNode::iASTCompoundExpressionNode()
     , iASTNode(nullptr, iASTNodeType::iASTCompoundExpressionNode, "iASTCompoundExpressionNode", 0, false, {})
 { }
 
-iASTCompoundExpressionNode:iASTCompoundExpressionNode(Ptr<iASTNode> pexpression)
+iASTCompoundExpressionNode::iASTCompoundExpressionNode(Ptr<iASTNode> pexpression)
     : expression(pexpression)
     , iASTNode(nullptr, iASTNodeType::iASTCompoundExpressionNode, "iASTCompoundExpressionNode", 0, false, {})
 { }
 
-iASTCompoundExpressionNode:~iASTCompoundExpressionNode()
+iASTCompoundExpressionNode::~iASTCompoundExpressionNode()
 { }
 
 

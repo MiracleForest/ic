@@ -46,9 +46,9 @@ std::vector<iASTImportStatementNode::istring> iASTImportStatementNode::getNickna
 	return this->nicknameList;
 }
 
-Ptr<iASTImportStatementNode> iASTImportStatementNode::setParentModuleList(std::vector<istring> pimportModuleList)
+Ptr<iASTImportStatementNode> iASTImportStatementNode::setParentModuleList(std::vector<istring> pparentModuleList)
 {
-	this->importModuleList = pimportModuleList;
+	this->parentModuleList = pparentModuleList;
 	return this;
 }
 

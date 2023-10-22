@@ -60,7 +60,7 @@ SPACE(i)
 				[[nodiscard]] istring getValue()const noexcept;
 
 				_ISTD Ptr<iATSTypeNode> setType(TypeNodeType typeData);
-				 _ISTD Ptr<iATSTypeNode> setValue(istring valueData);
+				_ISTD Ptr<iATSTypeNode> setValue(istring valueData);
 			};
 
 		}
