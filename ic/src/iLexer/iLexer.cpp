@@ -23,8 +23,7 @@ iToken iLexer::read()
 		if (_inputCode[_pos] == '\n')
 		{
 			_pos++;
-			_currentLine++;
-			return iToken(iTokenID::EOL, _currentLine, "");
+			return iToken(iTokenID::EOL, _currentLine++, "");
 		}
 
 		if (result = readString(_pos))
@@ -384,6 +383,9 @@ int iLexer::readBigComment(int pos)
 
 	while (pos + result < (_inputCode.length() - 2) && (_inputCode[pos + result] != '*' || _inputCode[pos + result + 1] != '/'))
 	{
+		if (_inputCode[pos + result] == '\n') {
+			_currentLine++;
+		}
 		result++;
 	}
 
