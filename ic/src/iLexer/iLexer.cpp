@@ -62,6 +62,7 @@ iToken iLexer::read()
 		else if (result = readLineComment(_pos))
 		{
 			_pos += result;
+			_currentLine++;
 		}
 		else if (result = readBigComment(_pos))
 		{
