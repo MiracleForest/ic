@@ -16,7 +16,7 @@ iATSTypeNode::iATSTypeNode(TypeNodeType typeData, istring valueData)
 
 iATSTypeNode::~iATSTypeNode()
 {
-	basic::iBasic<iASTNode>::destroy(parent);
+	//delete parent;
 }
 
 iATSTypeNode::TypeNodeType iATSTypeNode::getType()const noexcept

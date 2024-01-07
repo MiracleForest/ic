@@ -17,3 +17,5 @@
 
 # Clangd cache
 /.cache
+Debug
+x64

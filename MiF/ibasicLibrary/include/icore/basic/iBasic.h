@@ -116,21 +116,6 @@ SPACE(i)
 					return std::function<Type()>();
 				}
 
-				static void destroy(Ptr<Type> pointer)
-				{
-					if (pointer)
-					{
-						pointer->~Type();
-					}
-					pointer = nullptr;
-				}
-
-				static void destroy(Ref<Type> obj)
-				{
-					obj.~Type();
-				}
-
-
 			};//class iBasic
 
 

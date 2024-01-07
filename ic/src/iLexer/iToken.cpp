@@ -77,6 +77,7 @@ _ISTD Ref<iToken> iToken::operator=(_ISTD CRef<iToken> t)
 {
 	this->_ID = t.getID();
 	this->_text = t.getText();
+	this->_currentLine = t.getLine();
 	return *this;
 }
 

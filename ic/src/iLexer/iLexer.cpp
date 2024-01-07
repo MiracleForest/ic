@@ -133,7 +133,7 @@ std::vector<iToken> iLexer::mergeConsecutiveStringsToken(_ISTD CRef<std::vector<
 			currentText = input[i].getText();
 			count = 1;
 		}
-
+		currentLine = input[i].getLine();
 	}
 
 	if (count > 1)

@@ -23,11 +23,6 @@ iASTGlobalAreaNode::iASTGlobalAreaNode(std::vector<Ptr<iASTNode>> childElementsL
 
 iASTGlobalAreaNode::~iASTGlobalAreaNode()
 {
-	std::cout << "~iASTGlobalAreaNode\n";
-	for (auto& v : this->childElementsList)
-	{
-		basic::iBasic<iASTNode>::destroy(v);
-	}
 }
 
 int iASTGlobalAreaNode::getCount()const
@@ -92,7 +87,7 @@ Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::add(Ptr<iASTNode> node)
 Ptr<iASTGlobalAreaNode> iASTGlobalAreaNode::remove()
 {
 	std::cout << "-\n";
-	basic::iBasic<iASTNode>::destroy(this->get());
+	//delete this->get();
 	this->childElementsList.erase(this->childElementsList.begin() + this->_childElementsListIndex);
 	_childElementsListIndex--;
 	std::cout << "--\n";
