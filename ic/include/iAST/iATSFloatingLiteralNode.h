@@ -15,43 +15,30 @@
 
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			class ICAPI iATSFloatingLiteralNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
+namespace icFamily
+{
+    namespace AST
+    {
+        class ICAPI iATSFloatingLiteralNode : public iASTNode
+        {
+        public:
+            double data;
 
-			public:
+        public:
+            iATSFloatingLiteralNode();
 
-				double data;
+            iATSFloatingLiteralNode(double data);
 
-			public:
+            ~iATSFloatingLiteralNode();
 
-				iATSFloatingLiteralNode();
+        public:
+            [[nodiscard]] double get() const noexcept;
 
-				iATSFloatingLiteralNode(double data);
-
-				~iATSFloatingLiteralNode();
-
-			public:
-
-				[[nodiscard]] double get()const noexcept;
-
-				_ISTD Ptr<iATSFloatingLiteralNode> set(double data);
-
-			};
-
-		}
-	}
-}
+            Ptr<iATSFloatingLiteralNode> set(double data);
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

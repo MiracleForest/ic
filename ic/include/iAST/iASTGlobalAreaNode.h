@@ -14,63 +14,58 @@
 #pragma once
 
 #include "../family/iicfamily.h"
+#include "iASTCompoundExpressionNode.h"
+#include "iASTForStatementNode.h"
+#include "iASTImportStatementNode.h"
 #include "iASTNode.h"
 #include "iASTStringLiteralNode.h"
+#include "iATSBinaryOperatorNode.h"
 #include "iATSFloatingLiteralNode.h"
 #include "iATSIntegerLiteralNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
+#include "iATSReturnStatementNode.h"
+#include "iATSTernaryOperatorNode.h"
+#include "iATSTypeNode.h"
+#include "iATSUnaryOperatorNode.h"
+#include "iATSVariableDefinitionNode.h"
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			class ICAPI iASTGlobalAreaNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
-			private:
+namespace icFamily
+{
+    namespace AST
+    {
+        class ICAPI iASTGlobalAreaNode : public iASTNode
+        {
+        private:
+            mutable int _childElementsListIndex;
 
-				mutable int _childElementsListIndex;
+        public:
+            std::vector<Ptr<iASTNode>> childElementsList;
 
-			public:
+        public:
+            iASTGlobalAreaNode();
 
-				std::vector<_ISTD Ptr<iASTNode>> childElementsList;
+            iASTGlobalAreaNode(Ptr<iASTNode> childElements);
 
-			public:
+            iASTGlobalAreaNode(std::vector<Ptr<iASTNode>> childElementsList);
 
-				iASTGlobalAreaNode();
+            ~iASTGlobalAreaNode();
 
-				iASTGlobalAreaNode(_ISTD Ptr<iASTNode> childElements);
+        public:
+        public:
+            int           getCount() const;
+            int           getIndex() const;
+            Ptr<iASTNode> getNext() const;
+            Ptr<iASTNode> get() const;
 
-				iASTGlobalAreaNode(std::vector<_ISTD Ptr<iASTNode>> childElementsList);
+            Ptr<iASTGlobalAreaNode> setNext(Ptr<iASTNode> node);
+            Ptr<iASTGlobalAreaNode> set(Ptr<iASTNode> node);
+            Ptr<iASTGlobalAreaNode> setIndex(int index);
 
-				~iASTGlobalAreaNode();
-
-			public:
-
-			public:
-
-				int getCount()const;
-				int getIndex()const;
-				_ISTD Ptr<iASTNode> getNext()const;
-				_ISTD Ptr<iASTNode> get()const;
-
-				_ISTD Ptr<iASTGlobalAreaNode> setNext(_ISTD Ptr<iASTNode> node);
-				_ISTD Ptr<iASTGlobalAreaNode> set(_ISTD Ptr<iASTNode> node);
-				_ISTD Ptr<iASTGlobalAreaNode> setIndex(int index);
-
-				_ISTD Ptr<iASTGlobalAreaNode> add(_ISTD Ptr<iASTNode> node);
-				_ISTD Ptr<iASTGlobalAreaNode> remove();
-				_ISTD Ptr<iASTGlobalAreaNode> next()const;
-
-			};
-
-		}
-	}
-}
+            Ptr<iASTGlobalAreaNode> add(Ptr<iASTNode> node);
+            Ptr<iASTGlobalAreaNode> remove();
+            Ptr<iASTGlobalAreaNode> next() const;
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

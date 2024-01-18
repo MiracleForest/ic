@@ -13,100 +13,83 @@
  */
 #pragma once
 
-
 #include "../family/iicfamily.h"
-#include "iASTNodeBasic.h"
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			enum class iASTNodeType
-				:int
-			{
-				iASTNode,
-				iASTGlobalAreaNode,
-				iASTStringLiteralNode,
-				iATSFloatingLiteralNode,
-				iATSIntegerLiteralNode,
-				iATSBinaryOperatorNode,
-				iATSTernaryOperatorNode,
-				iATSUnaryOperatorNode,
-				iATSTypeNode,
-				iATSReturnStatementNode,
-				iATSVariableDefinitionNode,
-				iASTImportStatementNode,
-				iASTCompoundExpressionNode,
-				iASTForStatementNode
-			};
+namespace icFamily
+{
+    namespace AST
+    {
+        enum class iASTNodeType : int
+        {
+            iASTNode,
+            iASTGlobalAreaNode,
+            iASTStringLiteralNode,
+            iATSFloatingLiteralNode,
+            iATSIntegerLiteralNode,
+            iATSBinaryOperatorNode,
+            iATSTernaryOperatorNode,
+            iATSUnaryOperatorNode,
+            iATSTypeNode,
+            iATSReturnStatementNode,
+            iATSVariableDefinitionNode,
+            iASTImportStatementNode,
+            iASTCompoundExpressionNode,
+            iASTForStatementNode
+        };
 
 
-			class ICAPI iASTNode
-				:public iASTNodeBasic
-			{
-				using istring = _ISTDTEXT istring;
-			public:
+        class ICAPI iASTNode
+        {
+        public:
+            Ptr<iASTNode> parent;
 
-				_ISTD Ptr<iASTNode> parent;
+            iASTNodeType type;
 
-				iASTNodeType type;
+            std::string name;
 
-				istring name;
+            int line;
 
-				int line;
+            bool additionalNode;
 
-				bool additionalNode;
+            std::vector<std::string> tags;
 
-				std::vector<istring> tags;
+        private:
+        public:
 
-			private:
-			public:
+            virtual Ptr<iASTNode> setAdditionalNode()
+            {
+                additionalNode = true;
+                return this;
+            }
 
-				virtual _CSETVF2(iASTNode, _ISTD Ptr<iASTNode>, Parent, parent);
+        public:
+        public:
+            virtual Ptr<iASTNode> addTag(CRef<std::string> tag);
 
-				virtual _CSETVF2(iASTNode, _ISTD Ptr<iASTNode>, Name, name);
+            virtual bool hasTag(CRef<std::string> tag) const;
 
-				virtual _ISTD Ptr<iASTNode> setAdditionalNode()
-				{
-					additionalNode = true;
-					return this;
-				}
+            virtual int getTagIndex(CRef<std::string> tag) const;
 
-			public:
+            virtual bool removeTag(CRef<std::string> tag);
 
-			public:
-				virtual _ISTD Ptr<iASTNode> addTag(_ISTD  CRef<istring> tag);
+            virtual std::vector<std::string> getAllTag() const;
 
-				virtual bool hasTag(_ISTD CRef<istring> tag)const;
+        public:
+            iASTNode();
 
-				virtual int getTagIndex(_ISTD CRef<istring> tag)const;
+            iASTNode(
+                Ptr<iASTNode>            parent,
+                iASTNodeType             type,
+                CRef<std::string>        name,
+                int                      line,
+                bool                     additionalNode,
+                std::vector<std::string> tags
+            );
 
-				virtual bool removeTag(_ISTD CRef<istring> tag);
-
-				virtual std::vector<istring> getAllTag()const;
-
-			public:
-
-				iASTNode();
-
-				iASTNode(
-					_ISTD Ptr<iASTNode> parent,
-					iASTNodeType type,
-					_ISTD CRef<istring>name,
-					int line,
-					bool additionalNode,
-					std::vector<istring> tags
-				);
-
-				virtual ~iASTNode();
-
-			};
-
-		}
-	}
-}
+            virtual ~iASTNode();
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

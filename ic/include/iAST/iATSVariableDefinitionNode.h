@@ -16,51 +16,41 @@
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
 #include "iATSTypeNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			class ICAPI iATSVariableDefinitionNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
+namespace icFamily
+{
+    namespace AST
+    {
+        class ICAPI iATSVariableDefinitionNode : public iASTNode
+        {
+        public:
+            Ptr<iATSTypeNode> type;
+            Ptr<iASTNode>     value;
 
-			public:
+            std::string name;
 
-				_ISTD Ptr<iATSTypeNode> type;
-				_ISTD Ptr<iASTNode> value;
+        public:
+            iATSVariableDefinitionNode();
 
-				istring name;
+            iATSVariableDefinitionNode(
+                Ptr<iATSTypeNode> ptype,
+                Ptr<iASTNode>     pvalue,
+                CRef<std::string> pname
+            );
 
+            ~iATSVariableDefinitionNode();
 
-			public:
+        public:
+            [[nodiscard]] Ptr<iATSTypeNode> getVariableType() const noexcept;
+            [[nodiscard]] std::string       getVariableName() const noexcept;
+            [[nodiscard]] Ptr<iASTNode>     getVariableValue() const noexcept;
 
-				iATSVariableDefinitionNode();
-
-				iATSVariableDefinitionNode(_ISTD Ptr<iATSTypeNode> ptype, _ISTD Ptr<iASTNode> pvalue, _ISTD CRef<istring> pname);
-
-				~iATSVariableDefinitionNode();
-
-			public:
-
-				[[nodiscard]] _ISTD Ptr<iATSTypeNode> getVariableType()const noexcept;
-				[[nodiscard]] istring getVariableName()const noexcept;
-				[[nodiscard]] _ISTD Ptr<iASTNode> getVariableValue()const noexcept;
-
-				_ISTD Ptr<iATSVariableDefinitionNode> setVariableType(_ISTD Ptr<iATSTypeNode> ptype);
-				_ISTD Ptr<iATSVariableDefinitionNode> setVariableName(_ISTD CRef<istring> pname);
-				_ISTD Ptr<iATSVariableDefinitionNode> setVariableValue(_ISTD Ptr<iASTNode> pvalue);
-
-			};
-
-		}
-	}
-}
+            Ptr<iATSVariableDefinitionNode> setVariableType(Ptr<iATSTypeNode> ptype);
+            Ptr<iATSVariableDefinitionNode> setVariableName(CRef<std::string> pname);
+            Ptr<iATSVariableDefinitionNode> setVariableValue(Ptr<iASTNode> pvalue);
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

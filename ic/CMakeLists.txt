@@ -43,12 +43,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS YES)
 
-link_directories(${CMAKE_SOURCE_DIR}/MiF/ibasicLibrary/lib)
-
-include_directories(${CMAKE_SOURCE_DIR}/MiF/ibasicLibrary/include)
 include_directories(${CMAKE_SOURCE_DIR}/third-party)
-
-link_directories(${CMAKE_SOURCE_DIR}/MiF/ibasicLibrary/lib)
 
 file(
         GLOB_RECURSE SRC_FILES
@@ -70,8 +65,7 @@ file(
         ${PROJECT_SOURCE_DIR}/src/*.cpp
         ${PROJECT_SOURCE_DIR}/src/*.rc
 )
-# third-party source files
-file(GLOB_RECURSE THIRD_PARTY_SRC_FILES ${CMAKE_SOURCE_DIR}/third-party/rawpdb/*)
+
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
@@ -80,9 +74,6 @@ set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEB
 
 add_executable(ic ${SRC_FILES} ${THIRD_PARTY_SRC_FILES} ${SRC_FILES_EXE})
 add_library(libic SHARED ${SRC_FILES} ${THIRD_PARTY_SRC_FILES})
-
-target_link_libraries(ic iBasicLibrary_debug)
-target_link_libraries(libic iBasicLibrary_debug)
 
 target_compile_options(
         ic

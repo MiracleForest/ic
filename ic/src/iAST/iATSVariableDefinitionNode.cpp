@@ -1,53 +1,52 @@
 #include "../../include/iAST/iATSVariableDefinitionNode.h"
-using namespace i::icFamily::AST;
-using namespace i::core;
+using namespace MiracleForest::i::icFamily::AST;
+
 
 iATSVariableDefinitionNode::iATSVariableDefinitionNode()
-	: type(nullptr)
-	, name("")
-	, value(nullptr)
-	, iASTNode(nullptr, iASTNodeType::iATSVariableDefinitionNode, "iATSVariableDefinitionNode", 0, false, {})
-{ }
-
-iATSVariableDefinitionNode::iATSVariableDefinitionNode(Ptr<iATSTypeNode> ptype, Ptr<iASTNode> pvalue, CRef<istring> pname)
-	: type(ptype)
-	, name(pname)
-	, value(pvalue)
-	, iASTNode(nullptr, iASTNodeType::iATSVariableDefinitionNode, "iATSVariableDefinitionNode", 0, false, {})
-{ }
-
-iATSVariableDefinitionNode::~iATSVariableDefinitionNode()
-{ }
-
-Ptr<iATSTypeNode> iATSVariableDefinitionNode::getVariableType()const noexcept
+    : type(nullptr)
+    , name("")
+    , value(nullptr)
+    , iASTNode(nullptr, iASTNodeType::iATSVariableDefinitionNode, "iATSVariableDefinitionNode", 0, false, {})
 {
-	return type;
 }
 
-iATSVariableDefinitionNode::istring iATSVariableDefinitionNode::getVariableName()const noexcept
+iATSVariableDefinitionNode::iATSVariableDefinitionNode(
+    Ptr<iATSTypeNode> ptype,
+    Ptr<iASTNode>     pvalue,
+    CRef<std::string>     pname
+)
+    : type(ptype)
+    , name(pname)
+    , value(pvalue)
+    , iASTNode(nullptr, iASTNodeType::iATSVariableDefinitionNode, "iATSVariableDefinitionNode", 0, false, {})
 {
-	return name;
 }
 
-Ptr<iASTNode> iATSVariableDefinitionNode::getVariableValue()const noexcept
+iATSVariableDefinitionNode::~iATSVariableDefinitionNode() {}
+
+Ptr<iATSTypeNode> iATSVariableDefinitionNode::getVariableType() const noexcept { return type; }
+
+std::string iATSVariableDefinitionNode::getVariableName() const noexcept
 {
-	return value;
+    return name;
 }
+
+Ptr<iASTNode> iATSVariableDefinitionNode::getVariableValue() const noexcept { return value; }
 
 Ptr<iATSVariableDefinitionNode> iATSVariableDefinitionNode::setVariableType(Ptr<iATSTypeNode> ptype)
 {
-	this->type = ptype;
-	return this;
+    this->type = ptype;
+    return this;
 }
 
-Ptr<iATSVariableDefinitionNode> iATSVariableDefinitionNode::setVariableName(CRef<istring> pname)
+Ptr<iATSVariableDefinitionNode> iATSVariableDefinitionNode::setVariableName(CRef<std::string> pname)
 {
-	this->name = pname;
-	return this;
+    this->name = pname;
+    return this;
 }
 
 Ptr<iATSVariableDefinitionNode> iATSVariableDefinitionNode::setVariableValue(Ptr<iASTNode> pvalue)
 {
-	this->value = pvalue;
-	return this;
+    this->value = pvalue;
+    return this;
 }

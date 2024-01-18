@@ -15,42 +15,29 @@
 
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			class ICAPI iATSReturnStatementNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
+namespace icFamily
+{
+    namespace AST
+    {
+        class ICAPI iATSReturnStatementNode : public iASTNode
+        {
+        public:
+            Ptr<iASTNode> value;
 
-			public:
+        public:
+            iATSReturnStatementNode();
 
-				_ISTD Ptr<iASTNode> value;
+            iATSReturnStatementNode(Ptr<iASTNode> value);
 
-			public:
+            ~iATSReturnStatementNode();
 
-				iATSReturnStatementNode();
-
-				iATSReturnStatementNode(_ISTD Ptr<iASTNode> value);
-
-				~iATSReturnStatementNode();
-
-			public:
-
-				[[nodiscard]] _ISTD Ptr<iASTNode> getReturnValue()const noexcept;
-				_ISTD Ptr<iATSReturnStatementNode> setReturnValue(_ISTD Ptr<iASTNode> pvalue);
-
-			};
-
-		}
-	}
-}
+        public:
+            [[nodiscard]] Ptr<iASTNode>  getReturnValue() const noexcept;
+            Ptr<iATSReturnStatementNode> setReturnValue(Ptr<iASTNode> pvalue);
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

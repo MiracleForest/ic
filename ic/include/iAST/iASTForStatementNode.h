@@ -14,53 +14,46 @@
 #pragma once
 
 #include "../family/iicfamily.h"
+#include "iASTCompoundExpressionNode.h"
 #include "iASTNode.h"
 #include "iATSTypeNode.h"
-#include "iASTCompoundExpressionNode.h"
 #include "iATSVariableDefinitionNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			class ICAPI iASTForStatementNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
+namespace icFamily
+{
+    namespace AST
+    {
+        class ICAPI iASTForStatementNode : public iASTNode
+        {
+        public:
+            Ptr<iATSVariableDefinitionNode> loopDefineVariable;
+            Ptr<iASTCompoundExpressionNode> loopCondition;
+            Ptr<iASTNode>                   eachLoopExecute;
 
-			public:
+        public:
+            iASTForStatementNode();
 
-				_ISTD Ptr<iATSVariableDefinitionNode> loopDefineVariable;
-				_ISTD Ptr<iASTCompoundExpressionNode> loopCondition;
-				_ISTD Ptr<iASTNode> eachLoopExecute;
+            iASTForStatementNode(
+                Ptr<iATSVariableDefinitionNode> ploopDefineVariable,
+                Ptr<iASTCompoundExpressionNode> ploopCondition,
+                Ptr<iASTNode>                   peachLoopExecute
+            );
 
-			public:
+            ~iASTForStatementNode();
 
-				iASTForStatementNode();
+        public:
+            [[nodiscard]] Ptr<iATSVariableDefinitionNode> getLoopDefineVariable() const noexcept;
+            [[nodiscard]] Ptr<iASTCompoundExpressionNode> getLoopCondition() const noexcept;
+            [[nodiscard]] Ptr<iASTNode>                   getEachLoopExecute() const noexcept;
 
-				iASTForStatementNode(_ISTD Ptr<iATSVariableDefinitionNode> ploopDefineVariable, _ISTD Ptr<iASTCompoundExpressionNode> ploopCondition, _ISTD Ptr<iASTNode> peachLoopExecute);
-
-				~iASTForStatementNode();
-
-			public:
-
-				[[nodiscard]] _ISTD Ptr<iATSVariableDefinitionNode> getLoopDefineVariable()const noexcept;
-				[[nodiscard]] _ISTD Ptr<iASTCompoundExpressionNode> getLoopCondition()const noexcept;
-				[[nodiscard]] _ISTD Ptr<iASTNode> getEachLoopExecute()const noexcept;
-
-				_ISTD Ptr<iASTForStatementNode> getLoopsDefineVariable(_ISTD Ptr<iATSVariableDefinitionNode> ploopDefineVariable);
-				_ISTD Ptr<iASTForStatementNode> getLoopCondition(_ISTD Ptr<iASTCompoundExpressionNode> ploopCondition);
-				_ISTD Ptr<iASTForStatementNode> getEachLoopExecute(_ISTD Ptr<iASTNode> peachLoopExecute);
-
-			};
-
-		}
-	}
-}
+            Ptr<iASTForStatementNode> getLoopsDefineVariable(
+                Ptr<iATSVariableDefinitionNode> ploopDefineVariable
+            );
+            Ptr<iASTForStatementNode> getLoopCondition(Ptr<iASTCompoundExpressionNode> ploopCondition);
+            Ptr<iASTForStatementNode> getEachLoopExecute(Ptr<iASTNode> peachLoopExecute);
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

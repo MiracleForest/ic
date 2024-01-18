@@ -1,27 +1,25 @@
 #include "../../include/iAST/iATSReturnStatementNode.h"
-using namespace i::icFamily::AST;
-using namespace i::core;
+using namespace MiracleForest::i::icFamily::AST;
+
 
 iATSReturnStatementNode::iATSReturnStatementNode()
-	: value(nullptr)
-	, iASTNode(nullptr, iASTNodeType::iATSReturnStatementNode, "iATSReturnStatementNode", 0, false, {})
-{ }
+    : value(nullptr)
+    , iASTNode(nullptr, iASTNodeType::iATSReturnStatementNode, "iATSReturnStatementNode", 0, false, {})
+{
+}
 
 iATSReturnStatementNode::iATSReturnStatementNode(Ptr<iASTNode> value)
-	: value(value)
-	, iASTNode(nullptr, iASTNodeType::iATSReturnStatementNode, "iATSReturnStatementNode", 0, false, {})
-{ }
-
-iATSReturnStatementNode::~iATSReturnStatementNode()
-{ }
-
-Ptr<iASTNode> iATSReturnStatementNode::getReturnValue()const noexcept
+    : value(value)
+    , iASTNode(nullptr, iASTNodeType::iATSReturnStatementNode, "iATSReturnStatementNode", 0, false, {})
 {
-	return value;
 }
+
+iATSReturnStatementNode::~iATSReturnStatementNode() {}
+
+Ptr<iASTNode> iATSReturnStatementNode::getReturnValue() const noexcept { return value; }
 
 Ptr<iATSReturnStatementNode> iATSReturnStatementNode::setReturnValue(Ptr<iASTNode> pvalue)
 {
-	this->value = value;
-	return this;
+    this->value = value;
+    return this;
 }

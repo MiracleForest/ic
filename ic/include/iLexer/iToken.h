@@ -14,77 +14,60 @@
 #pragma once
 
 #include "../family/iicfamily.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
+{
+namespace icFamily
 {
 
-	SPACE(icFamily)
-	{
-
-#ifdef EOF
-#undef EOF
-#endif//^^^^EOF
-
-		enum class iTokenID
-		{
-			Unk = -1,
-			String,
-			Number,
-			Identifier,
-			Keyword,
-			Operator,
-			EOL,
-			EOF
-		};//enum class iTokenID
+    enum class iTokenID
+    {
+        Unk = -1,
+        String,
+        Number,
+        Identifier,
+        Keyword,
+        Operator,
+        EOL,
+        EOF_
+    }; // enum class iTokenID
 
 
-		class ICAPI iToken
-		{
-			using uchar = _ISTD uchar;
-			using uint = _ISTD uint;
-			using istring = _ISTDTEXT istring;
-		public:
+    class ICAPI iToken
+    {
+        using uchar = unsigned char;
+        using uint  = unsigned int;
+    public:
+        iToken();
 
-			iToken();
+        iToken(iTokenID token_id, int currentLine, std::string text);
 
-			iToken(iTokenID token_id, int currentLine, istring text);
+        iToken(CRef<iToken> itoken);
 
-			iToken(_ISTD CRef<iToken> itoken);
+    public:
+        // 获取文本
+        std::string getText() const noexcept;
 
-		public:
+        // 获取编号
+        iTokenID getID() const noexcept;
 
-			//获取文本
-			istring getText()const noexcept;
+        int getLine() const noexcept;
 
-			//获取编号
-			iTokenID getID()const noexcept;
+        // 设置文本
+        void setText(CRef<std::string> text);
 
-			int getLine()const noexcept;
+    public:
+        std::string getID2String() const;
 
-			//设置文本
-			void setText(_ISTD CRef<istring> text);
+    public:
+        Ref<iToken> operator=(CRef<iToken>);
 
-		public:
+    private:
+        std::string _text;
+        iTokenID    _ID;
+        int         _currentLine;
 
-			istring getID2String()const;
+    }; // iToken
 
-		public:
-
-			_ISTD Ref<iToken> operator=(_ISTD CRef<iToken>);
-
-		private:
-
-			istring _text;
-			iTokenID _ID;
-			int _currentLine;
-
-		};//iToken
-
-
-	}
-}
+} // namespace icFamily
+} // namespace MiracleForest::inline i

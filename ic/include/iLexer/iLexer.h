@@ -16,112 +16,100 @@
 
 #include "../family/iicfamily.h"
 #include "iToken.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
+namespace icFamily
+{
 
-		class ICAPI iLexer
-		{
-			using uchar = _ISTD uchar;
-			using uint = _ISTD uint;
-			using istring = _ISTDTEXT istring;
-		private:
+    class ICAPI iLexer
+    {
+        using uchar = unsigned char;
+        using uint  = unsigned int;
+    private:
+        std::string _inputCode;
 
-			istring _inputCode;
+        const std::vector<std::string> _keywords = {
+            "char",     "i16",     "i32",        "i64",      "u16",       "u32",        "u64",
+            "f32",      "f64",     "string",     "enum",     "label",     "keyword",    "struct",
+            "symbol",   "self",    "type",       "source",   "target",    "opt",        "pretreatment",
+            "defspace", "class",   "break",      "continue", "interface", "for",        "foreach",
+            "if",       "elif",    "else",       "_asm",     "_cpp",      "attributes", "namespace",
+            "template", "try",     "catch",      "throw",    "return",    "assert",     "operator",
+            "delete",   "goto",    "particulor", "virtual",  "export",    "static",     "const",
+            "ref",      "ptr",     "final",      "mutable",  "explicit",  "true",       "false",
+            "YES",      "NO",      "Yes",        "No",       "new",       "void",       "default",
+            "null",     "nullptr", "or",         "not",      "and",       "is",         "nand",
+            "nor",      "xor",     "xnor",       "in",       "as",        "add",        "sub",
+            "mul",      "div",     "equal",      "get",      "set",       "readonly",   "writeonly"
+        };
 
-			const std::vector<istring> _keywords =
-			{
-			"char", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64",
-			"string", "enum", "label", "keyword", "struct", "symbol", "self", "type", "source", "target",
-			"opt", "pretreatment", "defspace", "class", "break", "continue", "interface", "for", "foreach",
-			"if", "elif", "else", "_asm", "_cpp", "attributes", "namespace", "template", "try", "catch",
-			"throw", "return", "assert", "operator", "delete", "goto", "particulor", "virtual", "export",
-			"static", "const", "ref", "ptr", "final", "mutable", "explicit", "true", "false","YES","NO",
-			"Yes","No", "new", "void","default", "null", "nullptr", "or", "not", "and", "is", "nand", "nor",
-			"xor", "xnor", "in", "as","add", "sub", "mul", "div", "equal","get","set","readonly","writeonly"
-			};
+        const std::vector<std::string> _operatorsSeparateCharacter = {
+            "+", "-", "*", "/", "=", "%", "<", ">", "!", "^", "|", "&", ".",  "[", "]", "(",
+            ")", "{", "}", "@", "$", "#", ";", "~", "`", "´", ",", "¥", "\\", ":", "?"
+        };
 
-			const std::vector<istring> _operatorsSeparateCharacter =
-			{
-			"+","-","*","/","=","%","<",">","!","^",
-			"|","&",".","[","]","(",")","{","}","@","$","#",";",
-			"~","`","´",",","¥","\\",":","?"
-			};
+        const std::vector<std::string> _operatorsMultipleCharacter = {
+            "+=", "-=", "/=",  "*=", "%=", "<=",  ">=", "==",  "!=",  "<<", ">>",  "<<=", ">>=", "^=", "|=",
+            "&=", "..", "...", "=>", "->", "<=>", "?=", "??=", "!?=", "?:", "!=:", "==:", "||",  "&&", "::"
+        };
 
-			const std::vector<istring> _operatorsMultipleCharacter =
-			{
-			"+=","-=","/=","*=","%=","<=",">=","==","!=","<<",">>",
-			"<<=",">>=","^=","|=","&=","..","...",
-			"=>","->","<=>","?=","??=","!?=","?:","!=:","==:","||","&&","::"
-			};
+        int _pos;
+        int _len;
+        int _currentLine;
 
-			int _pos;
-			int _len;
-			int _currentLine;
+    public:
+        iLexer(std::string inputCode);
 
-		public:
+    public:
+        // 向下读取一个Token
+        iToken read();
 
-			iLexer(istring inputCode);
+        // 返回整个token数组
+        std::vector<iToken> parse();
 
-		public:
+        static std::vector<iToken> mergeConsecutiveStringsToken(CRef<std::vector<iToken>> input);
 
-			//向下读取一个Token
-			iToken read();
+    protected:
+        // 读取空白字符
+        int readSpace(int pos);
 
-			//返回整个token数组
-			std::vector<iToken> parse();
+        // 读取一个字符串
+        int readString(int pos);
 
-			static std::vector<iToken> mergeConsecutiveStringsToken(_ISTD CRef<std::vector<iToken>> input);
+        // 读取一个数
+        int readNumber(int pos);
 
-		protected:
+        // 十进制
+        int readDecNumber(int pos);
 
-			//读取空白字符
-			int readSpace(int pos);
+        // 十六进制
+        int readHexNumber(int pos);
 
-			//读取一个字符串
-			int readString(int pos);
+        // 二进制
+        int readBinNumber(int pos);
 
-			//读取一个数
-			int readNumber(int pos);
+        // 八进制
+        int readOctNumber(int pos);
 
-			//十进制
-			int readDecNumber(int pos);
+        // 单行注释
+        int readLineComment(int pos);
 
-			//十六进制
-			int readHexNumber(int pos);
+        // 多行注释
+        int readBigComment(int pos);
 
-			//二进制
-			int readBinNumber(int pos);
+        // 读取一个标识符
+        int readIdentifier(int pos);
 
-			//八进制
-			int readOctNumber(int pos);
+        // 读取一个标识符
+        int readOperator(int pos);
 
-			//单行注释
-			int readLineComment(int pos);
+        // 判断该标识符是否为关键字
+        bool isKeyword(std::string id) const;
 
-			//多行注释
-			int readBigComment(int pos);
+    public:
+        Ref<iLexer> operator=(CRef<iLexer>);
 
-			//读取一个标识符
-			int readIdentifier(int pos);
-
-			//读取一个标识符
-			int readOperator(int pos);
-
-			//判断该标识符是否为关键字
-			bool isKeyword(istring id)const;
-
-		public:
-
-			_ISTD Ref<iLexer> operator=(_ISTD CRef<iLexer>);
-
-		};//iLexer
-	}
-}
+    }; // iLexer
+} // namespace icFamily
+} // namespace MiracleForest::inline i

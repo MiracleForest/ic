@@ -15,45 +15,33 @@
 
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			class ICAPI iATSBinaryOperatorNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
+namespace icFamily
+{
+    namespace AST
+    {
+        class ICAPI iATSBinaryOperatorNode : public iASTNode
+        {
+        public:
+            Ptr<iASTNode> left;
+            Ptr<iASTNode> right;
 
-			public:
+        public:
+            iATSBinaryOperatorNode();
 
-				_ISTD Ptr<iASTNode> left;
-				_ISTD Ptr<iASTNode> right;
+            iATSBinaryOperatorNode(Ptr<iASTNode> leftData, Ptr<iASTNode> rightData);
 
-			public:
+            ~iATSBinaryOperatorNode();
 
-				iATSBinaryOperatorNode();
+        public:
+            [[nodiscard]] Ptr<iASTNode> getLeft() const noexcept;
+            [[nodiscard]] Ptr<iASTNode> getRight() const noexcept;
 
-				iATSBinaryOperatorNode(_ISTD Ptr<iASTNode> leftData, _ISTD Ptr<iASTNode> rightData);
-
-				~iATSBinaryOperatorNode();
-
-			public:
-
-				[[nodiscard]] _ISTD Ptr<iASTNode> getLeft()const noexcept;
-				[[nodiscard]] _ISTD Ptr<iASTNode> getRight()const noexcept;
-
-				_ISTD Ptr<iATSBinaryOperatorNode> setLeft(_ISTD Ptr<iASTNode> leftData);
-				_ISTD Ptr<iATSBinaryOperatorNode> setRight(_ISTD Ptr<iASTNode> rightData);
-			};
-
-		}
-	}
-}
+            Ptr<iATSBinaryOperatorNode> setLeft(Ptr<iASTNode> leftData);
+            Ptr<iATSBinaryOperatorNode> setRight(Ptr<iASTNode> rightData);
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

@@ -15,20 +15,33 @@
 
 #include "../family/iicfamily.h"
 #include "../iAST/iASTGlobalAreaNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
+#include "../iLexer/iToken.h"
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{ 
-		class ICAPI iParser
-		{
+namespace icFamily
+{
 
-		};
-	
-	}
-}
+    class ICAPI iParser
+    {
+        using iASTGlobalAreaNode = AST::iASTGlobalAreaNode;
+        using iASTStatementNode  = AST::iASTNode;
+
+    private:
+        std::vector<MiracleForest::i::icFamily::iToken> _tokens;
+
+    public:
+        iParser(CRef<std::vector<MiracleForest::i::icFamily::iToken>> tokens);
+
+        ~iParser();
+
+    public:
+        Ptr<iASTGlobalAreaNode> parse();
+
+    private:
+        Ptr<iASTGlobalAreaNode> program();
+        Ptr<iASTGlobalAreaNode> program_();
+        Ptr<iASTStatementNode>  statement();
+    };
+} // namespace icFamily
+} // namespace MiracleForest::inline i

@@ -16,43 +16,30 @@
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
 #include "iATSTypeNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			class ICAPI iASTCompoundExpressionNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
+namespace icFamily
+{
+    namespace AST
+    {
+        class ICAPI iASTCompoundExpressionNode : public iASTNode
+        {
+        public:
+            Ptr<iASTNode> expression;
 
-			public:
+        public:
+            iASTCompoundExpressionNode();
 
-				_ISTD Ptr<iASTNode> expression;
+            iASTCompoundExpressionNode(Ptr<iASTNode> pexpression);
 
-			public:
+            ~iASTCompoundExpressionNode();
 
-				iASTCompoundExpressionNode();
+        public:
+            [[nodiscard]] Ptr<iASTNode> getExpression() const noexcept;
 
-				iASTCompoundExpressionNode(_ISTD Ptr<iASTNode> pexpression);
-
-				~iASTCompoundExpressionNode();
-
-			public:
-
-				[[nodiscard]] _ISTD Ptr<iASTNode> getExpression()const noexcept;
-
-				_ISTD Ptr<iASTCompoundExpressionNode> setExpression(_ISTD Ptr<iASTNode> pexpression);
-
-			};
-
-		}
-	}
-}
+            Ptr<iASTCompoundExpressionNode> setExpression(Ptr<iASTNode> pexpression);
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

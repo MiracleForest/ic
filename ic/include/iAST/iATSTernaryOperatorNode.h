@@ -15,48 +15,40 @@
 
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			class ICAPI iATSTernaryOperatorNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
+namespace icFamily
+{
+    namespace AST
+    {
+        class ICAPI iATSTernaryOperatorNode : public iASTNode
+        {
+        public:
+            Ptr<iASTNode> left;
+            Ptr<iASTNode> middle;
+            Ptr<iASTNode> right;
 
-			public:
+        public:
+            iATSTernaryOperatorNode();
 
-				_ISTD Ptr<iASTNode> left;
-				_ISTD Ptr<iASTNode> middle;
-				_ISTD Ptr<iASTNode> right;
+            iATSTernaryOperatorNode(
+                Ptr<iASTNode> leftData,
+                Ptr<iASTNode> middleData,
+                Ptr<iASTNode> rightData
+            );
 
-			public:
+            ~iATSTernaryOperatorNode();
 
-				iATSTernaryOperatorNode();
+        public:
+            [[nodiscard]] Ptr<iASTNode> getLeft() const noexcept;
+            [[nodiscard]] Ptr<iASTNode> getMiddle() const noexcept;
+            [[nodiscard]] Ptr<iASTNode> getRight() const noexcept;
 
-				iATSTernaryOperatorNode(_ISTD Ptr<iASTNode> leftData, _ISTD Ptr<iASTNode> middleData, _ISTD Ptr<iASTNode> rightData);
-
-				~iATSTernaryOperatorNode();
-
-			public:
-
-				[[nodiscard]] _ISTD Ptr<iASTNode> getLeft()const noexcept;
-				[[nodiscard]] _ISTD Ptr<iASTNode> getMiddle()const noexcept;
-				[[nodiscard]] _ISTD Ptr<iASTNode> getRight()const noexcept;
-
-				_ISTD Ptr<iATSTernaryOperatorNode> setLeft(_ISTD Ptr<iASTNode> leftData);
-				_ISTD Ptr<iATSTernaryOperatorNode> setMiddle(_ISTD Ptr<iASTNode> middleData);
-				_ISTD Ptr<iATSTernaryOperatorNode> setRight(_ISTD Ptr<iASTNode> rightData);
-			};
-
-		}
-	}
-}
+            Ptr<iATSTernaryOperatorNode> setLeft(Ptr<iASTNode> leftData);
+            Ptr<iATSTernaryOperatorNode> setMiddle(Ptr<iASTNode> middleData);
+            Ptr<iATSTernaryOperatorNode> setRight(Ptr<iASTNode> rightData);
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

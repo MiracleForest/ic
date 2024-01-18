@@ -15,54 +15,41 @@
 
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
+namespace icFamily
+{
+    namespace AST
+    {
 
-			class ICAPI iATSTypeNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
-			public:
+        class ICAPI iATSTypeNode : public iASTNode
+        {
+        public:
+            enum class TypeNodeType : int
+            {
+                keyword,
+                identifier
+            };
 
-				enum class TypeNodeType
-					:int
-				{
-					keyword,
-					identifier
-				};
+        public:
+            TypeNodeType type;
+            std::string  value;
 
-			public:
+        public:
+            iATSTypeNode();
 
-				TypeNodeType type;
-				istring value;
+            iATSTypeNode(TypeNodeType typeData, std::string valueData);
 
-			public:
+            ~iATSTypeNode();
 
-				iATSTypeNode();
+        public:
+            [[nodiscard]] TypeNodeType getType() const noexcept;
+            [[nodiscard]] std::string  getValue() const noexcept;
 
-				iATSTypeNode(TypeNodeType typeData, istring valueData);
-
-				~iATSTypeNode();
-
-			public:
-
-				[[nodiscard]] TypeNodeType getType()const noexcept;
-				[[nodiscard]] istring getValue()const noexcept;
-
-				_ISTD Ptr<iATSTypeNode> setType(TypeNodeType typeData);
-				_ISTD Ptr<iATSTypeNode> setValue(istring valueData);
-			};
-
-		}
-	}
-}
+            Ptr<iATSTypeNode> setType(TypeNodeType typeData);
+            Ptr<iATSTypeNode> setValue(std::string valueData);
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i

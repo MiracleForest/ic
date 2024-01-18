@@ -16,56 +16,47 @@
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
 #include "iATSTypeNode.h"
-#include <icore/console/iconsole.h>
-#include <icore/console/iLogger.h>
-#include <icore/data/text/istring.h>
-#include <icore/exception/error.h>
-#include <icore/family/imacrofamily.h>
 
-SPACE(i)
+namespace MiracleForest::inline i
 {
-	SPACE(icFamily)
-	{
-		SPACE(AST)
-		{
-			class ICAPI iASTImportStatementNode
-				:public iASTNode
-			{
-				using istring = _ISTDTEXT istring;
+namespace icFamily
+{
+    namespace AST
+    {
+        class ICAPI iASTImportStatementNode : public iASTNode
+        {
+        public:
+            std::vector<std::string> parentModuleList;
+            std::string              importModule;
+            std::vector<std::string> nicknameList;
 
-			public:
+        public:
+            iASTImportStatementNode();
 
-				std::vector<istring> parentModuleList;
-				istring importModule;
-				std::vector<istring> nicknameList;
+            iASTImportStatementNode(
+                std::vector<std::string> pparentModuleList,
+                CRef<std::string>        pimportModule,
+                std::vector<std::string> pnicknameList
+            );
 
-			public:
+            ~iASTImportStatementNode();
 
-				iASTImportStatementNode();
+        public:
+            Ptr<iASTImportStatementNode> addNickname(CRef<std::string> nickname);
 
-				iASTImportStatementNode(std::vector<istring> pparentModuleList, _ISTD CRef<istring> pimportModule, std::vector<istring> pnicknameList);
+            /*
+             * @warning vector<std::string>的顺序代表着各级模块的所属关系
+             */
+            Ptr<iASTImportStatementNode> pushBackParentModule(CRef<std::string> parentModule);
 
-				~iASTImportStatementNode();
+            [[nodiscard]] std::string              getImportModule() const noexcept;
+            [[nodiscard]] std::vector<std::string> getParentModuleList() const noexcept;
+            [[nodiscard]] std::vector<std::string> getNicknameList() const noexcept;
 
-			public:
-
-				_ISTD Ptr<iASTImportStatementNode> addNickname(_ISTD CRef<istring> nickname);
-
-				/*
-				* @warning vector<istring>的顺序代表着各级模块的所属关系
-				*/
-				_ISTD Ptr<iASTImportStatementNode> pushBackParentModule(_ISTD CRef<istring> parentModule);
-
-				[[nodiscard]] istring getImportModule()const noexcept;
-				[[nodiscard]] std::vector<istring> getParentModuleList()const noexcept;
-				[[nodiscard]] std::vector<istring> getNicknameList()const noexcept;
-
-				_ISTD Ptr<iASTImportStatementNode> setParentModuleList(std::vector<istring> pparentModuleList);
-				_ISTD Ptr<iASTImportStatementNode> setImportModule(_ISTD CRef<istring> pimportModule);
-				_ISTD Ptr<iASTImportStatementNode> setNicknameList(std::vector<istring> pnicknameList);
-
-			};
-
-		}
-	}
-}
+            Ptr<iASTImportStatementNode> setParentModuleList(std::vector<std::string> pparentModuleList);
+            Ptr<iASTImportStatementNode> setImportModule(CRef<std::string> pimportModule);
+            Ptr<iASTImportStatementNode> setNicknameList(std::vector<std::string> pnicknameList);
+        };
+    } // namespace AST
+} // namespace icFamily
+} // namespace MiracleForest::inline i
