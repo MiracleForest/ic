@@ -337,11 +337,11 @@ int iLexer::readOperator(int pos)
 
     for (int i = 0; vector::contains<std::string>(
              this->_operatorsSeparateCharacter,
-             std::to_string(_inputCode[pos + i])
+             std::string(1,_inputCode[pos + i])
          );
          i++)
     {
-        buff += std::to_string(_inputCode[pos + i]);
+        buff += std::string(1,_inputCode[pos + i]);
     }
 
     if (buff.size() > 3) { buff = buff.substr(0, 3); }
