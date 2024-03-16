@@ -23,39 +23,10 @@ namespace icFamily
 {
     namespace AST
     {
-        class ICAPI iASTImportStatementNode : public iASTNode
+        class iASTImportStatementNode : public iASTNode
         {
         public:
-            std::vector<std::string> parentModuleList;
-            std::string              importModule;
-            std::vector<std::string> nicknameList;
-
-        public:
-            iASTImportStatementNode();
-
-            iASTImportStatementNode(
-                std::vector<std::string> pparentModuleList,
-                CRef<std::string>        pimportModule,
-                std::vector<std::string> pnicknameList
-            );
-
-            ~iASTImportStatementNode();
-
-        public:
-            Ptr<iASTImportStatementNode> addNickname(CRef<std::string> nickname);
-
-            /*
-             * @warning vector<std::string>的顺序代表着各级模块的所属关系
-             */
-            Ptr<iASTImportStatementNode> pushBackParentModule(CRef<std::string> parentModule);
-
-            [[nodiscard]] std::string              getImportModule() const noexcept;
-            [[nodiscard]] std::vector<std::string> getParentModuleList() const noexcept;
-            [[nodiscard]] std::vector<std::string> getNicknameList() const noexcept;
-
-            Ptr<iASTImportStatementNode> setParentModuleList(std::vector<std::string> pparentModuleList);
-            Ptr<iASTImportStatementNode> setImportModule(CRef<std::string> pimportModule);
-            Ptr<iASTImportStatementNode> setNicknameList(std::vector<std::string> pnicknameList);
+            std::string mModule;
         };
     } // namespace AST
 } // namespace icFamily
