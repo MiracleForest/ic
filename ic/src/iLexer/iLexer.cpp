@@ -194,6 +194,7 @@ int iLexer::readDecNumber(int pos)
     {
         result++;
     }
+    if (_inputCode[pos] == '.' && result == 1) { return 0; }
 
     return result;
 }
