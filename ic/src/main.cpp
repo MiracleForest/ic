@@ -1,3 +1,4 @@
+#include "../iEncoding.hpp"
 #include "../include/iLexer/iLexer.h"
 #include "../include/iParse/iParser.h"
 #include <chrono>
@@ -18,7 +19,7 @@ int main()
     }
     std::string inputCode = "";
     inputCode.assign(std::istreambuf_iterator<char>(inputFile), std::istreambuf_iterator<char>());
-    std::cout << "输入的代码：" << inputCode << std::endl;
+    std::cout << "输入的代码：" << UTF82ANSI(inputCode) << std::endl;
     inputFile.close();
 
     using clock = std::chrono::high_resolution_clock;
@@ -34,8 +35,11 @@ int main()
     auto t3 = clock::now(); // 计时开始
     for (int i = 0; i < tokens.size(); i++)
     {
-        std::cout << "<" << tokens[i].getID2String() << "," << tokens[i].getLine() << "> \t"
-                  << tokens[i].getText().data() << std::endl;
+        if (tokens[i].getID() != MiracleForest::i::icFamily::iTokenID::EOL)
+        {
+            std::cout << "<" << tokens[i].getID2String() << "," << tokens[i].getLine() << "> \t\t"
+                      << UTF82ANSI(tokens[i].getText().data()) << std::endl;
+        }
     }
     auto t4 = clock::now(); // 计时结束
 

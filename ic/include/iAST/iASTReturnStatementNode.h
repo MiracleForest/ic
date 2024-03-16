@@ -1,12 +1,12 @@
 /*
  *
- * Copyright(C) 2022 MiracleForest Studio. All Rights Reserved.
+ * Copyright(C) 2023 MiracleForest Studio. All Rights Reserved.
  *
- * @文件名:iATSFloatingLiteralNode.h
- * @创建时间:2022.7.21.17:42
+ * @文件名:iASTReturnStatementNode.h
+ * @创建时间:2023.10.21.16:41
  * @创建者:Lovelylavender4
  * -----------------------------------------------------------------------------
- * iATSFloatingLiteralNode
+ * iASTReturnStatementNode
  * -----------------------------------------------------------------------------
  * 如果你发现了bug，你可以去Github或邮箱(MiracleForest@Outlook.com)反馈给我们！
  * 我们一定会努力做得更好的！
@@ -22,22 +22,21 @@ namespace icFamily
 {
     namespace AST
     {
-        class ICAPI iATSFloatingLiteralNode : public iASTNode
+        class ICAPI iASTReturnStatementNode : public iASTNode
         {
         public:
-            double data;
+            Ptr<iASTNode> value;
 
         public:
-            iATSFloatingLiteralNode();
+            iASTReturnStatementNode();
 
-            iATSFloatingLiteralNode(double data);
+            iASTReturnStatementNode(Ptr<iASTNode> value);
 
-            ~iATSFloatingLiteralNode();
+            ~iASTReturnStatementNode();
 
         public:
-            [[nodiscard]] double get() const noexcept;
-
-            Ptr<iATSFloatingLiteralNode> set(double data);
+            [[nodiscard]] Ptr<iASTNode>  getReturnValue() const noexcept;
+            Ptr<iASTReturnStatementNode> setReturnValue(Ptr<iASTNode> pvalue);
         };
     } // namespace AST
 } // namespace icFamily

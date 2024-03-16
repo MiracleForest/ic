@@ -3,7 +3,7 @@ using namespace MiracleForest::i::icFamily;
 
 
 iParser::iParser(CRef<std::vector<MiracleForest::i::icFamily::iToken>> tokens)
-    : _tokens(tokens)
+    : mTokens(tokens)
 {
 }
 
@@ -11,13 +11,13 @@ iParser::~iParser() {}
 
 Ptr<AST::iASTGlobalAreaNode> iParser::parse()
 {
-    if (this->_tokens.empty()) { return nullptr; }
+    if (this->mTokens.empty()) { return nullptr; }
     return this->program();
 }
 
 Ptr<AST::iASTGlobalAreaNode> iParser::program()
 {
-    static Ptr<AST::iASTGlobalAreaNode> iAST;
+    Ptr<AST::iASTGlobalAreaNode> iAST = new AST::iASTGlobalAreaNode();
 
     return iAST;
 }

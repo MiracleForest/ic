@@ -19,14 +19,14 @@
 #include "iASTImportStatementNode.h"
 #include "iASTNode.h"
 #include "iASTStringLiteralNode.h"
-#include "iATSBinaryOperatorNode.h"
-#include "iATSFloatingLiteralNode.h"
-#include "iATSIntegerLiteralNode.h"
-#include "iATSReturnStatementNode.h"
-#include "iATSTernaryOperatorNode.h"
-#include "iATSTypeNode.h"
-#include "iATSUnaryOperatorNode.h"
-#include "iATSVariableDefinitionNode.h"
+#include "iASTBinaryOperatorNode.h"
+#include "iASTFloatingLiteralNode.h"
+#include "iASTIntegerLiteralNode.h"
+#include "iASTReturnStatementNode.h"
+#include "iASTTernaryOperatorNode.h"
+#include "iASTTypeNode.h"
+#include "iASTUnaryOperatorNode.h"
+#include "iASTVariableDefinitionNode.h"
 
 namespace MiracleForest::inline i
 {

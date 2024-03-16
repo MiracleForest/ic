@@ -16,8 +16,8 @@
 #include "../family/iicfamily.h"
 #include "iASTCompoundExpressionNode.h"
 #include "iASTNode.h"
-#include "iATSTypeNode.h"
-#include "iATSVariableDefinitionNode.h"
+#include "iASTTypeNode.h"
+#include "iASTVariableDefinitionNode.h"
 
 namespace MiracleForest::inline i
 {
@@ -28,7 +28,7 @@ namespace icFamily
         class ICAPI iASTForStatementNode : public iASTNode
         {
         public:
-            Ptr<iATSVariableDefinitionNode> loopDefineVariable;
+            Ptr<iASTVariableDefinitionNode> loopDefineVariable;
             Ptr<iASTCompoundExpressionNode> loopCondition;
             Ptr<iASTNode>                   eachLoopExecute;
 
@@ -36,7 +36,7 @@ namespace icFamily
             iASTForStatementNode();
 
             iASTForStatementNode(
-                Ptr<iATSVariableDefinitionNode> ploopDefineVariable,
+                Ptr<iASTVariableDefinitionNode> ploopDefineVariable,
                 Ptr<iASTCompoundExpressionNode> ploopCondition,
                 Ptr<iASTNode>                   peachLoopExecute
             );
@@ -44,12 +44,12 @@ namespace icFamily
             ~iASTForStatementNode();
 
         public:
-            [[nodiscard]] Ptr<iATSVariableDefinitionNode> getLoopDefineVariable() const noexcept;
+            [[nodiscard]] Ptr<iASTVariableDefinitionNode> getLoopDefineVariable() const noexcept;
             [[nodiscard]] Ptr<iASTCompoundExpressionNode> getLoopCondition() const noexcept;
             [[nodiscard]] Ptr<iASTNode>                   getEachLoopExecute() const noexcept;
 
             Ptr<iASTForStatementNode> getLoopsDefineVariable(
-                Ptr<iATSVariableDefinitionNode> ploopDefineVariable
+                Ptr<iASTVariableDefinitionNode> ploopDefineVariable
             );
             Ptr<iASTForStatementNode> getLoopCondition(Ptr<iASTCompoundExpressionNode> ploopCondition);
             Ptr<iASTForStatementNode> getEachLoopExecute(Ptr<iASTNode> peachLoopExecute);

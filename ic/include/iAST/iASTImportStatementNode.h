@@ -15,7 +15,7 @@
 
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
-#include "iATSTypeNode.h"
+#include "iASTTypeNode.h"
 
 namespace MiracleForest::inline i
 {

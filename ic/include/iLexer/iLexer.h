@@ -26,27 +26,29 @@ namespace icFamily
     {
         using uchar = unsigned char;
         using uint  = unsigned int;
+
     private:
         std::string _inputCode;
 
         const std::vector<std::string> _keywords = {
-            "char",     "i16",     "i32",        "i64",      "u16",       "u32",        "u64",
-            "f32",      "f64",     "string",     "enum",     "label",     "keyword",    "struct",
-            "symbol",   "self",    "type",       "source",   "target",    "opt",        "pretreatment",
-            "defspace", "class",   "break",      "continue", "interface", "for",        "foreach",
-            "if",       "elif",    "else",       "_asm",     "_cpp",      "attributes", "namespace",
-            "template", "try",     "catch",      "throw",    "return",    "assert",     "operator",
-            "delete",   "goto",    "particulor", "virtual",  "export",    "static",     "const",
-            "ref",      "ptr",     "final",      "mutable",  "explicit",  "true",       "false",
-            "YES",      "NO",      "Yes",        "No",       "new",       "void",       "default",
-            "null",     "nullptr", "or",         "not",      "and",       "is",         "nand",
-            "nor",      "xor",     "xnor",       "in",       "as",        "add",        "sub",
-            "mul",      "div",     "equal",      "get",      "set",       "readonly",   "writeonly"
+            "char",     "i16",   "i32",        "i64",      "u16",       "u32",        "u64",
+            "f32",      "f64",   "string",     "enum",     "label",     "keyword",    "struct",
+            "symbol",   "self",  "type",       "source",   "target",    "opt",        "pretreatment",
+            "defspace", "class", "break",      "continue", "interface", "for",        "foreach",
+            "if",       "elif",  "else",       "_asm",     "_cpp",      "attributes", "namespace",
+            "template", "try",   "catch",      "throw",    "return",    "assert",     "operator",
+            "delete",   "goto",  "particulor", "virtual",  "export",    "import",     "static",
+            "const",    "ref",   "ptr",        "final",    "mutable",   "explicit",   "true",
+            "false",    "YES",   "NO",         "Yes",      "No",        "new",        "void",
+            "default",  "null",  "nullptr",    "or",       "not",       "and",        "is",
+            "nand",     "nor",   "xor",        "xnor",     "in",        "as",         "add",
+            "sub",      "mul",   "div",        "equal",    "get",       "set",        "readonly",
+            "writeonly"
         };
 
         const std::vector<std::string> _operatorsSeparateCharacter = {
-            "+", "-", "*", "/", "=", "%", "<", ">", "!", "^", "|", "&", ".",  "[", "]", "(",
-            ")", "{", "}", "@", "$", "#", ";", "~", "`", "´", ",", "¥", "\\", ":", "?"
+            "+", "-", "*", "/", "=", "%", "<", ">", "!", "^", "|",          "&",           ".", "[", "]",
+            "(", ")", "{", "}", "@", "$", "#", ";", "~", "`", /*"´",*/ ",", /*"¥",*/ "\\", ":", "?"
         };
 
         const std::vector<std::string> _operatorsMultipleCharacter = {

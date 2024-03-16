@@ -24,11 +24,20 @@ namespace icFamily
 
     class ICAPI iParser
     {
-        using iASTGlobalAreaNode = AST::iASTGlobalAreaNode;
-        using iASTStatementNode  = AST::iASTNode;
+        using Pending                    = void;
+        using iASTGlobalAreaNode         = AST::iASTGlobalAreaNode;
+        using iASTStatementNode          = AST::iASTNode;
+        using iASTImportStatementNode    = AST::iASTImportStatementNode;
+        using iASTForStatementNode       = AST::iASTForStatementNode;
+        using iASTVariableDefinitionNode = AST::iASTVariableDefinitionNode;
+        using iASTBinaryOperatorNode     = AST::iASTBinaryOperatorNode;
+        using iASTUnaryOperatorNode      = AST::iASTUnaryOperatorNode;
+        using iASTLiteralNode            = AST::iASTNode;
+        using iASTIntegerLiteralNode     = AST::iASTIntegerLiteralNode;
+        using iASTFloatingLiteralNode    = AST::iASTFloatingLiteralNode;
 
     private:
-        std::vector<MiracleForest::i::icFamily::iToken> _tokens;
+        std::vector<MiracleForest::i::icFamily::iToken> mTokens;
 
     public:
         iParser(CRef<std::vector<MiracleForest::i::icFamily::iToken>> tokens);
@@ -39,9 +48,10 @@ namespace icFamily
         Ptr<iASTGlobalAreaNode> parse();
 
     private:
-        Ptr<iASTGlobalAreaNode> program();
-        Ptr<iASTGlobalAreaNode> program_();
-        Ptr<iASTStatementNode>  statement();
+        Ptr<iASTGlobalAreaNode>         program();
+
+
+
     };
 } // namespace icFamily
 } // namespace MiracleForest::inline i

@@ -2,11 +2,11 @@
  *
  * Copyright(C) 2023 MiracleForest Studio. All Rights Reserved.
  *
- * @文件名:iATSReturnStatementNode.h
- * @创建时间:2023.10.21.16:41
- * @创建者:Lovelylavender4
+ * @文件名:iASTUnaryOperatorNode.h
+ * @创建时间:2023.09.03.18:00
+ * @创建者:Windows.h
  * -----------------------------------------------------------------------------
- * iATSReturnStatementNode
+ * iASTUnaryOperatorNode
  * -----------------------------------------------------------------------------
  * 如果你发现了bug，你可以去Github或邮箱(MiracleForest@Outlook.com)反馈给我们！
  * 我们一定会努力做得更好的！
@@ -22,21 +22,22 @@ namespace icFamily
 {
     namespace AST
     {
-        class ICAPI iATSReturnStatementNode : public iASTNode
+        class ICAPI iASTUnaryOperatorNode : public iASTNode
         {
         public:
-            Ptr<iASTNode> value;
+            Ptr<iASTNode> data;
 
         public:
-            iATSReturnStatementNode();
+            iASTUnaryOperatorNode();
 
-            iATSReturnStatementNode(Ptr<iASTNode> value);
+            iASTUnaryOperatorNode(Ptr<iASTNode> data);
 
-            ~iATSReturnStatementNode();
+            ~iASTUnaryOperatorNode();
 
         public:
-            [[nodiscard]] Ptr<iASTNode>  getReturnValue() const noexcept;
-            Ptr<iATSReturnStatementNode> setReturnValue(Ptr<iASTNode> pvalue);
+            [[nodiscard]] Ptr<iASTNode> get() const noexcept;
+
+            Ptr<iASTUnaryOperatorNode> set(Ptr<iASTNode> data);
         };
     } // namespace AST
 } // namespace icFamily

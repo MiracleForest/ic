@@ -1,12 +1,12 @@
 /*
  *
- * Copyright(C) 2023 MiracleForest Studio. All Rights Reserved.
+ * Copyright(C) 2022 MiracleForest Studio. All Rights Reserved.
  *
- * @文件名:iASTCompoundExpressionNode.h
- * @创建时间:2023.10.21.19:32
+ * @文件名:iASTIntegerLiteralNode.h
+ * @创建时间:2022.7.21.17:42
  * @创建者:Lovelylavender4
  * -----------------------------------------------------------------------------
- * iASTCompoundExpressionNode
+ * iASTIntegerLiteralNode
  * -----------------------------------------------------------------------------
  * 如果你发现了bug，你可以去Github或邮箱(MiracleForest@Outlook.com)反馈给我们！
  * 我们一定会努力做得更好的！
@@ -15,7 +15,6 @@
 
 #include "../family/iicfamily.h"
 #include "iASTNode.h"
-#include "iASTTypeNode.h"
 
 namespace MiracleForest::inline i
 {
@@ -23,22 +22,22 @@ namespace icFamily
 {
     namespace AST
     {
-        class ICAPI iASTCompoundExpressionNode : public iASTNode
+        class ICAPI iASTIntegerLiteralNode : public iASTNode
         {
         public:
-            Ptr<iASTNode> expression;
+            long long data;
 
         public:
-            iASTCompoundExpressionNode();
+            iASTIntegerLiteralNode();
 
-            iASTCompoundExpressionNode(Ptr<iASTNode> pexpression);
+            iASTIntegerLiteralNode(long long data);
 
-            ~iASTCompoundExpressionNode();
+            ~iASTIntegerLiteralNode();
 
         public:
-            [[nodiscard]] Ptr<iASTNode> getExpression() const noexcept;
+            [[nodiscard]] long long get() const noexcept;
 
-            Ptr<iASTCompoundExpressionNode> setExpression(Ptr<iASTNode> pexpression);
+            Ptr<iASTIntegerLiteralNode> set(long long data);
         };
     } // namespace AST
 } // namespace icFamily

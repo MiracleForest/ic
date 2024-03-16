@@ -11,7 +11,7 @@ iASTForStatementNode::iASTForStatementNode()
 }
 
 iASTForStatementNode::iASTForStatementNode(
-    Ptr<iATSVariableDefinitionNode> ploopDefineVariable,
+    Ptr<iASTVariableDefinitionNode> ploopDefineVariable,
     Ptr<iASTCompoundExpressionNode> ploopCondition,
     Ptr<iASTNode>                   peachLoopExecute
 )
@@ -24,7 +24,7 @@ iASTForStatementNode::iASTForStatementNode(
 
 iASTForStatementNode::~iASTForStatementNode() {}
 
-Ptr<iATSVariableDefinitionNode> iASTForStatementNode::getLoopDefineVariable() const noexcept
+Ptr<iASTVariableDefinitionNode> iASTForStatementNode::getLoopDefineVariable() const noexcept
 {
     return this->loopDefineVariable;
 }
@@ -37,7 +37,7 @@ Ptr<iASTCompoundExpressionNode> iASTForStatementNode::getLoopCondition() const n
 Ptr<iASTNode> iASTForStatementNode::getEachLoopExecute() const noexcept { return this->eachLoopExecute; }
 
 Ptr<iASTForStatementNode> iASTForStatementNode::getLoopsDefineVariable(
-    Ptr<iATSVariableDefinitionNode> ploopDefineVariable
+    Ptr<iASTVariableDefinitionNode> ploopDefineVariable
 )
 {
     this->loopDefineVariable = ploopDefineVariable;
