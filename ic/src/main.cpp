@@ -1,6 +1,7 @@
 #include "../iEncoding.hpp"
 #include "../include/iLexer/iLexer.h"
 #include "../include/iParse/iParser.h"
+#include <Logger.h>
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -10,16 +11,17 @@ using namespace std::chrono;
 
 int main()
 {
+    Logger logger("iCompiler");
 
     std::fstream inputFile("../../../../script.is");
     if (!inputFile.good())
     {
-        std::cout << "打开目标文件失败！" << std::endl;
+        logger.error("打开目标文件失败！");
         return 0;
     }
     std::string inputCode = "";
     inputCode.assign(std::istreambuf_iterator<char>(inputFile), std::istreambuf_iterator<char>());
-    std::cout << "输入的代码：" << UTF82ANSI(inputCode) << std::endl;
+    logger.info("输入的代码：{}", UTF82ANSI(inputCode));
     inputFile.close();
 
     using clock = std::chrono::high_resolution_clock;
@@ -35,23 +37,28 @@ int main()
     auto t3 = clock::now(); // 计时开始
     for (int i = 0; i < tokens.size(); i++)
     {
-        if (tokens[i].getID() != MiracleForest::i::icFamily::iTokenID::EOL)
-        {
-            std::cout << "<" << tokens[i].getID2String() << "," << tokens[i].getLine() << "> \t\t"
-                      << UTF82ANSI(tokens[i].getText().data()) << std::endl;
-        }
+        logger.info(
+            "<{},{}> \t{}",
+            tokens[i].getID2String(),
+            tokens[i].getLine(),
+            UTF82ANSI(tokens[i].getText().data())
+        );
     }
     auto t4 = clock::now(); // 计时结束
 
+    logger.info("Start Parse!");
+    MiracleForest::i::icFamily::iParser parser(tokens);
+    auto                                t5  = clock::now(); // 计时开始
+    auto&                               ast = parser.parse()->childElementsList;
+    auto                                t6  = clock::now(); // 计时结束
+    logger.info("全局域内有{}个语句！", ast.size());
 
 #define TIMECAST(p1, p2) std::chrono::duration_cast<std::chrono::nanoseconds>(p1 - p2).count()
-    std::cout << "解析用时：" << TIMECAST(t2, t1) << "纳秒" << std::endl;
-    std::cout << "等于：" << TIMECAST(t2, t1) / 1e+6 << "毫秒" << std::endl;
-    std::cout << "等于：" << TIMECAST(t2, t1) / 1e+9 << "秒" << std::endl;
-    std::cout << "打印用时：" << TIMECAST(t4, t3) << "纳秒" << std::endl;
-    std::cout << "等于：" << TIMECAST(t4, t3) / 1e+6 << "毫秒" << std::endl;
-    std::cout << "等于：" << TIMECAST(t4, t3) / 1e+9 << "秒" << std::endl;
+    logger.note("词法分析用时：{}毫秒", TIMECAST(t2, t1) / 1e+6);
+    logger.note("词法打印用时：{}毫秒", TIMECAST(t4, t3) / 1e+6);
+    logger.note("语法分析用时：{}毫秒", TIMECAST(t6, t5) / 1e+6);
 #undef TIMECAST
+
 
     // for (;;)
     //{
@@ -100,7 +107,7 @@ int main()
     //         logger.info("test2:{}", test2);
     //         logger.info("getCount:{}", astnode->getCount());
     //     }
-
+    //
     //    delete test_1;
     //    delete test_2;
     //    delete test_3;

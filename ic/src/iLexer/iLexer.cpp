@@ -20,7 +20,8 @@ iToken iLexer::read()
         if (_inputCode[_pos] == '\n')
         {
             _pos++;
-            return iToken(iTokenID::EOL, _currentLine++, "");
+            _currentLine++;
+            //return iToken(iTokenID::EOL, _currentLine++, "");
         }
 
         if (result = readString(_pos))

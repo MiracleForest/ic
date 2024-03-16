@@ -44,6 +44,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS YES)
 
 include_directories(${CMAKE_SOURCE_DIR}/third-party)
+include_directories(${PROJECT_SOURCE_DIR})
 
 file(
         GLOB_RECURSE SRC_FILES
@@ -58,6 +59,13 @@ file(
         ${PROJECT_SOURCE_DIR}/src/iLexer/*.cpp
         ${PROJECT_SOURCE_DIR}/src/iParse/*.cpp
         ${PROJECT_SOURCE_DIR}/src/iAST/*.cpp
+        ${PROJECT_SOURCE_DIR}/Utils/*.cpp
+        ${PROJECT_SOURCE_DIR}/Utils/*.h
+        ${PROJECT_SOURCE_DIR}/fmt/*.cpp
+        ${PROJECT_SOURCE_DIR}/fmt/*.h
+        ${PROJECT_SOURCE_DIR}/*.cpp
+        ${PROJECT_SOURCE_DIR}/*.h
+        ${PROJECT_SOURCE_DIR}/*.hpp
 )
 
 file(
@@ -82,7 +90,7 @@ target_compile_options(
 
 target_compile_definitions(
         ic
-        PRIVATE _CONSOLE _UNICODE UNICODE ___STATICLIB___
+        PRIVATE _CONSOLE _UNICODE UNICODE ___STATICLIB___ FMT_HEADER_ONLY
 )
 
 target_compile_options(
@@ -92,5 +100,5 @@ target_compile_options(
 
 target_compile_definitions(
         libic
-        PRIVATE _CONSOLE _UNICODE UNICODE ___ICEXPORT___  
+        PRIVATE _CONSOLE _UNICODE UNICODE ___ICEXPORT___  FMT_HEADER_ONLY
 ) 
